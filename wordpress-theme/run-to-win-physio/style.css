@@ -1,0 +1,75 @@
+/*
+Theme Name: Run To Win Physiotherapy
+Theme URI: https://runtowinphysio.com/
+Author: Dr Pawan Gupta (PT) & Team
+Author URI: https://runtowinphysio.com/
+Description: Modern, responsive, evidence-based Physiotherapy & Pain Rehabilitation WordPress Theme for Dr Pawan Gupta (PT) - Run To Win Healthcare Services Mumbai. Features interactive Body Pain Symptom Triage, Specialized Orthopedic / Sports Rehab services, Doctor Profile, Google Reviews, WhatsApp Instant Booking, and SEO-optimized Schema.
+Version: 1.0.0
+Tested up to: 6.7
+Requires at least: 6.0
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: run-to-win-physio
+Tags: medical, healthcare, physiotherapy, clinic, doctor, appointment-booking, responsive-layout, translation-ready
+*/
+
+/* Custom Smooth Scrolling & Theme Base Variables */
+:root {
+  --rtw-primary: #2563eb;
+  --rtw-primary-dark: #1d4ed8;
+  --rtw-secondary: #0f172a;
+  --rtw-emerald: #059669;
+  --rtw-bg-light: #f8fafc;
+  --rtw-text-main: #1e293b;
+  --rtw-text-muted: #64748b;
+  --rtw-border: #e2e8f0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--rtw-text-main);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom interactive Pain Map pointer */
+.pain-point-pulse {
+  position: relative;
+}
+.pain-point-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background-color: rgba(239, 68, 68, 0.4);
+  animation: rtw-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes rtw-ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

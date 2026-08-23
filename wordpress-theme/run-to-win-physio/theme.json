@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "1140px",
+      "wideSize": "1380px"
+    },
+    "color": {
+      "palette": [
+        {
+          "name": "Brand Blue",
+          "slug": "brand-blue",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Brand Blue Dark",
+          "slug": "brand-blue-dark",
+          "color": "#1d4ed8"
+        },
+        {
+          "name": "Emerald Accent",
+          "slug": "emerald-accent",
+          "color": "#059669"
+        },
+        {
+          "name": "Dark Slate",
+          "slug": "dark-slate",
+          "color": "#0f172a"
+        },
+        {
+          "name": "Light Slate",
+          "slug": "light-slate",
+          "color": "#f8fafc"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "\"Plus Jakarta Sans\", system-ui, sans-serif",
+          "name": "Plus Jakarta Sans",
+          "slug": "plus-jakarta-sans"
+        },
+        {
+          "fontFamily": "\"Outfit\", system-ui, sans-serif",
+          "name": "Outfit",
+          "slug": "outfit"
+        }
+      ]
+    }
+  }
+}
