@@ -284,6 +284,7 @@ export default function App() {
             onBackToHome={handleGoHome}
             onOpenBooking={handleOpenBooking}
             onOpenAiAssistant={handleOpenAiAssistant}
+            onNavigatePage={handleNavigatePage}
           />
         ) : currentPage === 'services' || currentPage === 'conditions' ? (
           <ServicesPage

@@ -35,11 +35,12 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
   onBackToHome,
   onOpenBooking,
 }) => {
+  const [reviewsList, setReviewsList] = useState(TESTIMONIALS);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
-  const filteredReviews = TESTIMONIALS.filter((review) => {
+  const filteredReviews = reviewsList.filter((review) => {
     const isHome = review.tag.toLowerCase().includes('home') || review.location.toLowerCase().includes('home');
     const matchesCategory = 
       selectedCategory === 'All' ||
@@ -247,6 +248,9 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
       <WriteReviewModal
         isOpen={isReviewModalOpen}
         onClose={() => setIsReviewModalOpen(false)}
+        onReviewSubmitted={(newReview) => {
+          setReviewsList((prev) => [newReview, ...prev]);
+        }}
       />
 
     </div>

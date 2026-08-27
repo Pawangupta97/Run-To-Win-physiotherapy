@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import doctorPhoto from '../assets/images/regenerated_image_1787089379420.jpg';
 import { 
   Award, 
   CheckCircle2, 
@@ -18,10 +19,13 @@ import {
   ChevronRight,
   Stethoscope,
   Building,
-  Star
+  Star,
+  Play,
+  Dumbbell
 } from 'lucide-react';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
+import { DoctorExerciseVideoStudio } from './DoctorExerciseVideoStudio';
 
 interface AboutPageProps {
   onBackToHome: () => void;
@@ -114,16 +118,29 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               </div>
             </div>
 
-            {/* Right Col: Doctor Feature Card */}
+            {/* Right Col: Doctor Video & Feature Presentation Card */}
             <div className="lg:col-span-5">
-              <div className="bg-gradient-to-b from-slate-800/90 to-slate-900/90 rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-2xl backdrop-blur">
-                <div className="flex items-center space-x-4 pb-6 border-b border-slate-700/80">
-                  <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center text-white font-black text-2xl shadow-md">
-                    PG
+              <div className="bg-gradient-to-b from-slate-800/95 to-slate-900/95 rounded-3xl p-6 sm:p-7 border border-slate-700 shadow-2xl backdrop-blur relative overflow-hidden group">
+                
+                {/* Background ambient lighting */}
+                <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
+
+                <div className="flex items-center space-x-4 pb-5 border-b border-slate-700/80 relative z-10">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-blue-400 shadow-lg shadow-blue-500/30 shrink-0 bg-slate-950 flex items-center justify-center relative">
+                    {/* Dr. Pawan Gupta Cutout Photo with studio lighting */}
+                    <img 
+                      src={doctorPhoto} 
+                      alt="Dr. Pawan Gupta (PT)" 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-top filter brightness-105"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-blue-600/80 text-[8px] font-bold text-center text-white py-0.5">
+                      LIVE PT
+                    </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white font-heading">Dr. Pawan Gupta (PT)</h3>
-                    <p className="text-xs text-blue-400 font-medium">Founder, Run To Win Healthcare</p>
+                    <h3 className="text-lg sm:text-xl font-bold text-white font-heading">Dr. Pawan Gupta (PT)</h3>
+                    <p className="text-xs text-blue-400 font-medium">Founder & Clinical Director</p>
                     <div className="flex items-center space-x-1 mt-1 text-amber-400 text-xs font-semibold">
                       <Star className="w-3.5 h-3.5 fill-amber-400" />
                       <span>4.9 / 5.0 Google Rating (128+ Reviews)</span>
@@ -131,7 +148,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-6 text-xs sm:text-sm text-slate-300">
+                {/* Animated Exercise Demonstration Preview Pill */}
+                <div className="mt-4 p-3.5 rounded-2xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-between">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs">
+                      <Play className="w-4 h-4 fill-current ml-0.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white">Watch Dr. Pawan Explain Exercises</div>
+                      <div className="text-[10px] text-blue-300">4K Biomechanical Video Guide Below</div>
+                    </div>
+                  </div>
+                  <a
+                    href="#exercise-studio"
+                    className="text-[11px] font-bold text-blue-400 hover:text-blue-300 underline"
+                  >
+                    View Studio ↓
+                  </a>
+                </div>
+
+                <div className="space-y-3 pt-5 text-xs text-slate-300">
                   <div className="flex items-start space-x-3">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
@@ -158,14 +194,40 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-slate-700/80 bg-slate-900/50 -mx-6 -mb-6 p-6 rounded-b-3xl text-xs flex items-center justify-between">
-                  <span className="text-slate-400">Sewri Clinic & Home Visits</span>
+                <div className="mt-5 pt-4 border-t border-slate-700/80 bg-slate-900/50 -mx-6 -mb-6 p-5 rounded-b-3xl text-xs flex items-center justify-between">
+                  <span className="text-slate-400">Sewri Clinic & Mumbai Home Visits</span>
                   <span className="text-emerald-400 font-bold">Accepting New Patients</span>
                 </div>
               </div>
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* Dr. Pawan Gupta Interactive Exercise Video Demonstration Studio */}
+      <section id="exercise-studio" className="py-16 md:py-20 bg-slate-900 text-white relative overflow-hidden border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-3">
+              <Play className="w-3.5 h-3.5 fill-current text-blue-400" />
+              <span>Interactive Clinical Video Studio</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-heading">
+              Watch Dr. Pawan Gupta (PT) Explain & Demonstrate Core Rehab Exercises
+            </h2>
+            <p className="mt-3 text-base text-slate-300">
+              Interactive high-definition physical therapy exercise loops featuring biomechanical angles, clinical objectives, target muscles, and audio voiceover guidance.
+            </p>
+          </div>
+
+          {/* Exercise Demonstration Component */}
+          <DoctorExerciseVideoStudio
+            onOpenBooking={(service, area) => onOpenBooking(service || 'Exercise & Physical Therapy Session', area)}
+            standalone={false}
+          />
+
         </div>
       </section>
 

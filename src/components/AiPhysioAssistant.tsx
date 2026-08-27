@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Markdown from 'react-markdown';
 import { 
   Sparkles, 
   Send, 
@@ -15,7 +16,10 @@ import {
   MicOff,
   Volume2,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Activity,
+  Home,
+  Dumbbell
 } from 'lucide-react';
 import { ChatMessage } from '../types';
 import { CLINIC_CONTACT, MUMBAI_AREAS } from '../data/clinicData';
@@ -43,14 +47,23 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
     {
       id: 'welcome-1',
       role: 'assistant',
-      content: `Hello! I am the **Run To Win AI Physiotherapy Assistant** for **Dr Pawan Gupta (PT)** in Mumbai.\n\nYou can ask about symptoms, treatments, Mumbai home visits, or use **Voice Commands** (e.g., *"Book home visit in Bandra"* or *"Schedule knee consultation"*).`,
+      content: `👋 Hello! I am the **Run To Win AI Physiotherapy & Exercise Assistant** for **Dr Pawan Gupta (PT)** (MIAP, M.P.Th, 8+ yrs exp).
+
+💡 **How I Can Help You:**
+• **In-Depth Condition Explanations:** Ask about sciatica, slip discs, knee osteoarthritis, frozen shoulder, stroke recovery, neck spondylosis, or sports injuries.
+• **Safe Home Exercise Guidance:** Get step-by-step physiotherapy exercise recommendations with sets, reps, and precautions.
+• **Schedule Appointments:** Instantly book clinic sessions in Sewri or **doorstep Home Visits** across Mumbai.
+
+*Use the quick prompts below or tap the 🎙️ microphone for voice commands!*`,
       timestamp: 'Just now',
       suggestedPills: [
-        'Acute Lower Back & Sciatica Relief',
-        'Frozen Shoulder Recovery Stages',
+        'Exercises for Lower Back & Sciatica',
+        'Knee Pain Relief & Strengthening Exercises',
+        'Frozen Shoulder Exercises by Stage',
+        'Neck Posture & Tech Neck Stretches',
         'Post Knee Replacement (TKR) Milestones',
-        'Book Dr. Pawan Consultation',
-        'Ask about Mumbai Home Visits',
+        'Book Appointment with Dr. Pawan',
+        'Mumbai Home Visit Coverage',
       ],
     },
   ]);
@@ -297,8 +310,9 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         suggestedPills: [
           'Book Dr. Pawan Consultation',
-          'Ask about Mumbai Home Visits',
-          'Desk Posture Tips',
+          'Book Mumbai Home Visit',
+          'Ask for More Exercises',
+          'Desk Posture & Spine Alignment',
         ],
       };
 
@@ -330,14 +344,14 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
             <div>
               <div className="flex items-center space-x-2">
                 <h3 className="font-bold text-sm sm:text-base font-heading">
-                  Run To Win AI Voice & Clinical Assistant
+                  Run To Win AI Physiotherapy & Exercise Consultant
                 </h3>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-semibold border border-blue-500/30">
                   Gemini 3.7 + Voice
                 </span>
               </div>
               <p className="text-[11px] text-slate-400">
-                Dr Pawan Gupta (PT) Clinical Guidance • Mumbai
+                Dr Pawan Gupta (PT) Clinical Guidance • Exercises • Mumbai Home Visits
               </p>
             </div>
           </div>
@@ -357,7 +371,7 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
         <div className="bg-amber-50 px-4 py-2 border-b border-amber-200 text-amber-900 text-[11px] flex items-center space-x-2 shrink-0">
           <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
           <span>
-            <strong>Medical Notice:</strong> AI responses provide educational insights only. Never substitute this for in-person medical diagnosis by Dr Pawan Gupta (PT).
+            <strong>Clinical & Exercise Notice:</strong> AI advice is for educational guidance. Stop if sharp pain occurs. For hands-on treatment & diagnosis, consult Dr Pawan Gupta (PT).
           </span>
         </div>
 
@@ -402,7 +416,7 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
                   {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                 </div>
 
-                <div className={`max-w-[85%] space-y-2`}>
+                <div className={`max-w-[88%] space-y-2`}>
                   <div
                     className={`p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed shadow-sm ${
                       isUser
@@ -410,9 +424,49 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
                         : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none'
                     }`}
                   >
-                    <div className="whitespace-pre-line space-y-1">
-                      {msg.content}
-                    </div>
+                    {isUser ? (
+                      <div className="whitespace-pre-line">{msg.content}</div>
+                    ) : (
+                      <div className="space-y-2 leading-relaxed text-slate-800 [&_strong]:text-slate-950 [&_strong]:font-bold [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4 [&_ol]:space-y-1.5 [&_h3]:text-sm [&_h3]:font-bold [&_h3]:text-slate-900 [&_p]:leading-relaxed [&_hr]:my-2 [&_hr]:border-slate-200">
+                        <Markdown>{msg.content}</Markdown>
+                      </div>
+                    )}
+
+                    {/* Integrated Interactive Booking CTA card for Assistant Messages */}
+                    {!isUser && msg.id !== 'welcome-1' && (
+                      <div className="mt-3.5 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2">
+                        <button
+                          onClick={() => {
+                            onClose();
+                            onOpenBooking('Comprehensive Physiotherapy Evaluation');
+                          }}
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold shadow-xs transition"
+                        >
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>Book In-Clinic Appointment</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            onClose();
+                            onOpenBooking('Home Visit Physiotherapy (Mumbai)');
+                          }}
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-semibold transition"
+                        >
+                          <Home className="w-3.5 h-3.5 text-blue-400" />
+                          <span>Book Mumbai Home Visit</span>
+                        </button>
+                        <a
+                          href={`https://wa.me/${CLINIC_CONTACT.whatsappNumber}?text=${encodeURIComponent('Hi Dr. Pawan Gupta, I used your Run To Win AI Assistant and would like to schedule a consultation.')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center space-x-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-semibold border border-emerald-200 transition"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>WhatsApp Doctor</span>
+                        </a>
+                      </div>
+                    )}
+
                     <div
                       className={`text-[10px] mt-2 text-right ${
                         isUser ? 'text-blue-200' : 'text-slate-400'
@@ -429,16 +483,18 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
                         <button
                           key={idx}
                           onClick={() => {
-                            if (pill === 'Book Dr. Pawan Consultation') {
+                            if (pill === 'Book Dr. Pawan Consultation' || pill === 'Book Appointment with Dr. Pawan') {
                               onClose();
                               onOpenBooking();
+                            } else if (pill === 'Book Mumbai Home Visit' || pill === 'Ask about Mumbai Home Visits' || pill === 'Mumbai Home Visit Coverage') {
+                              handleSendMessage('Which Mumbai areas do you cover for home visit physiotherapy and how can I book one?');
                             } else {
                               handleSendMessage(pill);
                             }
                           }}
-                          className="text-[11px] px-3 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-medium transition shadow-xs"
+                          className="text-[11px] px-3 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-medium transition shadow-xs flex items-center space-x-1"
                         >
-                          {pill}
+                          <span>{pill}</span>
                         </button>
                       ))}
                     </div>
@@ -493,29 +549,35 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
         {/* Action Fast Footer with Speech Recognition Microphone */}
         <div className="p-3 bg-white border-t border-slate-200 space-y-2 shrink-0">
           
-          {/* Quick Voice Prompt Shortcuts */}
+          {/* Quick Voice & Topic Shortcuts */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
             <span className="text-slate-400 font-medium whitespace-nowrap flex items-center gap-1">
-              <Mic className="w-3 h-3 text-blue-600" />
-              <span>Voice commands:</span>
+              <Dumbbell className="w-3 h-3 text-blue-600" />
+              <span>Quick Ask:</span>
             </span>
             <button
+              onClick={() => handleSendMessage('What are safe home exercises for lower back pain and sciatica?')}
+              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 whitespace-nowrap transition border border-slate-200"
+            >
+              "Back & Sciatica Exercises"
+            </button>
+            <button
+              onClick={() => handleSendMessage('What exercises help knee osteoarthritis and strengthening?')}
+              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 whitespace-nowrap transition border border-slate-200"
+            >
+              "Knee Strengthening Exercises"
+            </button>
+            <button
+              onClick={() => handleSendMessage('Can you explain frozen shoulder and show stretches for each phase?')}
+              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 whitespace-nowrap transition border border-slate-200"
+            >
+              "Frozen Shoulder Stretches"
+            </button>
+            <button
               onClick={() => processVoiceCommand('Book home visit in Bandra')}
-              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 whitespace-nowrap transition border border-slate-200"
+              className="px-2.5 py-0.5 rounded-full bg-blue-50 hover:bg-blue-100 hover:text-blue-800 text-blue-700 whitespace-nowrap transition border border-blue-200 font-medium"
             >
-              "Book home visit in Bandra"
-            </button>
-            <button
-              onClick={() => processVoiceCommand('Book appointment for severe knee pain')}
-              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 whitespace-nowrap transition border border-slate-200"
-            >
-              "Book for knee pain"
-            </button>
-            <button
-              onClick={() => processVoiceCommand('Schedule dry needling session in Sewri')}
-              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 whitespace-nowrap transition border border-slate-200"
-            >
-              "Schedule dry needling"
+              🎙️ "Book home visit in Bandra"
             </button>
           </div>
 
@@ -530,7 +592,7 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
             <button
               type="button"
               onClick={toggleSpeechRecognition}
-              title={isListening ? 'Stop listening' : 'Start voice command booking / question'}
+              title={isListening ? 'Stop listening' : 'Start voice command or ask exercise query'}
               className={`p-2.5 rounded-full transition flex items-center justify-center shrink-0 ${
                 isListening
                   ? 'bg-red-600 hover:bg-red-700 text-white ring-4 ring-red-200 animate-pulse'
@@ -542,7 +604,7 @@ export const AiPhysioAssistant: React.FC<AiPhysioAssistantProps> = ({
 
             <input
               type="text"
-              placeholder={isListening ? "Listening to your voice..." : "Ask symptom question or type 'Book appointment'..."}
+              placeholder={isListening ? "Listening to your voice..." : "Ask condition/exercise questions or type 'Book appointment'..."}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               disabled={isLoading || isListening}

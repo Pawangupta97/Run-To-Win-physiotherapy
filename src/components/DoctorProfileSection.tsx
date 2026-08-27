@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import doctorPhoto from '../assets/images/regenerated_image_1787089379420.jpg';
 import { 
   ShieldCheck, 
@@ -11,16 +11,21 @@ import {
   HeartHandshake, 
   Star, 
   Activity, 
-  FileText 
+  FileText,
+  Play,
+  Dumbbell,
+  X
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { CLINIC_CONTACT } from '../data/clinicData';
+import { DoctorExerciseVideoStudio } from './DoctorExerciseVideoStudio';
 
 interface DoctorProfileSectionProps {
   onOpenBooking: () => void;
 }
 
 export const DoctorProfileSection: React.FC<DoctorProfileSectionProps> = ({ onOpenBooking }) => {
+  const [showVideoModal, setShowVideoModal] = useState(false);
   const credentials = [
     {
       title: 'B.P.Th & M.P.Th (Musculoskeletal & Sports)',
@@ -133,6 +138,30 @@ export const DoctorProfileSection: React.FC<DoctorProfileSectionProps> = ({ onOp
                   </a>
                 </div>
 
+                {/* Interactive Video Exercise Demonstration Button */}
+                <button
+                  type="button"
+                  onClick={() => setShowVideoModal(true)}
+                  className="w-full p-3 rounded-2xl bg-blue-950/80 hover:bg-blue-900 border border-blue-500/40 text-left transition flex items-center justify-between group shadow-inner"
+                >
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-blue-600 group-hover:bg-blue-500 text-white flex items-center justify-center shadow-xs transition">
+                      <Play className="w-4 h-4 fill-current ml-0.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white group-hover:text-blue-300 transition">
+                        Watch Dr. Pawan Explain Exercises
+                      </div>
+                      <div className="text-[10px] text-blue-400">
+                        4K Clinical Biomechanical Video Loops
+                      </div>
+                    </div>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-bold border border-blue-500/30">
+                    Watch ▶
+                  </span>
+                </button>
+
                 {/* Clinical Philosophy Quote */}
                 <blockquote className="text-xs italic text-slate-300 border-l-2 border-blue-500 pl-3 leading-relaxed">
                   "My mission is simple: eliminate root pain causes through science-driven manual techniques, restoring every patient's freedom to run, work, and live without limits."
@@ -235,6 +264,37 @@ export const DoctorProfileSection: React.FC<DoctorProfileSectionProps> = ({ onOp
         </div>
 
       </div>
+
+      {/* Fullscreen Video Demonstration Studio Modal */}
+      <AnimatePresence>
+        {showVideoModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-5xl my-8 bg-slate-950 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden"
+            >
+              <button
+                onClick={() => setShowVideoModal(false)}
+                className="absolute top-4 right-4 z-40 p-2 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-700 transition"
+                title="Close Video Studio"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <DoctorExerciseVideoStudio
+                onOpenBooking={(service, area) => {
+                  setShowVideoModal(false);
+                  onOpenBooking();
+                }}
+                standalone={false}
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 };

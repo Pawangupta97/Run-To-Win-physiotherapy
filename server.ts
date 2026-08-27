@@ -79,48 +79,136 @@ CREATE POLICY "Allow public reads" ON public.appointments FOR SELECT USING (true
     try {
       const { message, history, context } = req.body;
 
+      const systemInstruction = `You are the expert "Run To Win AI Physiotherapy & Clinical Exercise Consultant" for RUN TO WIN HEALTHCARE MUMBAI, led by Dr Pawan Gupta (PT), Senior Consultant Physiotherapist & Rehabilitation Specialist (B.P.Th, M.P.Th, MIAP, Certified Dry Needling & Manual Therapy Practitioner).
+
+Clinic Details:
+- Doctor: Dr Pawan Gupta (PT) - 8+ years clinical experience, 1000+ patient recoveries, 4.9★ rating
+- Clinic Location: Sewri, Mumbai (with daily Home Visit Physiotherapy across Bandra, Khar, Santacruz, Juhu, Andheri, BKC, Dadar, Worli, Girgaon, Powai, etc.)
+- Phone / WhatsApp: +91 98386 88745
+- Key Specialities: Orthopedic & Spine Rehabilitation, Post-Operative (TKR/THR/Ligament Surgery) Rehab, Sports Injury Recovery, Neurological & Stroke Rehabilitation, Geriatric Mobility, Dry Needling, Cupping, Kinesiology Taping, Maitland/Mulligan Manual Mobilization.
+
+PERMISSIONS & RESPONSE PROTOCOL:
+You have FULL PERMISSION AND AUTHORITY to:
+1. EXPLAIN CLINICAL TOPICS IN DEPTH:
+   - Provide clear, empathetic, and evidence-based explanations of musculoskeletal conditions, biomechanics, nerve compressions, muscle imbalances, joint degeneration, sports injuries, and surgical recovery stages.
+   - Explain why the symptoms occur and the typical timeline for recovery.
+
+2. SUGGEST TARGETED, SAFE PHYSIOTHERAPY EXERCISES:
+   - Provide concrete, structured exercises (mobility, stretching, isometric strengthening, core stabilization, or ergonomic drills).
+   - Format each exercise with:
+     * **Exercise Name**
+     * **Step-by-step Execution** (how to perform correctly)
+     * **Sets, Reps, & Holds** (e.g., 2 sets of 10 reps, hold for 5-10 seconds)
+     * **Precautions / What to Avoid** (e.g., avoid heavy flexion, do not force joint range)
+
+3. ALWAYS INCLUDE A CLEAR SAFETY & EXERCISE DISCLAIMER:
+   - Add a brief, prominent disclaimer at the end:
+     "⚠️ *Safety & Exercise Disclaimer: Perform all exercises gently within a completely pain-free range. If you feel sharp pain, shooting sensations, or dizziness, stop immediately. AI guidance is for educational empowerment and does not replace an in-person physical assessment.*"
+
+4. SUGGEST & ENCOURAGE BOOKING AN APPOINTMENT WITH DR. PAWAN GUPTA (PT):
+   - Proactively recommend scheduling a personalized clinical evaluation or doorstep home visit with Dr. Pawan Gupta (PT) in Mumbai for hands-on joint mobilization, dry needling, postural corrections, and customized progression.
+   - Mention that appointments can be booked directly through the app booking form or via WhatsApp / Phone at +91 98386 88745.
+
+5. RED FLAGS AWARENESS:
+   - If symptoms indicate critical red flags (e.g. progressive numbness/weakness, loss of bladder/bowel control, suspected acute fracture, fever with hot swollen joint), urge immediate emergency medical consultation.
+
+Tone: Professional, encouraging, clear, medical yet patient-friendly, with organized Markdown (bold headings, bullet points).`;
+
       const apiKey = process.env.GEMINI_API_KEY;
       if (!apiKey) {
+        // High quality educational fallback if API key is not configured in local environment
+        const queryLower = (message || '').toLowerCase();
+        let topicExplanation = `**Understanding Your Condition & Recovery Roadmap:**\nMusculoskeletal discomfort, stiffness, or post-injury rehabilitation requires a balanced approach combining pain reduction, targeted joint mobility, and gradual muscle strengthening.`;
+        let exerciseList = `**Recommended Home Physiotherapy Exercises:**
+1. **Gentle Active Range of Motion & Mobility:**
+   - *How to do:* Move the affected joint gently through its comfortable, pain-free range of motion.
+   - *Dosage:* 10-12 smooth repetitions, 2 times daily.
+   - *Key Cue:* Do not bounce or force into painful angles.
+
+2. **Isometric Muscle Activation:**
+   - *How to do:* Contract the surrounding stabilizing muscles without moving the joint (press against gentle resistance for 5-10 seconds).
+   - *Dosage:* 8-10 repetitions, hold 5-7 seconds each.
+   - *Key Cue:* Breathe normally during the hold.
+
+3. **Postural Alignment & Decompression:**
+   - *How to do:* Maintain neutral spinal alignment, keep shoulders relaxed back and down, and adjust your sitting/standing ergonomic setup.
+   - *Dosage:* Recheck and reset posture every 30-45 minutes.`;
+
+        if (queryLower.includes('back') || queryLower.includes('sciatica') || queryLower.includes('disc') || queryLower.includes('spine')) {
+          topicExplanation = `**Lower Back & Sciatica Relief Overview:**\nLumbar pain and sciatica often arise from nerve root irritation, disc bulges, facet joint stiffness, or tight piriformis/gluteal musculature causing radiating discomfort.`;
+          exerciseList = `**Targeted Lower Back & Sciatic Nerve Exercises:**
+1. **Pelvic Tilts & Core Activation:**
+   - *How to do:* Lie on your back with knees bent. Gently flatten your lower back against the bed/mat by tightening abdominal muscles.
+   - *Dosage:* 2 sets of 10 reps, hold 5 seconds each.
+2. **Knee-to-Chest Stretch (Single Leg):**
+   - *How to do:* Lie on your back, slowly draw one knee toward your chest with your hands behind your thigh until a mild stretch is felt in the glute/lower back.
+   - *Dosage:* 3 reps per side, hold 15-20 seconds.
+3. **Gentle Prone Cobra / Cat-Cow Mobility:**
+   - *How to do:* Gentle spinal mobilization to restore natural lumbar lordosis without hyperextension.
+   - *Dosage:* 8-10 smooth repetitions.`;
+        } else if (queryLower.includes('knee') || queryLower.includes('tkr') || queryLower.includes('osteoarthritis') || queryLower.includes('meniscus')) {
+          topicExplanation = `**Knee Rehabilitation & Mobility Overview:**\nKnee pain from arthritis, ligament strain, or post-operative recovery (TKR) benefits from restoring full extension, patellar mobility, and quadriceps/hamstring stability without excessive joint compression.`;
+          exerciseList = `**Targeted Knee Strengthening & Mobility Exercises:**
+1. **Static Quadriceps Sets (Towel Under Knee):**
+   - *How to do:* Sit with leg straight, roll a small towel under your knee. Press the back of the knee down firmly into the towel, tightening the front thigh.
+   - *Dosage:* 2 sets of 12 reps, hold 5-8 seconds each.
+2. **Straight Leg Raises (SLR):**
+   - *How to do:* Lie flat, keep one leg straight with toes pointing up, and raise it 10-12 inches off the ground.
+   - *Dosage:* 2 sets of 10 reps per leg.
+3. **Heel Slides (Gentle Knee Flexion):**
+   - *How to do:* Slowly slide your heel toward your buttocks to gently bend the knee, then slide back out.
+   - *Dosage:* 10-15 controlled repetitions.`;
+        } else if (queryLower.includes('shoulder') || queryLower.includes('frozen') || queryLower.includes('rotator')) {
+          topicExplanation = `**Shoulder & Frozen Shoulder Recovery Overview:**\nShoulder stiffness and rotator cuff irritation require gradual capsular stretching, scapular stabilization, and rotator cuff endurance to regain overhead reach without impingement.`;
+          exerciseList = `**Targeted Shoulder Mobility & Rotator Cuff Exercises:**
+1. **Pendulum Exercises (Codman's):**
+   - *How to do:* Lean forward resting your good arm on a table. Let the affected arm dangle freely and gently swing it in small circles using body momentum.
+   - *Dosage:* 15-20 circles clockwise and counter-clockwise.
+2. **Towel / Wand Assisted Elevation:**
+   - *How to do:* Hold a light stick or towel with both hands; use the unaffected arm to gently assist lifting the stiff arm upward within comfortable limits.
+   - *Dosage:* 2 sets of 10 reps, hold 3-5 seconds at top.
+3. **Scapular Squeezes:**
+   - *How to do:* Sit upright, draw your shoulder blades back and down together without shrugging.
+   - *Dosage:* 2 sets of 12 reps, hold 5 seconds.`;
+        } else if (queryLower.includes('neck') || queryLower.includes('cervical') || queryLower.includes('headache')) {
+          topicExplanation = `**Neck & Cervical Spondylosis Overview:**\nNeck tension, text neck, and cervical stiffness are commonly caused by forward head posture, tight upper trapezius muscles, and weak deep neck flexors.`;
+          exerciseList = `**Targeted Neck Posture & Mobility Exercises:**
+1. **Chin Tucks (Deep Neck Flexor Activation):**
+   - *How to do:* Look straight ahead. Gently slide your chin straight backward as if making a subtle double chin.
+   - *Dosage:* 2 sets of 10 reps, hold 5 seconds each.
+2. **Upper Trapezius & Levator Scapulae Gentle Stretch:**
+   - *How to do:* Gently tilt your ear toward your shoulder until a mild stretch is felt on the opposite neck side.
+   - *Dosage:* 3 reps per side, hold 15-20 seconds.
+3. **Thoracic Extension Over Chair:**
+   - *How to do:* Sit with hands behind neck, gently arch upper back over the chair backrest.
+   - *Dosage:* 8-10 repetitions.`;
+        }
+
+        const reply = `${topicExplanation}
+
+${exerciseList}
+
+---
+
+⚠️ **Safety & Exercise Disclaimer:**
+*Always perform exercises in a gentle, pain-free range. Stop immediately if you experience sharp shooting pain, pins & needles, or dizziness. These recommendations are educational and do not substitute for a clinical diagnosis.*
+
+---
+
+👉 **Recommended Next Step:**
+For a precise physical examination, dry needling, joint mobilization, or personalized rehabilitation roadmap, book a consultation or **Mumbai Home Visit** with **Dr Pawan Gupta (PT)** (MIAP, M.P.Th).
+
+📞 **Call / WhatsApp:** +91 98386 88745  
+📍 **Clinic:** Sewri, Mumbai | Doorstep home visits across all Mumbai suburbs.`;
+
         return res.json({
-          reply: `Hello! I am the **Run To Win Healthcare AI Triage Assistant** for Dr Pawan Gupta (PT). 
-
-Based on your question: *"${message}"*, our recommended next step is an in-person or home-visit clinical assessment by Dr Pawan Gupta (PT) in Mumbai. 
-
-**Quick Recommendations & Guidance:**
-- **Acute Pain:** Avoid heavy loading, apply ice (15-20 min) for fresh inflammation or warm compress for chronic muscle stiffness.
-- **Proper Posture:** Avoid prolonged slouching; change positions every 30-45 minutes.
-- **Clinical Evaluation:** Call or WhatsApp Dr Pawan Gupta (PT) directly at **+91 98200 12345** for same-day priority consultation or home visit booking across Mumbai.
-
-*(Note: AI guidance is for general health education and does not substitute for an individual medical diagnosis by a licensed physiotherapist).*`,
+          reply,
           disclaimer: true,
+          bookingSuggested: true,
         });
       }
 
       const ai = new GoogleGenAI({ apiKey });
-
-      const systemInstruction = `You are the specialized "Run To Win Physiotherapy Assistant" for RUN TO WIN HEALTHCARE MUMBAI, led by Dr Pawan Gupta (PT), a renowned Consultant Physiotherapist and Rehabilitation Specialist with 12+ years of clinical excellence in Mumbai.
-
-Your tone is empathetic, clinical yet accessible, highly professional, motivating, and patient-first.
-
-Key Clinic & Doctor Info:
-- Doctor: Dr Pawan Gupta (PT), B.P.Th, M.P.Th (Specialist in Musculoskeletal, Sports Rehab, Neuro Rehab, Dry Needling & Post-Op Recovery)
-- Clinic & Service: RUN TO WIN HEALTHCARE MUMBAI
-- Services Offered:
-  1. Orthopedic & Spine Rehab (Sciatica, Slip Disc, Spondylitis, Neck/Back Pain, Knee Osteoarthritis)
-  2. Sports Injury & Return-to-Play Protocols (ACL, Rotator Cuff, Tennis Elbow, Ankle Sprain)
-  3. Neurological Rehab (Stroke / Hemiplegia, Parkinson's, Bell's Palsy, Balance Training)
-  4. Post-Operative Rehabilitation (Total Knee/Hip Replacement TKR/THR, Arthroscopy, Spinal Surgery)
-  5. Mumbai Home Visit Physiotherapy (Available in Bandra, Khar, Santacruz, Juhu, Andheri, BKC, Worli, Dadar, Powai, etc.)
-  6. Advanced Modalities: Dry Needling, Cupping Therapy, Kinesiology Taping, Manual Joint Mobilization, Electrotherapy.
-- Contact / Appointment: Direct WhatsApp & Phone consultation available.
-
-Guidelines for your responses:
-1. Provide structured, evidence-based physiotherapy education regarding symptoms, potential musculoskeletal causes, ergonomic tips, and self-care measures.
-2. Outline safe initial recommendations (e.g. R.I.C.E. protocol for acute sprains, gentle mobility exercises, ergonomic desk posture).
-3. Warn against red flag symptoms (e.g., severe neurological deficits, progressive numbness, fever with back pain, sudden loss of bowel/bladder control, suspected fractures) requiring immediate emergency medical attention.
-4. Encourage booking a clinical consultation or home visit with Dr Pawan Gupta (PT) in Mumbai for a personalized manual assessment and targeted recovery roadmap.
-5. Keep responses concise, well-formatted with markdown bolding and bullet points.
-6. Always maintain the medical disclaimer that this advice is for educational guidance and does not replace a clinical examination.`;
 
       // Build chat prompt or contents
       const conversationContents = [];
@@ -136,7 +224,7 @@ Guidelines for your responses:
       conversationContents.push({
         role: 'user',
         parts: [{ 
-          text: `User query: ${message}\nUser context/body area: ${context || 'General inquiry'}` 
+          text: `User query: ${message}\nContext/Body region: ${context || 'General physiotherapy & exercise inquiry'}\n\nPlease provide: 1) A clear clinical topic explanation, 2) Safe, structured, step-by-step physiotherapy exercises with sets/reps and precautions, 3) The required exercise safety disclaimer, and 4) A clear suggestion to book an in-person or Mumbai home visit consultation with Dr. Pawan Gupta (PT) (+91 98386 88745).` 
         }]
       });
 
@@ -149,16 +237,17 @@ Guidelines for your responses:
         }
       });
 
-      const replyText = response.text || 'Thank you for reaching out. Please connect with Dr Pawan Gupta (PT) directly for a personalized assessment.';
+      const replyText = response.text || 'Thank you for reaching out. Please connect with Dr Pawan Gupta (PT) directly at +91 98386 88745 for a personalized clinical evaluation and treatment plan.';
 
       res.json({
         reply: replyText,
         disclaimer: true,
+        bookingSuggested: true,
       });
     } catch (error: any) {
       console.error('Error generating AI response:', error);
       res.status(500).json({
-        reply: 'We are experiencing high traffic on the AI triage assistant. Please click the WhatsApp button or call Dr Pawan Gupta (PT) directly at +91 98200 12345 for immediate consultation.',
+        reply: 'We are experiencing high traffic. Please call or WhatsApp Dr Pawan Gupta (PT) directly at +91 98386 88745 to discuss your symptoms, get personalized exercise advice, or schedule a home visit.',
         error: error.message,
       });
     }
