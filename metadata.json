@@ -1,6 +1,6 @@
 {
   "name": "RUN TO WIN HEALTHCARE SERVICES MUMBAI - Dr Pawan Gupta (PT)",
   "description": "Premier physiotherapy, sports rehabilitation, orthopedic, post-surgical, neurological recovery, and specialized home visit care in Mumbai led by Dr Pawan Gupta (PT).",
-  "requestFramePermissions": [],
+  "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

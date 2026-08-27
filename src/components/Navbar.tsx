@@ -194,19 +194,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => onNavigatePage ? onNavigatePage('services') : onGoHome && onGoHome()}
               className={`hover:text-blue-600 transition-colors py-1 relative group ${
-                currentPage === 'services' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+                currentPage === 'services' || currentPage === 'conditions' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Services & Care
-            </button>
-
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('conditions') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
-                currentPage === 'conditions' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
-              }`}
-            >
-              Conditions
             </button>
 
             <button
@@ -471,24 +462,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   else if (onGoHome) onGoHome();
                 }}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
-                  currentPage === 'services' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                  currentPage === 'services' || currentPage === 'conditions' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Services & Care</span>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  if (onNavigatePage) onNavigatePage('conditions');
-                  else if (onGoHome) onGoHome();
-                }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
-                  currentPage === 'conditions' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
-                }`}
-              >
-                <span>Conditions Treated</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 

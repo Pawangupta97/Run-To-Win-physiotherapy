@@ -262,19 +262,13 @@ export default function App() {
             onOpenBooking={handleOpenBooking}
             onOpenAiAssistant={handleOpenAiAssistant}
           />
-        ) : currentPage === 'services' ? (
+        ) : currentPage === 'services' || currentPage === 'conditions' ? (
           <ServicesPage
             onBackToHome={handleGoHome}
             onOpenBooking={handleOpenBooking}
             onOpenAiAssistant={handleOpenAiAssistant}
-            onSelectConditionGuide={handleSelectCondition}
-          />
-        ) : currentPage === 'conditions' ? (
-          <ConditionsPage
-            onBackToHome={handleGoHome}
+            onNavigatePage={handleNavigatePage}
             onSelectCondition={handleSelectCondition}
-            onOpenBooking={handleOpenBooking}
-            onOpenAiAssistant={handleOpenAiAssistant}
           />
         ) : currentPage === 'articles' ? (
           <ArticlesPage
