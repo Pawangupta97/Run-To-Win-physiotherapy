@@ -244,7 +244,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                             {group.category}
                           </h4>
                         </div>
-                        <ul className="space-y-1.5 text-xs">
+                        <ul className="space-y-1.5 text-xs max-h-[360px] overflow-y-auto pr-1">
                           {group.locations.map((loc) => (
                             <li key={loc.id}>
                               <button

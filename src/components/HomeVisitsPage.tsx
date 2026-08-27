@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { 
   HOME_VISIT_LOCATIONS, 
   LOCATION_GROUPS, 
-  HomeVisitLocation 
+  HomeVisitLocation,
+  getLocationPath
 } from '../data/homeVisitLocations';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { 
@@ -215,11 +216,16 @@ export const HomeVisitsPage: React.FC<HomeVisitsPageProps> = ({
                     </span>
                   </div>
 
-                  <h3 
-                    onClick={() => onSelectLocation(loc.id)}
-                    className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-blue-700 font-heading cursor-pointer transition"
-                  >
-                    {loc.name}
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-blue-700 font-heading transition">
+                    <a
+                      href={getLocationPath(loc.id)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onSelectLocation(loc.id);
+                      }}
+                    >
+                      {loc.name}
+                    </a>
                   </h3>
 
                   <p className="text-xs text-slate-600 line-clamp-2">
@@ -251,13 +257,17 @@ export const HomeVisitsPage: React.FC<HomeVisitsPageProps> = ({
                     Book for {loc.name}
                   </button>
 
-                  <button
-                    onClick={() => onSelectLocation(loc.id)}
+                  <a
+                    href={getLocationPath(loc.id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onSelectLocation(loc.id);
+                    }}
                     className="inline-flex items-center space-x-1 text-xs font-bold text-blue-600 group-hover:text-blue-700 transition"
                   >
                     <span>View Details</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}

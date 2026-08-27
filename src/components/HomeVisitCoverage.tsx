@@ -20,7 +20,8 @@ import { CLINIC_CONTACT } from '../data/clinicData';
 import { 
   HOME_VISIT_LOCATIONS, 
   LOCATION_GROUPS, 
-  HomeVisitLocation 
+  HomeVisitLocation,
+  getLocationPath
 } from '../data/homeVisitLocations';
 
 interface HomeVisitCoverageProps {
@@ -272,13 +273,17 @@ export const HomeVisitCoverage: React.FC<HomeVisitCoverageProps> = ({
                     </button>
 
                     {onSelectLocation && (
-                      <button
-                        onClick={() => onSelectLocation(selectedLocation.id)}
+                      <a
+                        href={getLocationPath(selectedLocation.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectLocation(selectedLocation.id);
+                        }}
                         className="py-3 px-5 rounded-xl text-xs font-semibold bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-800/60 transition flex items-center justify-center space-x-1.5"
                       >
                         <span>View {selectedLocation.name} Page</span>
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
+                      </a>
                     )}
 
                     <a

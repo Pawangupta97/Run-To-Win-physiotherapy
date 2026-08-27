@@ -27,7 +27,7 @@ import { BodyMapPage } from './components/BodyMapPage';
 import { TestimonialsPage } from './components/TestimonialsPage';
 import { FaqPage } from './components/FaqPage';
 import { ContactPage } from './components/ContactPage';
-import { HOME_VISIT_LOCATIONS } from './data/homeVisitLocations';
+import { HOME_VISIT_LOCATIONS, parseLocationFromUrl, getLocationPath, getLocationHash } from './data/homeVisitLocations';
 import { CONDITION_GUIDES } from './data/conditionGuides';
 import { CLINICAL_ARTICLES } from './data/articlesData';
 
@@ -60,21 +60,23 @@ export default function App() {
 
   const [aiContext, setAiContext] = useState<string | undefined>(undefined);
 
-  // Sync with URL hash for all pages and detail routes
+  // Sync with URL pathname and hash for all pages and detail routes
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleUrlRouting = () => {
+      const pathname = window.location.pathname;
       const hash = window.location.hash.toLowerCase();
 
-      if (hash.startsWith('#location/')) {
-        const locId = hash.replace('#location/', '').toLowerCase();
-        const found = HOME_VISIT_LOCATIONS.find((l) => l.id === locId);
-        if (found) {
-          setSelectedLocationId(found.id);
-          setSelectedConditionId(null);
-          setSelectedArticleId(null);
-          return;
-        }
-      } else if (hash.startsWith('#condition/')) {
+      // 1. Check for location routing (/physiotherapist-near-me-[loc] or #physiotherapist-near-me-[loc] or #location/[loc])
+      const locId = parseLocationFromUrl(pathname, hash);
+      if (locId) {
+        setSelectedLocationId(locId);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+        return;
+      }
+
+      // 2. Check for condition routes (#condition/...)
+      if (hash.startsWith('#condition/')) {
         const condId = hash.replace('#condition/', '').toLowerCase();
         const found = CONDITION_GUIDES.find((c) => c.id === condId || c.slug === condId);
         if (found) {
@@ -138,16 +140,23 @@ export default function App() {
         setSelectedConditionId(null);
         setSelectedArticleId(null);
       } else if (hash === '' || hash === '#' || hash === '#home') {
-        setCurrentPage('home');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        // If pathname is root or unrecognized, return to home
+        if (!locId) {
+          setCurrentPage('home');
+          setSelectedLocationId(null);
+          setSelectedConditionId(null);
+          setSelectedArticleId(null);
+        }
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleUrlRouting();
+    window.addEventListener('hashchange', handleUrlRouting);
+    window.addEventListener('popstate', handleUrlRouting);
+    return () => {
+      window.removeEventListener('hashchange', handleUrlRouting);
+      window.removeEventListener('popstate', handleUrlRouting);
+    };
   }, []);
 
   const handleNavigatePage = (page: string) => {
@@ -155,6 +164,9 @@ export default function App() {
     setSelectedConditionId(null);
     setSelectedArticleId(null);
     setCurrentPage(page as PageType);
+    try {
+      window.history.pushState(null, '', '/');
+    } catch {}
     window.location.hash = page === 'home' ? '' : `#${page}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -163,7 +175,15 @@ export default function App() {
     setSelectedLocationId(locationId);
     setSelectedConditionId(null);
     setSelectedArticleId(null);
-    window.location.hash = `#location/${locationId}`;
+    const newPath = getLocationPath(locationId);
+    const newHash = getLocationHash(locationId);
+
+    // Update browser URL seamlessly for direct links and local SEO bookmarks
+    try {
+      window.history.pushState({ locationId }, '', newPath);
+    } catch {
+      window.location.hash = newHash;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -188,7 +208,10 @@ export default function App() {
     setSelectedConditionId(null);
     setSelectedArticleId(null);
     setCurrentPage('home');
-    history.pushState('', document.title, window.location.pathname + window.location.search);
+    try {
+      window.history.pushState(null, '', '/');
+    } catch {}
+    window.location.hash = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

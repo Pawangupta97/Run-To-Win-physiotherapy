@@ -14,7 +14,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { CLINIC_CONTACT } from '../data/clinicData';
-import { HOME_VISIT_LOCATIONS } from '../data/homeVisitLocations';
+import { HOME_VISIT_LOCATIONS, getLocationPath } from '../data/homeVisitLocations';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -196,19 +196,21 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
             <div className="flex flex-wrap gap-1.5 max-h-56 overflow-y-auto pr-1">
               {HOME_VISIT_LOCATIONS.map((loc) => (
-                <button
+                <a
                   key={loc.id}
-                  type="button"
-                  onClick={() => {
+                  href={getLocationPath(loc.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
                     if (onSelectLocation) {
                       onSelectLocation(loc.id);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
                   className="px-2 py-0.5 rounded-md bg-slate-900 hover:bg-blue-900 hover:text-white text-slate-300 text-[10px] border border-slate-800 transition"
+                  title={`Physiotherapist near me in ${loc.name}, Mumbai`}
                 >
                   {loc.name}
-                </button>
+                </a>
               ))}
             </div>
           </div>

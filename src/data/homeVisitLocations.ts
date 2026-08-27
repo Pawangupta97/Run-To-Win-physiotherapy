@@ -396,6 +396,246 @@ export const HOME_VISIT_LOCATIONS: HomeVisitLocation[] = [
 
   // --- SOUTH MUMBAI ---
   {
+    id: 'girgaon',
+    name: 'Girgaon',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Girgaon Chowpatty', 'Khadilkar Road', 'Opera House Enclave', 'Mugbhat', 'Thakurdwar', 'Dr. Bapu Rao Jagtap Marg'],
+    popularConditions: ['Knee Osteoarthritis', 'Sciatica & Disc Bulge', 'Geriatric Fall Prevention', 'Frozen Shoulder'],
+    heroTagline: 'Premier Home Care Physiotherapy in Girgaon & Chowpatty',
+    neighborhoodHighlights: 'Serving heritage and residential societies across Girgaon, Chowpatty, and Opera House with portable modalities and personalized orthopedic rehab.',
+    patientReview: {
+      name: 'Pradeep J. (Girgaon Chowpatty)',
+      condition: 'Cervical Spondylosis & Radiculopathy',
+      quote: 'The gentle manual cervical mobilization and posture retraining at my Girgaon residence relieved severe radiating neck pain without painkiller dependence.',
+      rating: 5
+    }
+  },
+  {
+    id: 'grant-road',
+    name: 'Grant Road',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Grant Road East', 'Grant Road West', 'Nana Chowk', 'Balaram Street', 'Sleater Road', 'Gowalia Tank Zone', 'Lamington Road'],
+    popularConditions: ['Post-Op Knee/Hip Replacement', 'Stroke Neuro Rehab', 'Lumbar Spondylosis', 'Dry Needling'],
+    heroTagline: 'Certified Doorstep Physiotherapy in Grant Road & Nana Chowk',
+    neighborhoodHighlights: 'Dedicated in-home rehabilitation for senior citizens, joint replacement patients, and post-stroke recovery across Grant Road and Gowalia Tank.',
+    patientReview: {
+      name: 'Harsha D. (Nana Chowk, Grant Road)',
+      condition: 'Bilateral Knee Osteoarthritis',
+      quote: 'Dr Pawan Gupta is wonderfully patient with seniors. The strengthening program at our flat restored my walking independence.',
+      rating: 5
+    }
+  },
+  {
+    id: 'mazgaon',
+    name: 'Mazgaon',
+    category: 'South Mumbai',
+    responseTime: '15 – 25 mins',
+    landmarkAreas: ['Mazgaon Docks Area', 'Matharpacady Village', 'Gunpowder Road', 'Mount Mary Enclave', 'Nesbit Road', 'St. Mary High School Zone'],
+    popularConditions: ['Stroke Hemiplegia Rehab', 'Bell\'s Palsy (Facial)', 'Sciatica Relief', 'Elderly Mobility Care'],
+    heroTagline: 'Expert In-Home Physiotherapy in Mazgaon & Matharpacady',
+    neighborhoodHighlights: 'Prompt clinical home visits across Mazgaon, Matharpacady, and Nesbit Road with portable electrotherapy, gait training, and neuro-rehab tools.',
+    patientReview: {
+      name: 'Farzana M. (Matharpacady, Mazgaon)',
+      condition: 'Bell\'s Palsy Facial Rehab',
+      quote: 'The targeted neuromuscular stimulation and facial massage exercises brought back my normal smile in just 3 weeks.',
+      rating: 5
+    }
+  },
+  {
+    id: 'worli',
+    name: 'Worli',
+    category: 'South Mumbai',
+    responseTime: '15 – 25 mins',
+    landmarkAreas: ['Worli Sea Face', 'Worli Naka', 'Pochkhanawala Road', 'Birla Niyaara Zone', 'Nehru Centre Enclave', 'Khan Abdul Ghaffar Khan Road', 'Worli Hill Road'],
+    popularConditions: ['Executive Ergonomics & Neck Pain', 'Post-Op Knee/Hip Rehab', 'Sports Injury Recovery', 'Chronic Lower Back Pain'],
+    heroTagline: 'Luxury Home Visit Physiotherapy in Worli & Worli Sea Face',
+    neighborhoodHighlights: 'High-touch private home physiotherapy for luxury sea-facing high-rises and residential towers across Worli and Pochkhanawala Road.',
+    patientReview: {
+      name: 'Vikramaditya S. (Worli Sea Face)',
+      condition: 'L4-L5 Lumbar Disc Herniation',
+      quote: 'Dr Pawan brought top-tier clinical expertise directly to my apartment in Worli. The McKenzie extension protocol completely resolved my acute sciatica.',
+      rating: 5
+    }
+  },
+  {
+    id: 'mahalaxmi',
+    name: 'Mahalaxmi',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Mahalaxmi Racecourse Enclave', 'Dr. E. Moses Road', 'Minerva Towers Zone', 'Keshavrao Khadye Marg', 'Dhobi Ghat Area', 'Jacob Circle'],
+    popularConditions: ['Sports Conditioning & Rehab', 'Post-Surgical Joint Care', 'Sciatica', 'Rotator Cuff Shoulder Pain'],
+    heroTagline: 'Specialized Doorstep Physiotherapy in Mahalaxmi & Racecourse',
+    neighborhoodHighlights: 'Serving residents near Mahalaxmi Racecourse, Minerva Towers, and Jacob Circle with hospital-grade physical therapy equipment at home.',
+    patientReview: {
+      name: 'Ananya G. (Minerva, Mahalaxmi)',
+      condition: 'Rotator Cuff Tendinitis',
+      quote: 'Ultrasound therapy, dry needling, and resistance band progressions right inside my home helped me avoid surgery.',
+      rating: 5
+    }
+  },
+  {
+    id: 'tardeo',
+    name: 'Tardeo',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Tardeo AC Market', 'Pandita Ramabai Road', 'Imperial Towers Zone', 'Javed Akhtar Marg', 'Bhatia Hospital Vicinity', 'Wellington Enclave'],
+    popularConditions: ['Post-Op Knee Replacement (TKR)', 'Severe Sciatica & Disc Bulge', 'Parkinson\'s Mobility', 'Frozen Shoulder'],
+    heroTagline: 'Comprehensive At-Home Physiotherapy in Tardeo & Imperial Towers',
+    neighborhoodHighlights: 'Private, personalized rehabilitation sessions delivered directly to premium residences in Tardeo, Bhatia Hospital vicinity, and Imperial Towers.',
+    patientReview: {
+      name: 'Sanjay V. (Imperial Towers, Tardeo)',
+      condition: 'Total Knee Replacement (TKR)',
+      quote: 'Punctual, thorough, and very encouraging. Dr Pawan had me walking confidently without support within two weeks.',
+      rating: 5
+    }
+  },
+  {
+    id: 'kalbadevi',
+    name: 'Kalbadevi',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Kalbadevi Road', 'Swadeshi Market', 'Cotton Exchange Area', 'Zaveri Bazaar Zone', 'Princess Street', 'Dawa Bazaar'],
+    popularConditions: ['Chronic Back Stiffness & Posture', 'Knee Osteoarthritis', 'Heel Spur & Plantar Fasciitis', 'Senior Fall Prevention'],
+    heroTagline: 'Trusted Home Care Physiotherapist in Kalbadevi & Princess Street',
+    neighborhoodHighlights: 'Convenient home visits for busy business families and seniors in Kalbadevi, avoiding congested stairways and market transit.',
+    patientReview: {
+      name: 'Mahesh C. (Kalbadevi Road)',
+      condition: 'Plantar Fasciitis & Heel Spur',
+      quote: 'Deep myofascial release and customized foot arch retraining completely cured my morning heel pain.',
+      rating: 5
+    }
+  },
+  {
+    id: 'cuffe-parade',
+    name: 'Cuffe Parade',
+    category: 'South Mumbai',
+    responseTime: '25 – 35 mins',
+    landmarkAreas: ['Maker Chambers Enclave', 'GD Somani Marg', 'President Hotel Zone', 'Jolly Maker Apartments', 'Cuffe Castle', 'Bayview Towers'],
+    popularConditions: ['Senior Balance & Fall Safety', 'Post-Op Knee/Hip Rehab', 'Chronic Spinal Decompression', 'VIP Home Healthcare'],
+    heroTagline: 'Elite In-Home Physiotherapy in Cuffe Parade & Maker Enclave',
+    neighborhoodHighlights: 'Exclusive, dignified one-on-one physiotherapy for senior diplomats, executives, and recovering orthopedic patients in Cuffe Parade.',
+    patientReview: {
+      name: 'Ratan N. (Jolly Maker, Cuffe Parade)',
+      condition: 'Post-Op Hip Replacement & Balance',
+      quote: 'The highest standard of home clinical care. Dr Pawan is knowledgeable, gentle, and extremely professional.',
+      rating: 5
+    }
+  },
+  {
+    id: 'nariman-point',
+    name: 'Nariman Point',
+    category: 'South Mumbai',
+    responseTime: '25 – 35 mins',
+    landmarkAreas: ['NCPA Enclave', 'Dorabjee Tata Road', 'Mittal Towers Area', 'Free Press Journal Marg', 'Air India Building Zone', 'Madame Cama Road'],
+    popularConditions: ['Executive Ergonomic Strain', 'Tech Neck & Cervical Spasm', 'Sciatica', 'Corporate Posture Correction'],
+    heroTagline: 'Executive Home & Office Physiotherapy in Nariman Point',
+    neighborhoodHighlights: 'On-demand ergonomic audits, urgent postural spasm decompression, and home sessions for Nariman Point executives and residents.',
+    patientReview: {
+      name: 'Gautam B. (Near NCPA, Nariman Point)',
+      condition: 'Acute Cervicogenic Headache & Neck Spasm',
+      quote: 'Dry needling and manual trigger point therapy provided immediate relief from excruciating desk-induced headaches.',
+      rating: 5
+    }
+  },
+  {
+    id: 'fort',
+    name: 'Fort',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Flora Fountain Area', 'Horniman Circle', 'Kala Ghoda', 'DN Road', 'Mint Road', 'Ballard Estate', 'BSE Zone'],
+    popularConditions: ['Corporate Neck & Back Pain', 'Frozen Shoulder', 'Post-Fracture Rehabilitation', 'Sciatica'],
+    heroTagline: 'Hospital-Grade Home Physiotherapy in Fort & Ballard Estate',
+    neighborhoodHighlights: 'Rapid doorstep physical therapy across Fort, Kala Ghoda, and heritage commercial/residential quarters with portable modalities.',
+    patientReview: {
+      name: 'Boman I. (Horniman Circle, Fort)',
+      condition: 'Frozen Shoulder (Adhesive Capsulitis)',
+      quote: 'Grade III mobilization and therapeutic ultrasound brought my arm back to full function without painful injections.',
+      rating: 5
+    }
+  },
+  {
+    id: 'churchgate',
+    name: 'Churchgate',
+    category: 'South Mumbai',
+    responseTime: '25 – 35 mins',
+    landmarkAreas: ['Marine Drive Enclave', 'Jamshedji Tata Road', 'Oval Maidan Area', 'Eros Cinema Zone', 'Veer Nariman Road', 'Brabourne Stadium Vicinity'],
+    popularConditions: ['Sports Injury Rehabilitation', 'Knee Osteoarthritis', 'Post-Op Care', 'Disc Bulge Management'],
+    heroTagline: 'Premier Doorstep Physiotherapy in Churchgate & Oval Maidan',
+    neighborhoodHighlights: 'Serving runners, athletes, and residents around Marine Drive and Churchgate with sports physio, manual therapy, and gait training.',
+    patientReview: {
+      name: 'Tara K. (J. Tata Road, Churchgate)',
+      condition: 'Patellofemoral Knee Pain (Runner\'s Knee)',
+      quote: 'Dr Pawan analyzed my running gait and strengthened my VMO muscles. I am back to running along Marine Drive pain-free!',
+      rating: 5
+    }
+  },
+  {
+    id: 'marine-lines',
+    name: 'Marine Lines',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Marine Drive Promenade', 'MK Road', 'Gol Masjid Area', 'Saifee Hospital Zone', 'Princess Street Flyover', 'Gymkhana Belt'],
+    popularConditions: ['Post-Op Orthopedic Care', 'Sciatica & Disc Herniation', 'Geriatric Balance', 'Sports Strains'],
+    heroTagline: 'Dedicated At-Home Physiotherapy in Marine Lines',
+    neighborhoodHighlights: 'Providing comprehensive in-home rehabilitation for residents along Marine Lines, Saifee Hospital zone, and Gymkhana corridor.',
+    patientReview: {
+      name: 'Burhanuddin T. (Near Saifee Hospital, Marine Lines)',
+      condition: 'Post-Surgical Lumbar Decompression',
+      quote: 'Careful, gradual core strengthening and electrotherapy helped me regain mobility in a few weeks.',
+      rating: 5
+    }
+  },
+  {
+    id: 'charni-road',
+    name: 'Charni Road',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Charni Road East', 'Charni Road West', 'Opera House Area', 'Hinduja College Zone', 'Raja Ram Mohan Roy Road', 'Prarthana Samaj'],
+    popularConditions: ['Knee Arthritis & Joint Lubrication', 'Stroke Rehab', 'Slip Disc', 'Elderly Mobility Support'],
+    heroTagline: 'Trusted Home Care Physiotherapy in Charni Road & Opera House',
+    neighborhoodHighlights: 'Tailored geriatric physical therapy, stroke neuro-rehab, and spine decompression visits throughout Charni Road and Prarthana Samaj.',
+    patientReview: {
+      name: 'Chandrakant M. (R.R. Roy Road, Charni Road)',
+      condition: 'Knee Osteoarthritis Grade 3',
+      quote: 'Avoided knee replacement surgery thanks to Dr Pawan\'s quad hypertrophy and joint glide exercises.',
+      rating: 5
+    }
+  },
+  {
+    id: 'bhuleshwar',
+    name: 'Bhuleshwar',
+    category: 'South Mumbai',
+    responseTime: '20 – 30 mins',
+    landmarkAreas: ['Bhuleshwar Market Zone', 'Mumbadevi Temple Area', 'Cawasji Patel Tank (CP Tank)', 'Panjrapole', 'Fanaswadi', 'Kika Street'],
+    popularConditions: ['Chronic Low Back Pain', 'Senior Citizen Fall Prevention', 'Frozen Shoulder', 'Post-Op Knee Rehab'],
+    heroTagline: 'Compassionate Doorstep Physiotherapy in Bhuleshwar & CP Tank',
+    neighborhoodHighlights: 'Bringing hospital-quality physiotherapy directly inside homes in Bhuleshwar and CP Tank, eliminating transit hurdles in narrow lanes.',
+    patientReview: {
+      name: 'Rameshwar S. (CP Tank, Bhuleshwar)',
+      condition: 'Severe Sciatica & Back Spasm',
+      quote: 'Could not walk down the stairs. Dr Pawan brought portable TENS and manual therapy to my home. Wonderful relief.',
+      rating: 5
+    }
+  },
+  {
+    id: 'agripada',
+    name: 'Agripada',
+    category: 'South Mumbai',
+    responseTime: '15 – 25 mins',
+    landmarkAreas: ['Agripada Police Station Zone', 'Maratha Mandir Area', 'Jahangir Boman Behram Marg', 'Nair Hospital Belt', 'Arab Lane', 'YMCA Ground Enclave'],
+    popularConditions: ['Stroke Paralysis Rehab', 'Post-Op Knee/Hip', 'Sciatica', 'Cervical Spondylosis'],
+    heroTagline: 'Certified Home Visit Physiotherapy in Agripada & Mumbai Central',
+    neighborhoodHighlights: 'Fast dispatch for post-operative recovery, paralysis neuroplasticity training, and manual spine therapies in Agripada residential areas.',
+    patientReview: {
+      name: 'Shabana K. (Agripada)',
+      condition: 'Stroke Neuro-Rehab & Gait Training',
+      quote: 'My mother regained arm movement and can now walk with minimal assistance. Dr Pawan\'s dedication is truly remarkable.',
+      rating: 5
+    }
+  },
+  {
     id: 'lower-parel',
     name: 'Lower Parel',
     category: 'South Mumbai',
@@ -638,3 +878,87 @@ export const LOCATION_GROUPS: LocationCategoryGroup[] = [
     locations: HOME_VISIT_LOCATIONS.filter((l) => l.category === 'Powai'),
   },
 ];
+
+/**
+ * Standard URL path for local SEO location pages:
+ * https://runtowinphysiotherapy.com/physiotherapist-near-me-[location]
+ */
+export const getLocationPath = (locationId: string): string => {
+  return `/physiotherapist-near-me-${locationId}`;
+};
+
+export const getLocationHash = (locationId: string): string => {
+  return `#physiotherapist-near-me-${locationId}`;
+};
+
+export const getLocationCanonicalUrl = (locationId: string): string => {
+  return `https://runtowinphysiotherapy.com/physiotherapist-near-me-${locationId}`;
+};
+
+/**
+ * Parses any incoming location URL format (e.g. /physiotherapist-near-me-andheri,
+ * /physiotherapist-near-me-location(andheri), #physiotherapist-near-me-andheri, #location/andheri)
+ */
+export const parseLocationFromUrl = (pathname: string, hash: string): string | null => {
+  const cleanPath = (pathname || '').toLowerCase();
+  const cleanHash = (hash || '').toLowerCase();
+
+  const parseIdCandidate = (raw: string): string | null => {
+    if (!raw) return null;
+    let candidate = raw.trim().toLowerCase();
+    // Normalize parentheses or prefix formats like location(andheri) or (andheri) or location-andheri
+    candidate = candidate.replace(/^location\((.*)\)$/, '$1');
+    candidate = candidate.replace(/\((.*)\)$/, '$1');
+    candidate = candidate.replace(/^location-/, '');
+    candidate = candidate.replace(/\/+$/, '');
+    candidate = candidate.trim().toLowerCase();
+
+    // 1. Direct ID match
+    const exactId = HOME_VISIT_LOCATIONS.find((l) => l.id.toLowerCase() === candidate);
+    if (exactId) return exactId.id;
+
+    // 2. Name match (hyphenated or plain)
+    const nameMatch = HOME_VISIT_LOCATIONS.find(
+      (l) =>
+        l.name.toLowerCase() === candidate ||
+        l.name.toLowerCase().replace(/\s+/g, '-') === candidate ||
+        l.name.toLowerCase().replace(/[^a-z0-9]/g, '') === candidate.replace(/[^a-z0-9]/g, '')
+    );
+    if (nameMatch) return nameMatch.id;
+
+    return null;
+  };
+
+  // 1. Check pathname with /physiotherapist-near-me-
+  if (cleanPath.includes('/physiotherapist-near-me-')) {
+    const parts = cleanPath.split('/physiotherapist-near-me-');
+    if (parts[1]) {
+      const matched = parseIdCandidate(parts[1]);
+      if (matched) return matched;
+    }
+  }
+
+  // 2. Check hash with #physiotherapist-near-me-
+  if (cleanHash.startsWith('#physiotherapist-near-me-')) {
+    const raw = cleanHash.replace('#physiotherapist-near-me-', '');
+    const matched = parseIdCandidate(raw);
+    if (matched) return matched;
+  }
+
+  // 3. Check legacy / fallback #location/
+  if (cleanHash.startsWith('#location/')) {
+    const raw = cleanHash.replace('#location/', '');
+    const matched = parseIdCandidate(raw);
+    if (matched) return matched;
+  }
+
+  // 4. Check #physiotherapist-near-me/
+  if (cleanHash.startsWith('#physiotherapist-near-me/')) {
+    const raw = cleanHash.replace('#physiotherapist-near-me/', '');
+    const matched = parseIdCandidate(raw);
+    if (matched) return matched;
+  }
+
+  return null;
+};
+
