@@ -3,69 +3,174 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RUN TO WIN HEALTHCARE MUMBAI | Dr Pawan Gupta (PT) - Physiotherapy & Rehabilitation</title>
-    <meta name="description" content="Leading Physiotherapy Clinic & Mumbai Home Care Services by Dr Pawan Gupta (PT). Specialized in Orthopedic, Sports Injuries, Spine Rehab, Post-Surgery Recovery, Neuro Rehab, Dry Needling & Manual Therapy in Mumbai." />
-    <meta name="keywords" content="Physiotherapist in Mumbai, Dr Pawan Gupta PT, Run To Win Healthcare, Home Visit Physiotherapy Mumbai, Sports Injury Rehab Mumbai, Back Pain Treatment Bandra, Knee Replacement Rehab, Dry Needling Mumbai" />
-    
-    <!-- Open Graph / Social -->
-    <meta property="og:title" content="RUN TO WIN HEALTHCARE MUMBAI | Dr Pawan Gupta (PT)" />
-    <meta property="og:description" content="Expert Physiotherapy, Sports Rehabilitation & Mumbai Home Visit Services by Dr Pawan Gupta (PT). Restore Mobility. Eliminate Pain. Run To Win." />
+    <title>Physiotherapist in Mumbai | Run To Win Healthcare Services | Dr. Pawan Gupta (PT)</title>
+    <meta name="description" content="Expert physiotherapy clinic in Mumbai & doorstep home visit care by Dr. Pawan Gupta (PT). Evidence-based orthopedic, spine, sports injury, knee replacement, and neuro rehabilitation." />
+    <meta name="keywords" content="Physiotherapist in Mumbai, Physiotherapy clinic in Mumbai, Dr Pawan Gupta PT, Run To Win Healthcare Services, Home visit physiotherapy Mumbai, Back pain physiotherapy Mumbai, Knee replacement rehabilitation Mumbai, Neuro rehabilitation Mumbai" />
+    <link rel="canonical" href="https://runtowinphysiotherapy.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Physiotherapist in Mumbai | Run To Win Healthcare Services" />
+    <meta property="og:description" content="Evidence-based physiotherapy, sports injury rehabilitation, and home visit care across Mumbai by Dr. Pawan Gupta (PT)." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://runtowinphysiotherapy.com/" />
+    <meta property="og:site_name" content="Run To Win Healthcare Services Mumbai" />
     <meta property="og:locale" content="en_IN" />
     
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Physiotherapist in Mumbai | Run To Win Healthcare Services" />
+    <meta name="twitter:description" content="Evidence-based physiotherapy, sports rehabilitation, and home visit care in Mumbai by Dr. Pawan Gupta (PT)." />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Local Business Schema JSON-LD -->
+    <!-- Schema.org JSON-LD Structured Data: MedicalBusiness / PhysiotherapyClinic & Physician -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      "name": "RUN TO WIN HEALTHCARE MUMBAI",
-      "alternateName": "Run To Win Physiotherapy Clinic Mumbai",
-      "description": "Premier Physiotherapy, Sports Rehabilitation, Spine & Joint Clinic and Home Care Services in Mumbai led by Dr Pawan Gupta (PT).",
-      "medicalSpecialty": "Physiotherapy",
-      "founder": {
-        "@type": "Physician",
-        "name": "Dr Pawan Gupta (PT)",
-        "jobTitle": "Consultant Physiotherapist & Rehabilitation Specialist",
-        "honorificPrefix": "Dr",
-        "honorificSuffix": "PT, B.P.Th, M.P.Th"
-      },
-      "telephone": "+91-98200-12345",
-      "priceRange": "₹₹",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Premier Medical Suites, Linking Road, Bandra West",
-        "addressLocality": "Mumbai",
-        "addressRegion": "Maharashtra",
-        "postalCode": "400050",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 19.0596,
-        "longitude": 72.8295
-      },
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "08:00",
-          "closes": "21:00"
+          "@type": "PhysiotherapyClinic",
+          "@id": "https://runtowinphysiotherapy.com/#clinic",
+          "name": "Run To Win Healthcare Services Mumbai",
+          "alternateName": "Run To Win Physiotherapy Clinic Mumbai",
+          "url": "https://runtowinphysiotherapy.com/",
+          "telephone": "+91-9838688745",
+          "email": "run2win.in@gmail.com",
+          "priceRange": "₹₹",
+          "image": "https://runtowinphysiotherapy.com/clinic-logo.png",
+          "medicalSpecialty": [
+            "Physiotherapy",
+            "Orthopedics",
+            "Neurology",
+            "SportsMedicine"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Sewri",
+            "addressLocality": "Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400015",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 19.0016,
+            "longitude": 72.8550
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "08:00",
+              "closes": "21:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Sunday"],
+              "opens": "09:00",
+              "closes": "14:00"
+            }
+          ],
+          "founder": {
+            "@type": "Physician",
+            "@id": "https://runtowinphysiotherapy.com/#doctor",
+            "name": "Dr. Pawan Gupta (PT)",
+            "jobTitle": "Senior Consultant Physiotherapist & Rehabilitation Specialist",
+            "honorificPrefix": "Dr",
+            "honorificSuffix": "PT, B.P.Th, M.P.Th",
+            "medicalSpecialty": "Physiotherapy",
+            "worksFor": {
+              "@id": "https://runtowinphysiotherapy.com/#clinic"
+            },
+            "sameAs": [
+              "https://instagram.com/runtowin.in"
+            ]
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Mumbai"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "South Mumbai"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Central Mumbai"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Western Suburbs Mumbai"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Thane"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Harbour Mumbai"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Physiotherapy Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalTherapy",
+                  "name": "Orthopedic & Spine Rehabilitation",
+                  "description": "Evidence-based therapy for back pain, neck spondylosis, sciatica, slip disc, and joint arthritis."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalTherapy",
+                  "name": "Post-Operative Joint Rehabilitation",
+                  "description": "Phase-wise physical therapy following total knee replacement (TKR), total hip replacement (THR), and spine surgeries."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalTherapy",
+                  "name": "Neurological & Stroke Rehabilitation",
+                  "description": "Neuro-rehab, balance training, and gait re-education for stroke recovery, Bell's palsy, and mobility restoration."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalTherapy",
+                  "name": "Mumbai Doorstep Home Visit Physiotherapy",
+                  "description": "Hospital-grade doorstep physiotherapy visits across 35+ Mumbai localities."
+                }
+              }
+            ]
+          }
         },
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Sunday"],
-          "opens": "09:00",
-          "closes": "14:00"
+          "@type": "WebSite",
+          "@id": "https://runtowinphysiotherapy.com/#website",
+          "url": "https://runtowinphysiotherapy.com/",
+          "name": "Run To Win Physiotherapy Mumbai",
+          "publisher": {
+            "@id": "https://runtowinphysiotherapy.com/#clinic"
+          }
         }
-      ],
-      "areaServed": [
-        "Mumbai", "Bandra West", "Khar", "Santacruz", "Juhu", "Andheri West", 
-        "Andheri East", "BKC", "Worli", "Lower Parel", "Dadar", "Powai", "Chembur"
       ]
     }
     </script>

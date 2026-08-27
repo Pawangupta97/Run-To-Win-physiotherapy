@@ -21,6 +21,8 @@ interface NavbarProps {
   onOpenBooking: (prefillService?: string, prefillArea?: string) => void;
   onOpenAiAssistant: () => void;
   onSelectLocation?: (locationId: string) => void;
+  onNavigatePage?: (page: string) => void;
+  currentPage?: string;
   onGoHome?: () => void;
 }
 
@@ -28,6 +30,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenBooking, 
   onOpenAiAssistant,
   onSelectLocation,
+  onNavigatePage,
+  currentPage = 'home',
   onGoHome
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -168,30 +172,51 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-600">
-            <a
-              href="#"
-              onClick={handleLogoClick}
-              className="hover:text-blue-600 transition-colors py-1 relative group font-semibold text-slate-800"
+          <nav className="hidden lg:flex items-center space-x-5 text-sm font-medium text-slate-600">
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('home') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold ${
+                currentPage === 'home' ? 'text-blue-600 border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
             >
               Home
-            </a>
+            </button>
             
-            <a
-              href="#doctor"
-              onClick={() => onGoHome && onGoHome()}
-              className="hover:text-blue-600 transition-colors py-1 relative group"
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('about') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'about' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
             >
               About Dr. Pawan
-            </a>
+            </button>
 
-            <a
-              href="#services"
-              onClick={() => onGoHome && onGoHome()}
-              className="hover:text-blue-600 transition-colors py-1 relative group"
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('services') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'services' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
             >
               Services & Care
-            </a>
+            </button>
+
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('conditions') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'conditions' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
+            >
+              Conditions
+            </button>
+
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('articles') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'articles' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
+            >
+              Articles
+            </button>
 
             {/* Mumbai Home Visit Dropdown Link with Mega Menu */}
             <div 
@@ -202,9 +227,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <button
                 type="button"
-                onClick={() => setIsLocationsOpen(!isLocationsOpen)}
+                onClick={() => onNavigatePage ? onNavigatePage('home-visits') : setIsLocationsOpen(!isLocationsOpen)}
                 className={`flex items-center space-x-1 py-1 transition-colors font-semibold ${
-                  isLocationsOpen ? 'text-blue-600' : 'text-blue-900 hover:text-blue-600'
+                  currentPage === 'home-visits' || isLocationsOpen ? 'text-blue-600' : 'text-blue-900 hover:text-blue-600'
                 }`}
               >
                 <span>Mumbai Home Visit</span>
@@ -254,40 +279,52 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <button
                       onClick={() => {
                         setIsLocationsOpen(false);
-                        onOpenBooking('Home Visit Physiotherapy (Mumbai)');
+                        if (onNavigatePage) onNavigatePage('home-visits');
                       }}
                       className="text-blue-600 hover:text-blue-700 font-bold hover:underline"
                     >
-                      Book Doorstep Assessment →
+                      View All 35+ Suburbs Hub →
                     </button>
                   </div>
                 </div>
               )}
             </div>
 
-            <a
-              href="#body-map"
-              onClick={() => onGoHome && onGoHome()}
-              className="hover:text-blue-600 transition-colors py-1 relative group"
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('body-map') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'body-map' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
             >
-              Body Symptom Map
-            </a>
+              Body Map
+            </button>
 
-            <a
-              href="#testimonials"
-              onClick={() => onGoHome && onGoHome()}
-              className="hover:text-blue-600 transition-colors py-1 relative group"
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('testimonials') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'testimonials' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
             >
               Testimonials
-            </a>
+            </button>
 
-            <a
-              href="#faq"
-              onClick={() => onGoHome && onGoHome()}
-              className="hover:text-blue-600 transition-colors py-1 relative group"
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('faq') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'faq' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
             >
               FAQ
-            </a>
+            </button>
+
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('contact') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'contact' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
+            >
+              Contact
+            </button>
           </nav>
 
           {/* Action CTAs */}
@@ -413,65 +450,117 @@ export const Navbar: React.FC<NavbarProps> = ({
                 )}
               </div>
 
-              <a
-                href="#doctor"
+              <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (onGoHome) onGoHome();
+                  if (onNavigatePage) onNavigatePage('about');
+                  else if (onGoHome) onGoHome();
                 }}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'about' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
               >
                 <span>About Dr. Pawan Gupta</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </a>
+              </button>
 
-              <a
-                href="#services"
+              <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (onGoHome) onGoHome();
+                  if (onNavigatePage) onNavigatePage('services');
+                  else if (onGoHome) onGoHome();
                 }}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'services' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
               >
                 <span>Services & Care</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </a>
+              </button>
 
-              <a
-                href="#body-map"
+              <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (onGoHome) onGoHome();
+                  if (onNavigatePage) onNavigatePage('conditions');
+                  else if (onGoHome) onGoHome();
                 }}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'conditions' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>Conditions Treated</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigatePage) onNavigatePage('articles');
+                  else if (onGoHome) onGoHome();
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'articles' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>Clinical Articles</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigatePage) onNavigatePage('body-map');
+                  else if (onGoHome) onGoHome();
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'body-map' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
               >
                 <span>Body Symptom Map</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </a>
+              </button>
 
-              <a
-                href="#testimonials"
+              <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (onGoHome) onGoHome();
+                  if (onNavigatePage) onNavigatePage('testimonials');
+                  else if (onGoHome) onGoHome();
                 }}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'testimonials' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
               >
                 <span>Testimonials</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </a>
+              </button>
 
-              <a
-                href="#faq"
+              <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (onGoHome) onGoHome();
+                  if (onNavigatePage) onNavigatePage('faq');
+                  else if (onGoHome) onGoHome();
                 }}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'faq' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
               >
                 <span>FAQ</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </a>
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigatePage) onNavigatePage('contact');
+                  else if (onGoHome) onGoHome();
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'contact' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>Contact & Clinic</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
             </div>
 
             <div className="pt-2 space-y-2">

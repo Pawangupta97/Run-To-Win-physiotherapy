@@ -20,9 +20,19 @@ interface FooterProps {
   onOpenBooking: () => void;
   onOpenAiAssistant: () => void;
   onSelectLocation?: (locationId: string) => void;
+  onSelectCondition?: (conditionId: string) => void;
+  onSelectArticle?: (articleId: string) => void;
+  onNavigatePage?: (page: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenAiAssistant, onSelectLocation }) => {
+export const Footer: React.FC<FooterProps> = ({ 
+  onOpenBooking, 
+  onOpenAiAssistant, 
+  onSelectLocation,
+  onSelectCondition,
+  onSelectArticle,
+  onNavigatePage
+}) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -113,19 +123,66 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenAiAssistant
             </div>
           </div>
 
-          {/* Col 2: Clinical Specializations */}
+          {/* Col 2: Clinical Specializations & Conditions */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-heading">
-              Clinical Specializations
+              Evidence-Based Guides
             </h4>
             <ul className="space-y-1.5 text-slate-400">
-              <li><a href="#services" className="hover:text-blue-400 transition">Spine, Sciatica & Slip Disc</a></li>
-              <li><a href="#services" className="hover:text-blue-400 transition">Frozen Shoulder & Rotator Cuff</a></li>
-              <li><a href="#services" className="hover:text-blue-400 transition">ACL & Sports Rehabilitation</a></li>
-              <li><a href="#services" className="hover:text-blue-400 transition">Total Knee Replacement (TKR) Care</a></li>
-              <li><a href="#services" className="hover:text-blue-400 transition">Stroke & Neurological Recovery</a></li>
-              <li><a href="#services" className="hover:text-blue-400 transition">Dry Needling & Cupping Therapy</a></li>
-              <li><a href="#services" className="hover:text-blue-400 transition">Corporate Ergonomics & Tech Neck</a></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('lower-back')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Lower Back Pain & Sciatica
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('cervical-neck')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Cervical Spondylosis & Tech Neck
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('knee')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Knee Osteoarthritis & TKR
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('shoulder')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Frozen Shoulder & Rotator Cuff
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('neuro-stroke')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Stroke & Neuro Rehabilitation
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('posture-ergonomics')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Posture & Desk Ergonomics
+                </button>
+              </li>
             </ul>
           </div>
 

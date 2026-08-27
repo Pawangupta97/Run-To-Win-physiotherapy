@@ -3,6 +3,8 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { InteractiveBodyMap } from './components/InteractiveBodyMap';
 import { ServicesSection } from './components/ServicesSection';
+import { ConditionsHubSection } from './components/ConditionsHubSection';
+import { ArticlesSection } from './components/ArticlesSection';
 import { DoctorProfileSection } from './components/DoctorProfileSection';
 import { HomeVisitCoverage } from './components/HomeVisitCoverage';
 import { RecoveryPhases } from './components/RecoveryPhases';
@@ -14,13 +16,41 @@ import { FloatingQuickActions } from './components/FloatingQuickActions';
 import { BookingModal } from './components/BookingModal';
 import { AiPhysioAssistant } from './components/AiPhysioAssistant';
 import { LocationPage } from './components/LocationPage';
-import { HOME_VISIT_LOCATIONS, HomeVisitLocation } from './data/homeVisitLocations';
+import { ConditionDetailPage } from './components/ConditionDetailPage';
+import { ArticleDetailPage } from './components/ArticleDetailPage';
+import { AboutPage } from './components/AboutPage';
+import { ServicesPage } from './components/ServicesPage';
+import { ConditionsPage } from './components/ConditionsPage';
+import { ArticlesPage } from './components/ArticlesPage';
+import { HomeVisitsPage } from './components/HomeVisitsPage';
+import { BodyMapPage } from './components/BodyMapPage';
+import { TestimonialsPage } from './components/TestimonialsPage';
+import { FaqPage } from './components/FaqPage';
+import { ContactPage } from './components/ContactPage';
+import { HOME_VISIT_LOCATIONS } from './data/homeVisitLocations';
+import { CONDITION_GUIDES } from './data/conditionGuides';
+import { CLINICAL_ARTICLES } from './data/articlesData';
+
+type PageType = 
+  | 'home' 
+  | 'about' 
+  | 'services' 
+  | 'conditions' 
+  | 'articles' 
+  | 'home-visits' 
+  | 'body-map' 
+  | 'testimonials' 
+  | 'faq' 
+  | 'contact';
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<PageType>('home');
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [selectedRegionId, setSelectedRegionId] = useState('lower-back');
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
+  const [selectedConditionId, setSelectedConditionId] = useState<string | null>(null);
+  const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
 
   const [bookingPrefill, setBookingPrefill] = useState<{
     service?: string;
@@ -30,17 +60,88 @@ export default function App() {
 
   const [aiContext, setAiContext] = useState<string | undefined>(undefined);
 
-  // Sync with URL hash for location pages (#location/andheri or #andheri)
+  // Sync with URL hash for all pages and detail routes
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash;
+      const hash = window.location.hash.toLowerCase();
+
       if (hash.startsWith('#location/')) {
         const locId = hash.replace('#location/', '').toLowerCase();
         const found = HOME_VISIT_LOCATIONS.find((l) => l.id === locId);
         if (found) {
           setSelectedLocationId(found.id);
+          setSelectedConditionId(null);
+          setSelectedArticleId(null);
           return;
         }
+      } else if (hash.startsWith('#condition/')) {
+        const condId = hash.replace('#condition/', '').toLowerCase();
+        const found = CONDITION_GUIDES.find((c) => c.id === condId || c.slug === condId);
+        if (found) {
+          setSelectedConditionId(found.id);
+          setSelectedLocationId(null);
+          setSelectedArticleId(null);
+          return;
+        }
+      } else if (hash.startsWith('#article/')) {
+        const artId = hash.replace('#article/', '').toLowerCase();
+        const found = CLINICAL_ARTICLES.find((a) => a.id === artId || a.slug === artId);
+        if (found) {
+          setSelectedArticleId(found.id);
+          setSelectedLocationId(null);
+          setSelectedConditionId(null);
+          return;
+        }
+      } else if (hash === '#about' || hash === '#doctor') {
+        setCurrentPage('about');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#services') {
+        setCurrentPage('services');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#conditions') {
+        setCurrentPage('conditions');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#articles') {
+        setCurrentPage('articles');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#home-visits' || hash === '#home-visit') {
+        setCurrentPage('home-visits');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#body-map' || hash === '#symptoms') {
+        setCurrentPage('body-map');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#testimonials' || hash === '#reviews') {
+        setCurrentPage('testimonials');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#faq') {
+        setCurrentPage('faq');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '#contact') {
+        setCurrentPage('contact');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
+      } else if (hash === '' || hash === '#' || hash === '#home') {
+        setCurrentPage('home');
+        setSelectedLocationId(null);
+        setSelectedConditionId(null);
+        setSelectedArticleId(null);
       }
     };
 
@@ -49,17 +150,45 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  const handleNavigatePage = (page: string) => {
+    setSelectedLocationId(null);
+    setSelectedConditionId(null);
+    setSelectedArticleId(null);
+    setCurrentPage(page as PageType);
+    window.location.hash = page === 'home' ? '' : `#${page}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleSelectLocation = (locationId: string) => {
     setSelectedLocationId(locationId);
+    setSelectedConditionId(null);
+    setSelectedArticleId(null);
     window.location.hash = `#location/${locationId}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectCondition = (conditionId: string) => {
+    setSelectedConditionId(conditionId);
+    setSelectedLocationId(null);
+    setSelectedArticleId(null);
+    window.location.hash = `#condition/${conditionId}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectArticle = (articleId: string) => {
+    setSelectedArticleId(articleId);
+    setSelectedLocationId(null);
+    setSelectedConditionId(null);
+    window.location.hash = `#article/${articleId}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleGoHome = () => {
     setSelectedLocationId(null);
-    if (window.location.hash.startsWith('#location/')) {
-      history.pushState('', document.title, window.location.pathname + window.location.search);
-    }
+    setSelectedConditionId(null);
+    setSelectedArticleId(null);
+    setCurrentPage('home');
+    history.pushState('', document.title, window.location.pathname + window.location.search);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -81,6 +210,14 @@ export default function App() {
     ? HOME_VISIT_LOCATIONS.find((l) => l.id === selectedLocationId)
     : null;
 
+  const currentCondition = selectedConditionId
+    ? CONDITION_GUIDES.find((c) => c.id === selectedConditionId)
+    : null;
+
+  const currentArticle = selectedArticleId
+    ? CLINICAL_ARTICLES.find((a) => a.id === selectedArticleId)
+    : null;
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
       {/* Navigation Header */}
@@ -88,10 +225,12 @@ export default function App() {
         onOpenBooking={() => handleOpenBooking()}
         onOpenAiAssistant={() => handleOpenAiAssistant()}
         onSelectLocation={handleSelectLocation}
+        onNavigatePage={handleNavigatePage}
+        currentPage={currentPage}
         onGoHome={handleGoHome}
       />
 
-      {/* Main Content: Render dedicated Location Page OR standard Homepage */}
+      {/* Main Content: Render dedicated Pages OR Suburb/Condition/Article Detail Pages */}
       <main className="flex-1">
         {currentLocation ? (
           <LocationPage
@@ -101,9 +240,83 @@ export default function App() {
             onOpenBooking={handleOpenBooking}
             onOpenAiAssistant={handleOpenAiAssistant}
           />
+        ) : currentCondition ? (
+          <ConditionDetailPage
+            condition={currentCondition}
+            onBackToHome={handleGoHome}
+            onSelectCondition={handleSelectCondition}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+          />
+        ) : currentArticle ? (
+          <ArticleDetailPage
+            article={currentArticle}
+            onBackToHome={handleGoHome}
+            onSelectArticle={handleSelectArticle}
+            onSelectCondition={handleSelectCondition}
+            onOpenBooking={handleOpenBooking}
+          />
+        ) : currentPage === 'about' ? (
+          <AboutPage
+            onBackToHome={handleGoHome}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+          />
+        ) : currentPage === 'services' ? (
+          <ServicesPage
+            onBackToHome={handleGoHome}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+            onSelectConditionGuide={handleSelectCondition}
+          />
+        ) : currentPage === 'conditions' ? (
+          <ConditionsPage
+            onBackToHome={handleGoHome}
+            onSelectCondition={handleSelectCondition}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+          />
+        ) : currentPage === 'articles' ? (
+          <ArticlesPage
+            onBackToHome={handleGoHome}
+            onSelectArticle={handleSelectArticle}
+            onSelectCondition={handleSelectCondition}
+            onOpenBooking={handleOpenBooking}
+          />
+        ) : currentPage === 'home-visits' ? (
+          <HomeVisitsPage
+            onBackToHome={handleGoHome}
+            onSelectLocation={handleSelectLocation}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+          />
+        ) : currentPage === 'body-map' ? (
+          <BodyMapPage
+            onBackToHome={handleGoHome}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+            onSelectConditionGuide={handleSelectCondition}
+          />
+        ) : currentPage === 'testimonials' ? (
+          <TestimonialsPage
+            onBackToHome={handleGoHome}
+            onOpenBooking={handleOpenBooking}
+          />
+        ) : currentPage === 'faq' ? (
+          <FaqPage
+            onBackToHome={handleGoHome}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={handleOpenAiAssistant}
+          />
+        ) : currentPage === 'contact' ? (
+          <ContactPage
+            onBackToHome={handleGoHome}
+            onOpenBooking={handleOpenBooking}
+            onOpenAiAssistant={() => handleOpenAiAssistant()}
+          />
         ) : (
           <>
-            {/* Hero Section */}
+            {/* Full High-Conversion Homepage */}
             <HeroSection
               onOpenBooking={handleOpenBooking}
               onOpenAiAssistant={() => handleOpenAiAssistant()}
@@ -116,10 +329,17 @@ export default function App() {
               onSelectRegion={(id) => setSelectedRegionId(id)}
               onOpenBooking={handleOpenBooking}
               onOpenAiAssistantWithContext={(ctx) => handleOpenAiAssistant(ctx)}
+              onSelectConditionGuide={handleSelectCondition}
             />
 
             {/* Clinical Services & Modalities Grid */}
             <ServicesSection
+              onOpenBooking={handleOpenBooking}
+            />
+
+            {/* Evidence-Based Condition Protocols Hub */}
+            <ConditionsHubSection
+              onSelectCondition={handleSelectCondition}
               onOpenBooking={handleOpenBooking}
             />
 
@@ -132,6 +352,12 @@ export default function App() {
             <HomeVisitCoverage
               onOpenBooking={handleOpenBooking}
               onSelectLocation={handleSelectLocation}
+            />
+
+            {/* Clinical Knowledge & Patient Guides Hub */}
+            <ArticlesSection
+              onSelectArticle={handleSelectArticle}
+              onOpenBooking={handleOpenBooking}
             />
 
             {/* 4-Phase Recovery Progression Pathway */}
@@ -151,7 +377,7 @@ export default function App() {
 
             {/* Categorized FAQs */}
             <FaqSection
-              onOpenBooking={() => handleOpenBooking()}
+              onOpenBooking={handleOpenBooking}
             />
           </>
         )}
@@ -162,6 +388,9 @@ export default function App() {
         onOpenBooking={() => handleOpenBooking()}
         onOpenAiAssistant={() => handleOpenAiAssistant()}
         onSelectLocation={handleSelectLocation}
+        onSelectCondition={handleSelectCondition}
+        onSelectArticle={handleSelectArticle}
+        onNavigatePage={handleNavigatePage}
       />
 
       {/* Floating Conversion Actions */}
@@ -189,3 +418,4 @@ export default function App() {
     </div>
   );
 }
+

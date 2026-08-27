@@ -5,6 +5,7 @@ import {
   LOCATION_GROUPS 
 } from '../data/homeVisitLocations';
 import { CLINIC_CONTACT } from '../data/clinicData';
+import { SeoMeta } from './SeoMeta';
 import { 
   MapPin, 
   Clock, 
@@ -20,10 +21,10 @@ import {
   Home, 
   Brain, 
   Award, 
-  ChevronRight,
-  Stethoscope,
-  Users,
-  BadgeCheck
+  ChevronRight, 
+  Stethoscope, 
+  Users, 
+  BadgeCheck 
 } from 'lucide-react';
 
 interface LocationPageProps {
@@ -43,13 +44,61 @@ export const LocationPage: React.FC<LocationPageProps> = ({
 }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = `Home Visit Physiotherapy in ${location.name}, Mumbai | Dr Pawan Gupta (PT)`;
   }, [location]);
 
   // Find related locations in the same category
   const siblingLocations = HOME_VISIT_LOCATIONS.filter(
     (l) => l.category === location.category && l.id !== location.id
   );
+
+  const locationSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "PhysiotherapyClinic",
+        "@id": `https://runtowinphysiotherapy.com/#location-${location.id}`,
+        "name": `Run To Win Physiotherapy - ${location.name} Mumbai Home Visit Service`,
+        "url": `https://runtowinphysiotherapy.com/#location/${location.id}`,
+        "telephone": "+91-9838688745",
+        "email": "run2win.in@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": location.name,
+          "addressRegion": "Mumbai, Maharashtra",
+          "addressCountry": "IN"
+        },
+        "areaServed": location.name,
+        "founder": {
+          "@type": "Physician",
+          "name": "Dr. Pawan Gupta (PT)",
+          "jobTitle": "Senior Consultant Physiotherapist"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Mumbai Home Visits",
+            "item": "https://runtowinphysiotherapy.com/#home-visits"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": `${location.name} Physiotherapy`,
+            "item": `https://runtowinphysiotherapy.com/#location/${location.id}`
+          }
+        ]
+      }
+    ]
+  };
 
   const keyHomeTreatments = [
     {
@@ -86,6 +135,12 @@ export const LocationPage: React.FC<LocationPageProps> = ({
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 animate-in fade-in duration-200">
+      <SeoMeta
+        title={`Home Visit Physiotherapy in ${location.name}, Mumbai | Dr. Pawan Gupta (PT)`}
+        description={`Doorstep physiotherapy in ${location.name}, Mumbai by Dr. Pawan Gupta (PT). Specialized orthopedic, post-surgery knee replacement, stroke recovery, and sciatica home care.`}
+        canonicalUrl={`https://runtowinphysiotherapy.com/#location/${location.id}`}
+        schema={locationSchema}
+      />
       
       {/* Top Breadcrumb & Quick Navigation Bar */}
       <div className="bg-slate-900 text-slate-300 text-xs py-3 px-4 border-b border-slate-800 sticky top-16 z-30 shadow-md">

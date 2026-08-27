@@ -18,6 +18,7 @@ interface InteractiveBodyMapProps {
   onSelectRegion: (id: string) => void;
   onOpenBooking: (prefillService?: string, prefillArea?: string, prefillBodyPart?: string) => void;
   onOpenAiAssistantWithContext: (context: string) => void;
+  onSelectConditionGuide?: (conditionId: string) => void;
 }
 
 export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
@@ -25,8 +26,21 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
   onSelectRegion,
   onOpenBooking,
   onOpenAiAssistantWithContext,
+  onSelectConditionGuide,
 }) => {
   const currentRegion = BODY_REGIONS.find((r) => r.id === selectedRegionId) || BODY_REGIONS[2]; // Lower back default
+
+  // Map body region id to condition guide id
+  const regionToConditionId: Record<string, string> = {
+    'cervical-neck': 'cervical-neck',
+    'shoulder-arm': 'shoulder',
+    'lumbar-spine': 'lower-back',
+    'knee-joint': 'knee',
+    'posture-ergonomics': 'posture-ergonomics',
+    'neurological': 'neuro-stroke',
+  };
+
+  const targetConditionGuide = regionToConditionId[currentRegion.id];
 
   return (
     <section id="body-map" className="py-16 md:py-24 bg-white border-b border-slate-200 scroll-mt-16">
@@ -206,22 +220,34 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
             </div>
 
             {/* Action CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <button
-                onClick={() => onOpenBooking(undefined, undefined, currentRegion.name)}
-                className="flex-1 py-3.5 px-6 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-100 transition active:scale-98 flex items-center justify-center space-x-2"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Book Consultation for {currentRegion.shortLabel}</span>
-              </button>
+            <div className="space-y-2.5 pt-2">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={() => onOpenBooking(undefined, undefined, currentRegion.name)}
+                  className="flex-1 py-3.5 px-6 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-100 transition active:scale-98 flex items-center justify-center space-x-2"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Book Consultation for {currentRegion.shortLabel}</span>
+                </button>
 
-              <button
-                onClick={() => onOpenAiAssistantWithContext(currentRegion.name)}
-                className="py-3.5 px-5 rounded-xl font-semibold text-sm bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 transition flex items-center justify-center space-x-2"
-              >
-                <Sparkles className="w-4 h-4 text-blue-600" />
-                <span>AI Guidance</span>
-              </button>
+                <button
+                  onClick={() => onOpenAiAssistantWithContext(currentRegion.name)}
+                  className="py-3.5 px-5 rounded-xl font-semibold text-sm bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 transition flex items-center justify-center space-x-2"
+                >
+                  <Sparkles className="w-4 h-4 text-blue-600" />
+                  <span>AI Guidance</span>
+                </button>
+              </div>
+
+              {targetConditionGuide && onSelectConditionGuide && (
+                <button
+                  onClick={() => onSelectConditionGuide(targetConditionGuide)}
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 transition flex items-center justify-center space-x-1.5"
+                >
+                  <span>Read Full Evidence-Based Medical Guide for {currentRegion.shortLabel}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
 
           </div>

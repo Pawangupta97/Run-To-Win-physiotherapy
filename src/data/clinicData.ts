@@ -8,8 +8,12 @@ export const CLINIC_CONTACT = {
   qualifications: 'B.P.Th, M.P.Th (Musculoskeletal & Sports Specialist), Certified Dry Needling Practitioner, Certified Manual Therapist (MIAP)',
   phone: '+91 98386 88745',
   phoneDisplay: '+91 98386 88745',
+  phoneRaw: '9838688745',
   whatsappNumber: '919838688745',
-  email: 'care@runtowinhealthcare.com',
+  email: 'run2win.in@gmail.com',
+  website: 'https://runtowinphysiotherapy.com/',
+  instagram: '@runtowin.in',
+  instagramUrl: 'https://instagram.com/runtowin.in',
   address: 'Sewri, Mumbai, Maharashtra 400015',
   clinicHours: {
     weekdays: 'Monday – Saturday: 8:00 AM – 9:00 PM',
