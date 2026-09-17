@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import doctorPhoto from '../assets/images/regenerated_image_1787089379420.jpg';
+import doctorPhoto from '../assets/images/regenerated_image_1787089379420.webp';
 import { 
   ShieldCheck, 
   Award, 
@@ -85,7 +85,11 @@ export const DoctorProfileSection: React.FC<DoctorProfileSectionProps> = ({ onOp
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-blue-400/50 shadow-lg shadow-blue-500/25 shrink-0 bg-slate-800">
                     <img 
                       src={doctorPhoto} 
-                      alt="Dr Pawan Gupta (PT)" 
+                      alt="Dr. Pawan Gupta (PT) - Consultant Physiotherapist in Mumbai" 
+                      loading="lazy"
+                      decoding="async"
+                      width="80"
+                      height="80"
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover object-top"
                     />

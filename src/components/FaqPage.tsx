@@ -13,6 +13,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface FaqPageProps {
   onBackToHome: () => void;
@@ -54,22 +55,69 @@ export const FaqPage: React.FC<FaqPageProps> = ({
     return matchesCategory && matchesSearch;
   });
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://runtowinphysiotherapy.com/faq#webpage",
+        "name": "Frequently Asked Questions (FAQ) | Physiotherapy Clinic Mumbai",
+        "url": "https://runtowinphysiotherapy.com/faq",
+        "description": "Get clear answers on physiotherapy costs, home visit coverage, insurance reimbursement, dry needling safety, and doctor qualifications at Run To Win Mumbai.",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": FAQS.slice(0, 15).map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "FAQs",
+            "item": "https://runtowinphysiotherapy.com/faq"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Frequently Asked Questions (FAQ) | Physiotherapy Clinic Mumbai"
         description="Get clear answers on physiotherapy costs, home visit coverage, insurance reimbursement, dry needling safety, and doctor qualifications at Run To Win Mumbai."
-        canonicalUrl="https://runtowinphysiotherapy.com/#faq"
+        canonicalUrl="https://runtowinphysiotherapy.com/faq"
+        schema={faqSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Frequently Asked Questions</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'Frequently Asked Questions (FAQ)', current: true },
+        ]}
+      />
 
       {/* Hero Header */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-16 md:py-20 relative overflow-hidden">

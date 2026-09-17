@@ -1,6 +1,12 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for https://runtowinphysiotherapy.com/
+# Directives for search engine web crawlers (Googlebot, Bingbot, etc.)
+
 User-agent: *
 Allow: /
 
-# Sitemaps
+# Disallow API utility endpoints and non-content operational routes
+Disallow: /api/
+Disallow: /api/*
+
+# XML Sitemap Index / Location
 Sitemap: https://runtowinphysiotherapy.com/sitemap.xml

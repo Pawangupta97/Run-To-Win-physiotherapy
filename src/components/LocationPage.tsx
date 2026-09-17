@@ -6,6 +6,7 @@ import {
 } from '../data/homeVisitLocations';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 import { 
   MapPin, 
   Clock, 
@@ -28,7 +29,8 @@ import {
   ChevronDown,
   HelpCircle,
   Search,
-  Check
+  Check,
+  Building
 } from 'lucide-react';
 
 interface LocationPageProps {
@@ -100,10 +102,23 @@ export const LocationPage: React.FC<LocationPageProps> = ({
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        "name": `Physiotherapist Near Me in ${location.name}, Mumbai | Dr. Pawan Gupta (PT)`,
+        "url": canonicalUrl,
+        "description": `Certified doorstep home visit physiotherapy in ${location.name}, Mumbai. Specialized recovery for knee replacement, spine pain, stroke neuro rehab & sciatica.`,
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
         "@type": ["PhysiotherapyClinic", "MedicalBusiness", "LocalBusiness"],
         "@id": `${canonicalUrl}#physiotherapy-clinic`,
-        "name": `Run To Win Physiotherapy - Best Physiotherapist in ${location.name}, Mumbai`,
-        "alternateName": `Dr. Pawan Gupta (PT) - Physiotherapist Near Me in ${location.name}`,
+        "name": "Run To Win Healthcare Services Mumbai",
+        "alternateName": `Doorstep Home Visit Physiotherapy in ${location.name}, Mumbai`,
         "url": canonicalUrl,
         "telephone": CLINIC_CONTACT.phone,
         "email": CLINIC_CONTACT.email,
@@ -112,16 +127,16 @@ export const LocationPage: React.FC<LocationPageProps> = ({
         "paymentAccepted": "Cash, UPI, Google Pay, PhonePe, Net Banking",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": location.landmarkAreas.join(', '),
-          "addressLocality": `${location.name}, Mumbai`,
+          "streetAddress": "Sewri",
+          "addressLocality": "Mumbai",
           "addressRegion": "Maharashtra",
-          "postalCode": "400001",
+          "postalCode": "400015",
           "addressCountry": "IN"
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": "19.0760",
-          "longitude": "72.8777"
+          "latitude": "19.0016",
+          "longitude": "72.8550"
         },
         "areaServed": [
           {
@@ -178,15 +193,9 @@ export const LocationPage: React.FC<LocationPageProps> = ({
             }
           ]
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "184",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
         "founder": {
           "@type": "Physician",
+          "@id": "https://runtowinphysiotherapy.com/#dr-pawan-gupta",
           "name": "Dr. Pawan Gupta (PT)",
           "jobTitle": "Senior Consultant Physiotherapist (M.P.Th, MIAP)",
           "description": "Certified Orthopedic & Neuro Rehabilitation Specialist with 8+ years clinical experience in Mumbai."
@@ -217,8 +226,8 @@ export const LocationPage: React.FC<LocationPageProps> = ({
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Mumbai Home Visits",
-            "item": "https://runtowinphysiotherapy.com/#home-visits"
+            "name": "Areas We Serve",
+            "item": "https://runtowinphysiotherapy.com/areas-we-serve"
           },
           {
             "@type": "ListItem",
@@ -276,24 +285,18 @@ export const LocationPage: React.FC<LocationPageProps> = ({
       />
       
       {/* Top Breadcrumb & Quick Navigation Bar */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-3 px-4 border-b border-slate-800 sticky top-16 z-30 shadow-md">
+      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 sticky top-16 z-30 shadow-md">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={onBackToHome}
-              className="inline-flex items-center space-x-1 text-blue-400 hover:text-blue-300 font-semibold transition"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Home</span>
-            </button>
-            <span className="text-slate-600">/</span>
-            <span className="text-slate-400">Mumbai Home Visits</span>
-            <span className="text-slate-600">/</span>
-            <span className="text-blue-400 font-medium">{location.category}</span>
-            <span className="text-slate-600">/</span>
-            <span className="text-white font-bold">{location.name}</span>
-          </div>
+          <Breadcrumbs
+            className="!py-0 !px-0 !bg-transparent !border-0 text-xs"
+            onHomeClick={onBackToHome}
+            items={[
+              { label: 'Areas We Serve', href: '/#areas-we-serve' },
+              { label: location.category, href: '/#areas-we-serve' },
+              { label: location.name, current: true },
+            ]}
+          />
 
           <div className="flex items-center space-x-3 text-[11px]">
             <span className="flex items-center text-emerald-400 font-medium">
@@ -336,6 +339,18 @@ export const LocationPage: React.FC<LocationPageProps> = ({
               <p className="text-lg text-blue-100/90 font-medium">
                 {location.heroTagline}
               </p>
+
+              {/* Verified Service Model Notice */}
+              <div className="flex flex-wrap items-center gap-2 text-xs pt-1">
+                <span className="px-3 py-1.5 rounded-full bg-slate-900/90 text-slate-300 border border-slate-700/80 flex items-center gap-1.5 shadow-sm">
+                  <Building className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Verified Clinic: Sewri, Mumbai 400015</span>
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-emerald-950/70 text-emerald-300 border border-emerald-800/60 flex items-center gap-1.5 shadow-sm">
+                  <Home className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Doorstep Home Visits in {location.name} (Response: {location.responseTime})</span>
+                </span>
+              </div>
 
               <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
                 Looking for an experienced, certified physiotherapist near you in <strong className="text-white">{location.name}</strong>? Skip the painful commute through Mumbai traffic. <strong className="text-white">Dr. Pawan Gupta (PT)</strong> brings complete clinical rehabilitation equipment, portable electrotherapy modalities, and hospital-grade manual therapy directly to your home.

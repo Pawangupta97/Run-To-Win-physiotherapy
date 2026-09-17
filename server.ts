@@ -74,12 +74,124 @@ CREATE POLICY "Allow public reads" ON public.appointments FOR SELECT USING (true
     }
   });
 
+  // Reusable clinical guidance generator for offline or high-traffic periods
+  function getClinicalConsultationResponse(message: string = '', context: string = ''): string {
+    const queryLower = `${message} ${context}`.toLowerCase();
+    let topicExplanation = `**Understanding Your Condition & Recovery Roadmap:**\nMusculoskeletal discomfort, stiffness, or post-injury rehabilitation requires a balanced approach combining pain reduction, targeted joint mobility, and gradual muscle strengthening.`;
+    let exerciseList = `**Recommended Home Physiotherapy Exercises:**
+1. **Gentle Active Range of Motion & Mobility:**
+   - *How to do:* Move the affected joint gently through its comfortable, pain-free range of motion.
+   - *Dosage:* 10-12 smooth repetitions, 2 times daily.
+   - *Key Cue:* Do not bounce or force into painful angles.
+
+2. **Isometric Muscle Activation:**
+   - *How to do:* Contract the surrounding stabilizing muscles without moving the joint (press against gentle resistance for 5-10 seconds).
+   - *Dosage:* 8-10 repetitions, hold 5-7 seconds each.
+   - *Key Cue:* Breathe normally during the hold.
+
+3. **Postural Alignment & Decompression:**
+   - *How to do:* Maintain neutral spinal alignment, keep shoulders relaxed back and down, and adjust your sitting/standing ergonomic setup.
+   - *Dosage:* Recheck and reset posture every 30-45 minutes.`;
+
+    if (queryLower.includes('back') || queryLower.includes('sciatica') || queryLower.includes('disc') || queryLower.includes('spine') || queryLower.includes('lumbar')) {
+      topicExplanation = `**Lower Back & Sciatica Relief Overview:**\nLumbar pain and sciatica often arise from nerve root irritation, disc bulges, facet joint stiffness, or tight piriformis/gluteal musculature causing radiating discomfort. Early conservative physiotherapy focuses on restoring pain-free spinal mobility and engaging deep trunk stabilizers.`;
+      exerciseList = `**Targeted Lower Back & Sciatic Nerve Exercises:**
+1. **Pelvic Tilts & Core Activation:**
+   - *How to do:* Lie on your back with knees bent. Gently flatten your lower back against the mat by engaging deep lower abdominal muscles.
+   - *Dosage:* 2 sets of 10 reps, hold 5 seconds each.
+   - *Precautions:* Keep breathing calmly; avoid bracing with high tension.
+
+2. **Single Knee-to-Chest Stretch:**
+   - *How to do:* Lie on your back, slowly draw one knee toward your chest with your hands behind your thigh until a comfortable release is felt in the glute and lumbar region.
+   - *Dosage:* 3 reps per side, hold 15-20 seconds.
+   - *Precautions:* Stop if numbness radiates down the leg.
+
+3. **Gentle Prone Lumbar Extension / Cat-Cow Mobility:**
+   - *How to do:* On hands and knees, slowly arch and round your back within a comfortable range of motion.
+   - *Dosage:* 8-10 smooth repetitions.`;
+    } else if (queryLower.includes('knee') || queryLower.includes('tkr') || queryLower.includes('osteoarthritis') || queryLower.includes('meniscus') || queryLower.includes('acl')) {
+      topicExplanation = `**Knee Rehabilitation & Mobility Overview:**\nKnee discomfort from osteoarthritis, ligament strain, patellofemoral tracking, or post-operative recovery (TKR) benefits from restoring full extension, patellar mobility, and quadriceps/hamstring stabilization without overloading the joint.`;
+      exerciseList = `**Targeted Knee Strengthening & Mobility Exercises:**
+1. **Static Quadriceps Sets (Towel Under Knee):**
+   - *How to do:* Sit with your leg extended straight, roll a small towel under your knee. Press the back of the knee down firmly into the towel, contracting the front thigh muscle.
+   - *Dosage:* 2 sets of 12 reps, hold 5-8 seconds each.
+   - *Precautions:* Do not hold your breath.
+
+2. **Straight Leg Raises (SLR):**
+   - *How to do:* Lie flat on your back, keep one leg straight with toes pointing upward, and raise it 10-12 inches off the mat.
+   - *Dosage:* 2 sets of 10 reps per leg.
+
+3. **Heel Slides (Controlled Knee Flexion):**
+   - *How to do:* Slowly slide your heel toward your buttocks to gently bend the knee, then slide back out smoothly.
+   - *Dosage:* 10-15 controlled repetitions.`;
+    } else if (queryLower.includes('shoulder') || queryLower.includes('frozen') || queryLower.includes('rotator') || queryLower.includes('impingement')) {
+      topicExplanation = `**Shoulder & Frozen Shoulder Recovery Overview:**\nShoulder stiffness, adhesive capsulitis, and rotator cuff irritation require progressive capsular stretching, scapular stabilization, and rotator cuff endurance to restore overhead reach without subacromial impingement.`;
+      exerciseList = `**Targeted Shoulder Mobility & Rotator Cuff Exercises:**
+1. **Pendulum Exercises (Codman's):**
+   - *How to do:* Lean forward resting your unaffected arm on a sturdy table. Let the affected arm dangle freely and gently swing it in small circles using body momentum.
+   - *Dosage:* 15-20 circles clockwise and counter-clockwise.
+
+2. **Towel / Wand Assisted Elevation:**
+   - *How to do:* Hold a light stick or towel with both hands; use the unaffected arm to gently assist lifting the stiff arm upward within comfortable limits.
+   - *Dosage:* 2 sets of 10 reps, hold 3-5 seconds at top.
+
+3. **Scapular Retraction & Squeezes:**
+   - *How to do:* Sit upright, draw your shoulder blades back and down together without shrugging the shoulders toward your ears.
+   - *Dosage:* 2 sets of 12 reps, hold 5 seconds.`;
+    } else if (queryLower.includes('neck') || queryLower.includes('cervical') || queryLower.includes('headache') || queryLower.includes('posture')) {
+      topicExplanation = `**Neck & Cervical Spondylosis Overview:**\nCervical tension, text neck, and cervical spondylosis frequently develop from prolonged forward head posture, tight upper trapezius muscles, and weak deep cervical flexors.`;
+      exerciseList = `**Targeted Neck Posture & Mobility Exercises:**
+1. **Chin Tucks (Deep Neck Flexor Activation):**
+   - *How to do:* Look straight ahead. Gently draw your chin straight backward as if creating a subtle double chin, lengthening the back of your neck.
+   - *Dosage:* 2 sets of 10 reps, hold 5 seconds each.
+
+2. **Upper Trapezius & Levator Scapulae Gentle Stretch:**
+   - *How to do:* Gently tilt your ear toward your shoulder until a mild stretch is felt on the opposite neck side.
+   - *Dosage:* 3 reps per side, hold 15-20 seconds.
+
+3. **Thoracic Extension Over Chair:**
+   - *How to do:* Sit with hands behind neck, gently arch your upper back over the chair backrest.
+   - *Dosage:* 8-10 repetitions.`;
+    } else if (queryLower.includes('stroke') || queryLower.includes('neuro') || queryLower.includes('balance') || queryLower.includes('parkinson')) {
+      topicExplanation = `**Neurological Rehabilitation & Balance Overview:**\nNeurological recovery after stroke, neuropathy, or Parkinson's relies on targeted neuroplastic training, weight-bearing sensory input, and gait re-education under structured supervision.`;
+      exerciseList = `**Targeted Balance & Neuromuscular Exercises:**
+1. **Weight Shifting in Stance:**
+   - *How to do:* Stand next to a sturdy counter. Gently shift your weight from left to right foot, holding for 3 seconds on each side.
+   - *Dosage:* 10-12 smooth weight transfers.
+   - *Precautions:* Always have a stable support within easy reach.
+
+2. **Seated Trunk Control & Reach:**
+   - *How to do:* Sit tall on a firm chair with feet flat on the floor. Gently reach forward and to the sides with both hands.
+   - *Dosage:* 8-10 repetitions per direction.
+
+3. **Ankle Pumps & Toe-Heel Raises:**
+   - *How to do:* While holding a counter, lift heels up onto toes, hold 2 seconds, then lower down.
+   - *Dosage:* 2 sets of 10 reps.`;
+    }
+
+    return `${topicExplanation}
+
+${exerciseList}
+
+---
+
+⚠️ **Safety & Exercise Disclaimer:**
+*Always perform exercises in a gentle, pain-free range. Stop immediately if you experience sharp shooting pain, pins & needles, or dizziness. These recommendations are educational and do not substitute for a clinical diagnosis.*
+
+---
+
+👉 **Recommended Next Step:**
+For a precise physical examination, dry needling, joint mobilization, or personalized rehabilitation roadmap, book a consultation or **Mumbai Home Visit** with **Dr. Pawan Gupta (PT)** (B.P.Th, M.P.Th, MIAP).
+
+📞 **Call / WhatsApp:** +91 98386 88745  
+📍 **Clinic:** Sewri, Mumbai | Doorstep home visits across South, Central & Western Mumbai suburbs.`;
+  }
+
   // AI Assistant endpoint using Gemini
   app.post('/api/gemini/assist', async (req, res) => {
-    try {
-      const { message, history, context } = req.body;
+    const { message = '', history = [], context = '' } = req.body;
 
-      const systemInstruction = `You are the expert "Run To Win AI Physiotherapy & Clinical Exercise Consultant" for RUN TO WIN HEALTHCARE MUMBAI, led by Dr Pawan Gupta (PT), Senior Consultant Physiotherapist & Rehabilitation Specialist (B.P.Th, M.P.Th, MIAP, Certified Dry Needling & Manual Therapy Practitioner).
+    const systemInstruction = `You are the expert "Run To Win AI Physiotherapy & Clinical Exercise Consultant" for RUN TO WIN HEALTHCARE MUMBAI, led by Dr Pawan Gupta (PT), Senior Consultant Physiotherapist & Rehabilitation Specialist (B.P.Th, M.P.Th, MIAP, Certified Dry Needling & Manual Therapy Practitioner).
 
 Clinic Details:
 - Doctor: Dr Pawan Gupta (PT) - 8+ years clinical experience, 1000+ patient recoveries, 4.9★ rating
@@ -114,100 +226,16 @@ You have FULL PERMISSION AND AUTHORITY to:
 
 Tone: Professional, encouraging, clear, medical yet patient-friendly, with organized Markdown (bold headings, bullet points).`;
 
-      const apiKey = process.env.GEMINI_API_KEY;
-      if (!apiKey) {
-        // High quality educational fallback if API key is not configured in local environment
-        const queryLower = (message || '').toLowerCase();
-        let topicExplanation = `**Understanding Your Condition & Recovery Roadmap:**\nMusculoskeletal discomfort, stiffness, or post-injury rehabilitation requires a balanced approach combining pain reduction, targeted joint mobility, and gradual muscle strengthening.`;
-        let exerciseList = `**Recommended Home Physiotherapy Exercises:**
-1. **Gentle Active Range of Motion & Mobility:**
-   - *How to do:* Move the affected joint gently through its comfortable, pain-free range of motion.
-   - *Dosage:* 10-12 smooth repetitions, 2 times daily.
-   - *Key Cue:* Do not bounce or force into painful angles.
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.json({
+        reply: getClinicalConsultationResponse(message, context),
+        disclaimer: true,
+        bookingSuggested: true,
+      });
+    }
 
-2. **Isometric Muscle Activation:**
-   - *How to do:* Contract the surrounding stabilizing muscles without moving the joint (press against gentle resistance for 5-10 seconds).
-   - *Dosage:* 8-10 repetitions, hold 5-7 seconds each.
-   - *Key Cue:* Breathe normally during the hold.
-
-3. **Postural Alignment & Decompression:**
-   - *How to do:* Maintain neutral spinal alignment, keep shoulders relaxed back and down, and adjust your sitting/standing ergonomic setup.
-   - *Dosage:* Recheck and reset posture every 30-45 minutes.`;
-
-        if (queryLower.includes('back') || queryLower.includes('sciatica') || queryLower.includes('disc') || queryLower.includes('spine')) {
-          topicExplanation = `**Lower Back & Sciatica Relief Overview:**\nLumbar pain and sciatica often arise from nerve root irritation, disc bulges, facet joint stiffness, or tight piriformis/gluteal musculature causing radiating discomfort.`;
-          exerciseList = `**Targeted Lower Back & Sciatic Nerve Exercises:**
-1. **Pelvic Tilts & Core Activation:**
-   - *How to do:* Lie on your back with knees bent. Gently flatten your lower back against the bed/mat by tightening abdominal muscles.
-   - *Dosage:* 2 sets of 10 reps, hold 5 seconds each.
-2. **Knee-to-Chest Stretch (Single Leg):**
-   - *How to do:* Lie on your back, slowly draw one knee toward your chest with your hands behind your thigh until a mild stretch is felt in the glute/lower back.
-   - *Dosage:* 3 reps per side, hold 15-20 seconds.
-3. **Gentle Prone Cobra / Cat-Cow Mobility:**
-   - *How to do:* Gentle spinal mobilization to restore natural lumbar lordosis without hyperextension.
-   - *Dosage:* 8-10 smooth repetitions.`;
-        } else if (queryLower.includes('knee') || queryLower.includes('tkr') || queryLower.includes('osteoarthritis') || queryLower.includes('meniscus')) {
-          topicExplanation = `**Knee Rehabilitation & Mobility Overview:**\nKnee pain from arthritis, ligament strain, or post-operative recovery (TKR) benefits from restoring full extension, patellar mobility, and quadriceps/hamstring stability without excessive joint compression.`;
-          exerciseList = `**Targeted Knee Strengthening & Mobility Exercises:**
-1. **Static Quadriceps Sets (Towel Under Knee):**
-   - *How to do:* Sit with leg straight, roll a small towel under your knee. Press the back of the knee down firmly into the towel, tightening the front thigh.
-   - *Dosage:* 2 sets of 12 reps, hold 5-8 seconds each.
-2. **Straight Leg Raises (SLR):**
-   - *How to do:* Lie flat, keep one leg straight with toes pointing up, and raise it 10-12 inches off the ground.
-   - *Dosage:* 2 sets of 10 reps per leg.
-3. **Heel Slides (Gentle Knee Flexion):**
-   - *How to do:* Slowly slide your heel toward your buttocks to gently bend the knee, then slide back out.
-   - *Dosage:* 10-15 controlled repetitions.`;
-        } else if (queryLower.includes('shoulder') || queryLower.includes('frozen') || queryLower.includes('rotator')) {
-          topicExplanation = `**Shoulder & Frozen Shoulder Recovery Overview:**\nShoulder stiffness and rotator cuff irritation require gradual capsular stretching, scapular stabilization, and rotator cuff endurance to regain overhead reach without impingement.`;
-          exerciseList = `**Targeted Shoulder Mobility & Rotator Cuff Exercises:**
-1. **Pendulum Exercises (Codman's):**
-   - *How to do:* Lean forward resting your good arm on a table. Let the affected arm dangle freely and gently swing it in small circles using body momentum.
-   - *Dosage:* 15-20 circles clockwise and counter-clockwise.
-2. **Towel / Wand Assisted Elevation:**
-   - *How to do:* Hold a light stick or towel with both hands; use the unaffected arm to gently assist lifting the stiff arm upward within comfortable limits.
-   - *Dosage:* 2 sets of 10 reps, hold 3-5 seconds at top.
-3. **Scapular Squeezes:**
-   - *How to do:* Sit upright, draw your shoulder blades back and down together without shrugging.
-   - *Dosage:* 2 sets of 12 reps, hold 5 seconds.`;
-        } else if (queryLower.includes('neck') || queryLower.includes('cervical') || queryLower.includes('headache')) {
-          topicExplanation = `**Neck & Cervical Spondylosis Overview:**\nNeck tension, text neck, and cervical stiffness are commonly caused by forward head posture, tight upper trapezius muscles, and weak deep neck flexors.`;
-          exerciseList = `**Targeted Neck Posture & Mobility Exercises:**
-1. **Chin Tucks (Deep Neck Flexor Activation):**
-   - *How to do:* Look straight ahead. Gently slide your chin straight backward as if making a subtle double chin.
-   - *Dosage:* 2 sets of 10 reps, hold 5 seconds each.
-2. **Upper Trapezius & Levator Scapulae Gentle Stretch:**
-   - *How to do:* Gently tilt your ear toward your shoulder until a mild stretch is felt on the opposite neck side.
-   - *Dosage:* 3 reps per side, hold 15-20 seconds.
-3. **Thoracic Extension Over Chair:**
-   - *How to do:* Sit with hands behind neck, gently arch upper back over the chair backrest.
-   - *Dosage:* 8-10 repetitions.`;
-        }
-
-        const reply = `${topicExplanation}
-
-${exerciseList}
-
----
-
-⚠️ **Safety & Exercise Disclaimer:**
-*Always perform exercises in a gentle, pain-free range. Stop immediately if you experience sharp shooting pain, pins & needles, or dizziness. These recommendations are educational and do not substitute for a clinical diagnosis.*
-
----
-
-👉 **Recommended Next Step:**
-For a precise physical examination, dry needling, joint mobilization, or personalized rehabilitation roadmap, book a consultation or **Mumbai Home Visit** with **Dr Pawan Gupta (PT)** (MIAP, M.P.Th).
-
-📞 **Call / WhatsApp:** +91 98386 88745  
-📍 **Clinic:** Sewri, Mumbai | Doorstep home visits across all Mumbai suburbs.`;
-
-        return res.json({
-          reply,
-          disclaimer: true,
-          bookingSuggested: true,
-        });
-      }
-
+    try {
       const ai = new GoogleGenAI({ apiKey });
 
       // Build chat prompt or contents
@@ -237,18 +265,20 @@ For a precise physical examination, dry needling, joint mobilization, or persona
         }
       });
 
-      const replyText = response.text || 'Thank you for reaching out. Please connect with Dr Pawan Gupta (PT) directly at +91 98386 88745 for a personalized clinical evaluation and treatment plan.';
+      const replyText = response.text || getClinicalConsultationResponse(message, context);
 
-      res.json({
+      return res.json({
         reply: replyText,
         disclaimer: true,
         bookingSuggested: true,
       });
     } catch (error: any) {
-      console.error('Error generating AI response:', error);
-      res.status(500).json({
-        reply: 'We are experiencing high traffic. Please call or WhatsApp Dr Pawan Gupta (PT) directly at +91 98386 88745 to discuss your symptoms, get personalized exercise advice, or schedule a home visit.',
-        error: error.message,
+      console.warn('Gemini API notice (using clinical guidance fallback):', error.message);
+      // Gracefully return the clinical consultation engine output rather than failing with 500
+      return res.json({
+        reply: getClinicalConsultationResponse(message, context),
+        disclaimer: true,
+        bookingSuggested: true,
       });
     }
   });
@@ -312,7 +342,7 @@ For a precise physical examination, dry needling, joint mobilization, or persona
       }
 
       // Construct WhatsApp message URL for direct patient notification
-      const cleanPhone = '919833633857'; // Dr Pawan Gupta's clinic number
+      const cleanPhone = '919838688745'; // Dr Pawan Gupta's clinic number
       const waText = encodeURIComponent(
         `Hello Dr. Pawan Gupta (PT),\nI booked a Physiotherapy Consultation with RUN TO WIN HEALTHCARE MUMBAI.\n\n` +
         `📋 Booking Ref: ${appointmentId}\n` +

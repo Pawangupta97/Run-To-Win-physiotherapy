@@ -13,6 +13,7 @@ import {
   Info
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface BodyMapPageProps {
   onBackToHome: () => void;
@@ -31,22 +32,58 @@ export const BodyMapPage: React.FC<BodyMapPageProps> = ({
 
   const selectedRegion = BODY_REGIONS.find((r) => r.id === selectedRegionId) || BODY_REGIONS[0];
 
+  const bodyMapSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://runtowinphysiotherapy.com/body-map#webpage",
+        "name": "Interactive Body Symptom Map & Pain Triage Mumbai | Dr. Pawan Gupta (PT)",
+        "url": "https://runtowinphysiotherapy.com/body-map",
+        "description": "Select where it hurts on our interactive anatomical body map. Instant evidence-based physiotherapy guidance for neck, back, knee, shoulder, and sciatic nerve pain.",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Interactive Body Map",
+            "item": "https://runtowinphysiotherapy.com/body-map"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Interactive Body Symptom Map & Pain Triage Mumbai | Dr. Pawan Gupta (PT)"
         description="Select where it hurts on our interactive anatomical body map. Instant evidence-based physiotherapy guidance for neck, back, knee, shoulder, and sciatic nerve pain."
-        canonicalUrl="https://runtowinphysiotherapy.com/#body-map"
+        canonicalUrl="https://runtowinphysiotherapy.com/body-map"
+        schema={bodyMapSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Interactive Anatomical Body Symptom Map</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'Interactive Anatomical Body Symptom Map', current: true },
+        ]}
+      />
 
       {/* Hero Header */}
       <section className="bg-gradient-to-br from-blue-950 via-slate-900 to-blue-950 text-white py-14 md:py-18 relative overflow-hidden">

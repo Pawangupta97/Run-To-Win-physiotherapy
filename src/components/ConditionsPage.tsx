@@ -16,6 +16,8 @@ import {
   HeartPulse
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
+import { CLINIC_CONTACT } from '../data/clinicData';
 
 interface ConditionsPageProps {
   onBackToHome: () => void;
@@ -27,11 +29,11 @@ interface ConditionsPageProps {
 const CATEGORIES = [
   'All',
   'Spine & Back',
-  'Neck & Cervical',
-  'Joint & Lower Limb',
-  'Upper Limb & Shoulder',
-  'Neurology',
-  'Postural & Ergonomics',
+  'Joints & Orthopedic',
+  'Sports Rehab',
+  'Neurological',
+  'Post-Surgical',
+  'Posture & Ergonomics',
 ];
 
 export const ConditionsPage: React.FC<ConditionsPageProps> = ({
@@ -44,7 +46,23 @@ export const ConditionsPage: React.FC<ConditionsPageProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredConditions = CONDITION_GUIDES.filter((cond) => {
-    const matchesCategory = selectedCategory === 'All' || cond.category === selectedCategory;
+    let matchesCategory = selectedCategory === 'All';
+    if (!matchesCategory) {
+      if (selectedCategory === cond.category) {
+        matchesCategory = true;
+      } else if (selectedCategory === 'Spine & Back' && (cond.category === 'Spine & Back' || cond.id.includes('back') || cond.id.includes('neck') || cond.id.includes('sciatica'))) {
+        matchesCategory = true;
+      } else if (selectedCategory === 'Joints & Orthopedic' && (cond.category === 'Joints & Orthopedic' || cond.id.includes('shoulder') || cond.id.includes('elbow') || cond.id.includes('knee') || cond.id.includes('plantar'))) {
+        matchesCategory = true;
+      } else if (selectedCategory === 'Sports Rehab' && (cond.category === 'Sports Rehab' || cond.id.includes('sport') || cond.id.includes('acl'))) {
+        matchesCategory = true;
+      } else if (selectedCategory === 'Neurological' && (cond.category === 'Neurological' || cond.id.includes('stroke') || cond.id.includes('parkinson') || cond.id.includes('balance'))) {
+        matchesCategory = true;
+      } else if (selectedCategory === 'Post-Surgical' && (cond.category === 'Post-Surgical' || cond.id.includes('replacement') || cond.id.includes('rehab'))) {
+        matchesCategory = true;
+      }
+    }
+
     const matchesSearch = 
       cond.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       cond.quickSummary.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -53,20 +71,61 @@ export const ConditionsPage: React.FC<ConditionsPageProps> = ({
     return matchesCategory && matchesSearch;
   });
 
+  const conditionsSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://runtowinphysiotherapy.com/conditions#webpage",
+        "name": "Physiotherapy Conditions Directory Mumbai - Run To Win Healthcare",
+        "url": "https://runtowinphysiotherapy.com/conditions",
+        "description": "Explore evidence-based physiotherapy guides for Lower Back Pain, Sciatica, Cervical Spondylosis, Knee Osteoarthritis, Frozen Shoulder, and Stroke Recovery in Mumbai.",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Conditions Treated",
+            "item": "https://runtowinphysiotherapy.com/conditions"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Conditions Treated & Clinical Physio Protocols Mumbai | Dr. Pawan Gupta"
         description="Explore evidence-based physiotherapy guides for Lower Back Pain, Sciatica, Cervical Spondylosis, Knee Osteoarthritis, Frozen Shoulder, and Stroke Recovery in Mumbai."
-        canonicalUrl="https://runtowinphysiotherapy.com/#conditions"
+        canonicalUrl="https://runtowinphysiotherapy.com/conditions"
+        schema={conditionsSchema}
       />
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Conditions Treated & Clinical Guides</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <Breadcrumbs
+            className="!py-0 !px-0 !bg-transparent !border-0 text-xs"
+            onHomeClick={onBackToHome}
+            items={[
+              { label: 'Conditions Treated', current: true }
+            ]}
+          />
         </div>
       </div>
 

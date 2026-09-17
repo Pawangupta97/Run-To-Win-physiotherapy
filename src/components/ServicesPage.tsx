@@ -27,6 +27,7 @@ import {
   UserCheck
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface ServicesPageProps {
   onBackToHome: () => void;
@@ -90,22 +91,58 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     return matchesCategory && matchesSearch;
   });
 
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://runtowinphysiotherapy.com/services#webpage",
+        "name": "Physiotherapy Services & Treatments - Run To Win Healthcare Mumbai",
+        "url": "https://runtowinphysiotherapy.com/services",
+        "description": "Explore comprehensive physiotherapy services, treatment modalities, and clinical condition recovery guides in Mumbai by Dr. Pawan Gupta (PT).",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Physiotherapy Services",
+            "item": "https://runtowinphysiotherapy.com/services"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Physiotherapy Services, Clinical Care & Conditions Treated Mumbai | Dr. Pawan Gupta (PT)"
         description="Explore comprehensive physiotherapy services, treatment modalities, and clinical condition recovery guides in Mumbai by Dr. Pawan Gupta (PT). Spine care, sports recovery, joint replacement, and home visits."
-        canonicalUrl="https://runtowinphysiotherapy.com/#services"
+        canonicalUrl="https://runtowinphysiotherapy.com/services"
+        schema={servicesSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Services, Care & Conditions Treated</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'Services, Modalities & Conditions Treated', current: true },
+        ]}
+      />
 
       {/* Header Banner */}
       <section className="bg-gradient-to-br from-blue-950 via-slate-900 to-blue-950 text-white py-14 md:py-18 relative overflow-hidden">
@@ -198,6 +235,173 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               >
                 <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                 <span>AI Physio Guide</span>
+              </button>
+            </div>
+          </div>
+
+          {/* CORE SPECIALIZED CLINICAL LANDING PAGES */}
+          <div className="mb-12 bg-gradient-to-r from-blue-900 to-indigo-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+            <div className="max-w-3xl mb-6">
+              <span className="text-xs font-bold text-blue-300 uppercase tracking-wider">Dedicated Clinical Portals</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-heading mt-1">
+                Core Specialized Physiotherapy Programs
+              </h2>
+              <p className="text-xs sm:text-sm text-blue-100 mt-2 leading-relaxed">
+                Explore in-depth clinical protocols, assessment methodologies, treatment modalities, and customized rehabilitation pathways for each specialized discipline.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <button
+                onClick={() => onNavigatePage('physiotherapy-mumbai')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-blue-300 uppercase tracking-wider">Clinic & Doorstep</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-blue-200 transition mt-1 font-heading">
+                    Physiotherapy in Mumbai
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Sewri clinic center and certified home visits across 35+ Mumbai suburbs.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-blue-300 group-hover:text-white">
+                  <span>View Mumbai Hub</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('orthopedic-physiotherapy')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-wider">Joints & Spine</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-emerald-200 transition mt-1 font-heading">
+                    Orthopedic Physiotherapy
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Joint mobilization, spinal traction, and dry needling for osteoarthritis & back pain.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-emerald-300 group-hover:text-white">
+                  <span>View Orthopedic</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('sports-physiotherapy')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider">Athletes & Runners</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-amber-200 transition mt-1 font-heading">
+                    Sports Physiotherapy
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    ACL, meniscus, running mechanics, and return-to-sport physical conditioning.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-amber-300 group-hover:text-white">
+                  <span>View Sports Rehab</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('neuro-physiotherapy')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-purple-300 uppercase tracking-wider">Neurological</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-purple-200 transition mt-1 font-heading">
+                    Neuro Physiotherapy
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Stroke motor relearning, Parkinson’s gait training, and neuromuscular facilitation.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-purple-300 group-hover:text-white">
+                  <span>View Neuro Rehab</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('home-physiotherapy')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-teal-300 uppercase tracking-wider">Doorstep Care</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-teal-200 transition mt-1 font-heading">
+                    Home Physiotherapy
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Bedside care with portable ultrasound, TENS & exercise tools across Mumbai.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-teal-300 group-hover:text-white">
+                  <span>View Home Visits</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('online-physiotherapy')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-sky-300 uppercase tracking-wider">Virtual Sessions</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-sky-200 transition mt-1 font-heading">
+                    Online Physiotherapy
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Encrypted HD video consultations, ergonomic screens, and guided home routines.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-sky-300 group-hover:text-white">
+                  <span>View Tele-Physio</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('pain-management')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-rose-300 uppercase tracking-wider">Chronic Relief</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-rose-200 transition mt-1 font-heading">
+                    Pain Management
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Non-pharmacological pain desensitization, pacing, and active functional recovery.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-rose-300 group-hover:text-white">
+                  <span>View Pain Programs</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => onNavigatePage('post-surgical-rehab')}
+                className="text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 transition flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider">Post-Operative</span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-amber-200 transition mt-1 font-heading">
+                    Post-Surgical Rehab
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Surgeon-aligned protocols for TKR, THR, spine surgery, and fracture recovery.
+                  </p>
+                </div>
+                <div className="pt-3 flex items-center text-xs font-bold text-amber-300 group-hover:text-white">
+                  <span>View Post-Surgical</span>
+                  <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+                </div>
               </button>
             </div>
           </div>

@@ -48,10 +48,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     savedToSupabase?: boolean;
   } | null>(null);
 
+  const [bookingFor, setBookingFor] = useState<'myself' | 'family'>('myself');
+  const [caregiverName, setCaregiverName] = useState<string>('');
+
   const [formData, setFormData] = useState<BookingFormData>({
     serviceType: 'In-Clinic Consultation',
     bodyPart: 'Lower Back & Lumbar Spine',
-    mumbaiArea: 'Bandra West & Linking Road',
+    mumbaiArea: 'Sewri & Central Mumbai Clinic Area',
     preferredDate: new Date(Date.now() + 86400000).toISOString().split('T')[0], // tomorrow
     preferredTime: '10:00 AM – 11:00 AM (Morning)',
     patientName: '',
@@ -94,11 +97,18 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
     setIsSubmitting(true);
 
+    const submissionPayload = {
+      ...formData,
+      symptoms: bookingFor === 'family' && caregiverName 
+        ? `[Booked by family member/caregiver: ${caregiverName}] ${formData.symptoms || ''}`.trim()
+        : formData.symptoms,
+    };
+
     try {
       const response = await fetch('/api/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionPayload),
       });
 
       const data = await response.json();
@@ -116,7 +126,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         address: formData.address,
         preferred_date: formData.preferredDate,
         preferred_time: formData.preferredTime,
-        symptoms: formData.symptoms,
+        symptoms: submissionPayload.symptoms,
         previous_surgery: formData.previousSurgeryOrXRay,
         status: 'Pending Confirmation',
       }).catch((err) => console.warn('Supabase sync note:', err));
@@ -186,22 +196,48 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 Book Physiotherapy Consultation
               </h3>
               <p className="text-xs text-blue-400">
-                Dr Pawan Gupta (PT) • Bandra Clinic & Mumbai Home Care
+                Dr Pawan Gupta (PT) • Sewri Clinic & Mumbai Home Care
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            aria-label="Close booking modal"
+            className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
+        {/* Quick Assistance Banner for Elderly & Family Members */}
+        <div className="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex items-center justify-between text-xs text-emerald-900 shrink-0">
+          <span className="font-semibold text-[11px] sm:text-xs flex items-center gap-1.5">
+            <Phone className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+            <span>Need quick booking or arranging for a senior?</span>
+          </span>
+          <div className="flex items-center gap-2">
+            <a
+              href={`tel:${CLINIC_CONTACT.phone}`}
+              className="text-[11px] font-bold text-emerald-800 hover:text-emerald-950 underline flex items-center gap-1 py-1 px-1.5"
+            >
+              Call Clinic
+            </a>
+            <span className="text-emerald-300">|</span>
+            <a
+              href={`https://wa.me/${CLINIC_CONTACT.whatsappNumber}?text=Hello%20Dr%20Pawan%20Gupta,%20I%20need%20assistance%20booking%20a%20physiotherapy%20consultation.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-bold text-emerald-700 hover:text-emerald-900 underline flex items-center gap-1 py-1 px-1.5"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
         {/* Step Indicator (Steps 1-4) */}
         {step < 5 && (
-          <div className="bg-slate-50 px-6 py-3.5 border-b border-slate-200 flex items-center justify-between text-xs text-slate-600 shrink-0">
+          <div className="bg-slate-50 px-6 py-3 border-b border-slate-200 flex items-center justify-between text-xs text-slate-600 shrink-0">
             <div className="flex items-center space-x-2">
               <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
                 step >= 1 ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-200 text-slate-600'
@@ -233,33 +269,33 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         )}
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto flex-1 space-y-6">
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 space-y-5">
           
           {/* STEP 1: Service Type & Mumbai Area */}
           {step === 1 && (
-            <div className="space-y-5 animate-in fade-in">
+            <div className="space-y-4 animate-in fade-in">
               <div>
                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
                   Select Consultation Format:
                 </label>
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                   {[
                     {
                       id: 'In-Clinic Consultation',
-                      title: 'In-Clinic Consultation (Bandra West Clinic)',
-                      desc: 'Full access to traction, matrix therapy, therapeutic ultrasound, and specialized exercise setup.',
+                      title: 'In-Clinic Consultation (Sewri Clinic, Mumbai)',
+                      desc: 'Full clinical assessment, manual mobilization, traction, and electrotherapy modalities at Sewri.',
                       icon: Activity,
                     },
                     {
                       id: 'Home Visit Physiotherapy (Mumbai)',
-                      title: 'Home Visit Care (At Your Doorstep in Mumbai)',
-                      desc: 'Doctor travels to your residence with portable electrotherapy & rehabilitation equipment.',
+                      title: 'Home Visit Physiotherapy (At Your Doorstep across Mumbai)',
+                      desc: 'Doctor visits your home with portable therapy equipment. Ideal for elderly, bedbound, or post-surgical patients.',
                       icon: Home,
                     },
                     {
                       id: 'Online Video Consultation',
-                      title: 'Tele-Rehab Video Consultation',
-                      desc: 'Initial exercise prescription, ergonomic evaluation, and posture correction online.',
+                      title: 'Online Video Physiotherapy',
+                      desc: 'Ergonomic evaluation, guided exercise rehab, and clinical posture correction via secure video call.',
                       icon: Sparkles,
                     },
                   ].map((service) => {
@@ -482,76 +518,143 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {/* STEP 4: Patient Contact Information */}
           {step === 4 && (
             <form onSubmit={handleSubmit} className="space-y-4 animate-in fade-in">
+              {/* Who is this consultation for? */}
+              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
+                  Who is this consultation for?
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setBookingFor('myself')}
+                    className={`py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 min-h-[44px] ${
+                      bookingFor === 'myself'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                    }`}
+                  >
+                    <User className="w-4 h-4 shrink-0" />
+                    <span>Myself</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBookingFor('family')}
+                    className={`py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 min-h-[44px] ${
+                      bookingFor === 'family'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                    }`}
+                  >
+                    <Home className="w-4 h-4 shrink-0" />
+                    <span>Senior / Family Member</span>
+                  </button>
+                </div>
+
+                {bookingFor === 'family' && (
+                  <p className="text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg p-2 mt-2 leading-relaxed">
+                    ✨ <strong>Senior Citizen & Post-Surgical Friendly:</strong> Dr. Pawan Gupta specializes in gentle home rehabilitation for elderly patients with mobility or fall-risk concerns.
+                  </p>
+                )}
+              </div>
+
+              {/* Patient Name */}
               <div>
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
-                  Patient Full Name *:
+                <label htmlFor="patientNameInput" className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                  {bookingFor === 'family' ? "Patient's Full Name *:" : "Your Full Name *:"}
                 </label>
                 <input
+                  id="patientNameInput"
                   type="text"
                   required
-                  placeholder="e.g. Rajesh Kumar"
+                  autoComplete="name"
+                  placeholder={bookingFor === 'family' ? "e.g. Nirmala Gupta (Mother / Patient)" : "e.g. Rajesh Kumar"}
                   value={formData.patientName}
                   onChange={(e) => setFormData({ ...formData, patientName: e.target.value })}
-                  className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
+                  className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-base sm:text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* If family booking, also ask caregiver's name for communication */}
+              {bookingFor === 'family' && (
                 <div>
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
-                    Phone / WhatsApp Number *:
+                  <label htmlFor="caregiverNameInput" className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                    Your Name (Son/Daughter/Family Member Arranging Care):
                   </label>
                   <input
+                    id="caregiverNameInput"
+                    type="text"
+                    placeholder="e.g. Amit Gupta (Son)"
+                    value={caregiverName}
+                    onChange={(e) => setCaregiverName(e.target.value)}
+                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-base sm:text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
+                  />
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="patientPhoneInput" className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                    Contact Phone / WhatsApp *:
+                  </label>
+                  <input
+                    id="patientPhoneInput"
                     type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
                     required
                     placeholder="e.g. +91 98200 00000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
+                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-base sm:text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
-                    Email Address:
+                  <label htmlFor="patientEmailInput" className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                    Email Address (Optional):
                   </label>
                   <input
+                    id="patientEmailInput"
                     type="email"
-                    placeholder="e.g. rajesh@example.com"
+                    inputMode="email"
+                    autoComplete="email"
+                    placeholder="e.g. patient@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
+                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-base sm:text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
                   />
                 </div>
               </div>
 
               {formData.serviceType.includes('Home') && (
                 <div>
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
+                  <label htmlFor="residenceAddressInput" className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
                     Full Mumbai Residence Address (for Home Visit):
                   </label>
                   <input
+                    id="residenceAddressInput"
                     type="text"
+                    autoComplete="street-address"
                     placeholder="Building name, flat number, street, landmark in Mumbai..."
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
+                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300 text-base sm:text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-600 transition"
                   />
                 </div>
               )}
 
               {/* Booking Summary Box */}
-              <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 text-xs space-y-1 text-slate-800">
-                <span className="font-bold block text-blue-800 font-heading">Appointment Summary:</span>
-                <div>• Format: {formData.serviceType}</div>
-                <div>• Area: {formData.mumbaiArea} | Focus: {formData.bodyPart}</div>
-                <div>• Scheduled: {formData.preferredDate} at {formData.preferredTime}</div>
+              <div className="p-3.5 rounded-2xl bg-blue-50/80 border border-blue-200 text-xs space-y-1 text-slate-800">
+                <span className="font-bold block text-blue-900 font-heading">Appointment Summary:</span>
+                <div>• Format: <strong className="text-slate-900">{formData.serviceType}</strong></div>
+                <div>• Area: <strong className="text-slate-900">{formData.mumbaiArea}</strong> | Focus: {formData.bodyPart}</div>
+                <div>• Scheduled: <strong className="text-slate-900">{formData.preferredDate}</strong> at {formData.preferredTime}</div>
               </div>
 
               <div className="flex items-center gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="py-3.5 px-5 rounded-full border border-slate-300 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition flex items-center space-x-1"
+                  className="py-3.5 px-5 rounded-full border border-slate-300 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition flex items-center space-x-1 min-h-[46px]"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Back</span>
@@ -559,7 +662,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 py-3.5 px-6 rounded-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-sm shadow-md shadow-blue-100 transition flex items-center justify-center space-x-2"
+                  className="flex-1 py-3.5 px-6 rounded-full bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-blue-500/20 transition flex items-center justify-center space-x-2 min-h-[46px]"
                 >
                   {isSubmitting ? (
                     <span>Confirming Appointment...</span>

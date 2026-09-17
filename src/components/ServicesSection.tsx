@@ -19,14 +19,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SERVICES } from '../data/clinicData';
 import { ServiceItem, ServiceCategory } from '../types';
 
-import orthopedicImg from '../assets/images/regenerated_image_1787088217070.png';
-import sportsImg from '../assets/images/regenerated_image_1787088221289.png';
-import postOpImg from '../assets/images/regenerated_image_1787088225175.png';
-import homeVisitImg from '../assets/images/regenerated_image_1787088229284.png';
-import neuroImg from '../assets/images/regenerated_image_1787088232497.png';
-import modalitiesImg from '../assets/images/regenerated_image_1787088240020.png';
-import ergonomicsImg from '../assets/images/regenerated_image_1787088933047.png';
-import geriatricImg from '../assets/images/regenerated_image_1787088243680.png';
+import orthopedicImg from '../assets/images/regenerated_image_1787088217070.webp';
+import sportsImg from '../assets/images/regenerated_image_1787088221289.webp';
+import postOpImg from '../assets/images/regenerated_image_1787088225175.webp';
+import homeVisitImg from '../assets/images/regenerated_image_1787088229284.webp';
+import neuroImg from '../assets/images/regenerated_image_1787088232497.webp';
+import modalitiesImg from '../assets/images/regenerated_image_1787088240020.webp';
+import ergonomicsImg from '../assets/images/regenerated_image_1787088933047.webp';
+import geriatricImg from '../assets/images/regenerated_image_1787088243680.webp';
 
 interface ServicesSectionProps {
   onOpenBooking: (prefillService?: string) => void;
@@ -148,6 +148,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                     <img 
                       src={serviceImg} 
                       alt={service.title} 
+                      loading="lazy"
+                      decoding="async"
+                      width="400"
+                      height="160"
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />

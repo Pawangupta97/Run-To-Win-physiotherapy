@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import clinicLogo from '../assets/images/regenerated_image_1787083514422.jpg';
+import clinicLogo from '../assets/images/regenerated_image_1787083514422.webp';
 import { 
   Phone, 
   Calendar, 
@@ -162,9 +162,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
             </div>
             <div>
-              <h1 className="text-base sm:text-lg font-bold tracking-tight text-blue-950 uppercase leading-none font-heading flex items-center gap-1.5">
+              <div className="text-base sm:text-lg font-bold tracking-tight text-blue-950 uppercase leading-none font-heading flex items-center gap-1.5">
                 <span className="transition-transform duration-300 ease-out group-hover:scale-[1.02] inline-block origin-left">RUN TO WIN PHYSIOTHERAPY</span>
-              </h1>
+              </div>
               <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider mt-1">
                 <span>Care To Cure</span>
               </p>
@@ -172,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-5 text-sm font-medium text-slate-600">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-5 text-sm font-medium text-slate-600">
             <button
               onClick={() => onNavigatePage ? onNavigatePage('home') : onGoHome && onGoHome()}
               className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold ${
@@ -181,32 +181,50 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               Home
             </button>
-            
+
             <button
-              onClick={() => onNavigatePage ? onNavigatePage('about') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
-                currentPage === 'about' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              onClick={() => onNavigatePage ? onNavigatePage('physiotherapy-mumbai') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold ${
+                currentPage === 'physiotherapy-mumbai' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
-              About Dr. Pawan
+              Mumbai Care
             </button>
 
             <button
               onClick={() => onNavigatePage ? onNavigatePage('services') : onGoHome && onGoHome()}
               className={`hover:text-blue-600 transition-colors py-1 relative group ${
-                currentPage === 'services' || currentPage === 'conditions' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+                currentPage === 'services' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
-              Services & Care
+              Services
             </button>
 
             <button
-              onClick={() => onNavigatePage ? onNavigatePage('articles') : onGoHome && onGoHome()}
+              onClick={() => onNavigatePage ? onNavigatePage('conditions') : onGoHome && onGoHome()}
               className={`hover:text-blue-600 transition-colors py-1 relative group ${
-                currentPage === 'articles' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+                currentPage === 'conditions' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
-              Articles
+              Conditions
+            </button>
+
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('rehabilitation') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'rehabilitation' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
+            >
+              Rehabilitation
+            </button>
+
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('dr-pawan-gupta') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'dr-pawan-gupta' || currentPage === 'about' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
+            >
+              Dr. Pawan
             </button>
 
             {/* Mumbai Home Visit Dropdown Link with Mega Menu */}
@@ -223,7 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPage === 'home-visits' || isLocationsOpen ? 'text-blue-600' : 'text-blue-900 hover:text-blue-600'
                 }`}
               >
-                <span>Mumbai Home Visit</span>
+                <span>Areas We Serve</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isLocationsOpen ? 'rotate-180 text-blue-600' : 'text-slate-400'}`} />
               </button>
 
@@ -297,6 +315,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               Testimonials
+            </button>
+
+            <button
+              onClick={() => onNavigatePage ? onNavigatePage('articles') : onGoHome && onGoHome()}
+              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+                currentPage === 'articles' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
+              }`}
+            >
+              Patient Education
             </button>
 
             <button
@@ -444,14 +471,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  if (onNavigatePage) onNavigatePage('about');
+                  if (onNavigatePage) onNavigatePage('physiotherapy-mumbai');
                   else if (onGoHome) onGoHome();
                 }}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
-                  currentPage === 'about' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                  currentPage === 'physiotherapy-mumbai' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>About Dr. Pawan Gupta</span>
+                <span>Physiotherapy in Mumbai</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
@@ -462,10 +489,52 @@ export const Navbar: React.FC<NavbarProps> = ({
                   else if (onGoHome) onGoHome();
                 }}
                 className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
-                  currentPage === 'services' || currentPage === 'conditions' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                  currentPage === 'services' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>Services & Care</span>
+                <span>Services</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigatePage) onNavigatePage('conditions');
+                  else if (onGoHome) onGoHome();
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'conditions' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>Conditions Treated</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigatePage) onNavigatePage('rehabilitation');
+                  else if (onGoHome) onGoHome();
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'rehabilitation' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>Rehabilitation Programs</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onNavigatePage) onNavigatePage('dr-pawan-gupta');
+                  else if (onGoHome) onGoHome();
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                  currentPage === 'dr-pawan-gupta' || currentPage === 'about' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <span>Dr. Pawan Gupta (PT) — Profile</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
@@ -479,7 +548,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPage === 'articles' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>Clinical Articles</span>
+                <span>Patient Education & Articles</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
@@ -493,7 +562,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPage === 'body-map' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>Body Symptom Map</span>
+                <span>Interactive Body Symptom Map</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
@@ -507,7 +576,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPage === 'testimonials' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>Testimonials</span>
+                <span>Patient Reviews</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
@@ -521,7 +590,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPage === 'faq' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>FAQ</span>
+                <span>Frequently Asked Questions</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
@@ -535,7 +604,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPage === 'contact' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
-                <span>Contact & Clinic</span>
+                <span>Contact & Sewri Clinic</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
             </div>

@@ -25,6 +25,7 @@ import {
   Users
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface HomeVisitsPageProps {
   onBackToHome: () => void;
@@ -57,22 +58,58 @@ export const HomeVisitsPage: React.FC<HomeVisitsPageProps> = ({
     return matchesZone && matchesSearch;
   });
 
+  const homeVisitsSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://runtowinphysiotherapy.com/home-visits#webpage",
+        "name": "Home Visit Physiotherapy Mumbai - Run To Win Healthcare",
+        "url": "https://runtowinphysiotherapy.com/home-visits",
+        "description": "Book certified doorstep home visit physiotherapy in Mumbai by Dr. Pawan Gupta (PT). Available 7 AM – 8:30 PM across South Mumbai, Western Suburbs, Central Mumbai & Thane.",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Home Visit Physiotherapy Mumbai",
+            "item": "https://runtowinphysiotherapy.com/home-visits"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Home Visit Physiotherapy Mumbai | Doorstep Physio Across 35+ Suburbs"
         description="Book certified doorstep home visit physiotherapy in Mumbai by Dr. Pawan Gupta (PT). Available 7 AM – 8:30 PM across South Mumbai, Western Suburbs, Central Mumbai & Thane."
-        canonicalUrl="https://runtowinphysiotherapy.com/#home-visits"
+        canonicalUrl="https://runtowinphysiotherapy.com/home-visits"
+        schema={homeVisitsSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Mumbai Home Visit Physiotherapy Hub</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'Mumbai Home Visit Physiotherapy Hub', current: true },
+        ]}
+      />
 
       {/* Hero Header */}
       <section className="bg-gradient-to-br from-blue-950 via-slate-900 to-blue-950 text-white py-16 md:py-20 relative overflow-hidden">

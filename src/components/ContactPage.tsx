@@ -16,17 +16,22 @@ import {
   Navigation
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface ContactPageProps {
   onBackToHome: () => void;
   onOpenBooking: (prefillService?: string, prefillArea?: string) => void;
   onOpenAiAssistant: () => void;
+  onNavigatePage?: (page: string) => void;
+  onSelectCondition?: (conditionId: string) => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({
   onBackToHome,
   onOpenBooking,
   onOpenAiAssistant,
+  onNavigatePage,
+  onSelectCondition,
 }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -48,22 +53,58 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     setFormSubmitted(true);
   };
 
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "@id": "https://runtowinphysiotherapy.com/contact#webpage",
+        "name": "Contact Sewri Clinic & Book Appointment Mumbai | Dr. Pawan Gupta (PT)",
+        "url": "https://runtowinphysiotherapy.com/contact",
+        "description": "Contact Run To Win Healthcare Services in Sewri, Mumbai. Call +91 98386 88745 or WhatsApp for in-clinic physiotherapy and doorstep home visits across Mumbai.",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contact",
+            "item": "https://runtowinphysiotherapy.com/contact"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Contact Sewri Clinic & Book Appointment Mumbai | Dr. Pawan Gupta (PT)"
         description="Contact Run To Win Healthcare Services in Sewri, Mumbai. Call +91 98386 88745 or WhatsApp for in-clinic physiotherapy and doorstep home visits across Mumbai."
-        canonicalUrl="https://runtowinphysiotherapy.com/#contact"
+        canonicalUrl="https://runtowinphysiotherapy.com/contact"
+        schema={contactPageSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Contact & Clinic Location</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'Contact & Sewri Clinic Location', current: true },
+        ]}
+      />
 
       {/* Hero Header */}
       <section className="bg-gradient-to-br from-blue-950 via-slate-900 to-blue-950 text-white py-16 md:py-20 relative overflow-hidden">
@@ -143,6 +184,23 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                       </a>
                     </div>
                   </div>
+                </div>
+
+                {/* Embedded Map for Verified Sewri Clinic */}
+                <div className="pt-2">
+                  <div className="rounded-xl overflow-hidden border border-slate-200 shadow-2xs h-56 w-full relative">
+                    <iframe
+                      title="Sewri Clinic Location - Run To Win Healthcare Services Mumbai"
+                      src="https://maps.google.com/maps?q=Sewri,+Mumbai,+Maharashtra+400015&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                      className="w-full h-full border-0"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-blue-600 shrink-0" />
+                    <span>Verified Physical Practice: Sewri, Mumbai 400015. Easy transit from Dadar, Parel & Wadala.</span>
+                  </p>
                 </div>
 
                 <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-3">
@@ -293,6 +351,83 @@ export const ContactPage: React.FC<ContactPageProps> = ({
 
           </div>
 
+        </div>
+      </section>
+
+      {/* Helpful Clinical Resources Before Your Appointment */}
+      <section className="py-12 bg-white border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-8 space-y-2">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Before Your Consultation</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-heading">
+              Explore Our Specialized Clinical Protocols & Doctor Profile
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Review our evidence-based rehabilitation protocols, meet the clinical director, or read self-management advice.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <button
+              onClick={() => onNavigatePage && onNavigatePage('dr-pawan-gupta')}
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200/80 hover:border-blue-300 text-left transition space-y-2 group shadow-2xs"
+            >
+              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 font-heading">
+                Dr. Pawan Gupta (PT)
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Consultant Physiotherapist with 8+ years clinical excellence in musculoskeletal & sports care.
+              </p>
+            </button>
+
+            <button
+              onClick={() => onNavigatePage && onNavigatePage('home-physiotherapy')}
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200/80 hover:border-blue-300 text-left transition space-y-2 group shadow-2xs"
+            >
+              <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                <Building className="w-4 h-4" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 font-heading">
+                Doorstep Home Visits
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                7:00 AM – 8:30 PM home sessions covering 35+ suburbs across Mumbai and Thane.
+              </p>
+            </button>
+
+            <button
+              onClick={() => onNavigatePage && onNavigatePage('rehabilitation')}
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200/80 hover:border-blue-300 text-left transition space-y-2 group shadow-2xs"
+            >
+              <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                <Navigation className="w-4 h-4" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 font-heading">
+                Rehabilitation Authority Hub
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Structured protocols for post-TKR, stroke recovery, ACL tears, and sciatica management.
+              </p>
+            </button>
+
+            <button
+              onClick={() => onNavigatePage && onNavigatePage('articles')}
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200/80 hover:border-blue-300 text-left transition space-y-2 group shadow-2xs"
+            >
+              <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center">
+                <CheckCircle2 className="w-4 h-4" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 font-heading">
+                Patient Education & Blog
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Evidence-based articles on ergonomic posture, early back pain signs, and post-op exercises.
+              </p>
+            </button>
+          </div>
         </div>
       </section>
 

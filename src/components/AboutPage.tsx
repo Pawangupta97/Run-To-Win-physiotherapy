@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import doctorPhoto from '../assets/images/regenerated_image_1787089379420.jpg';
+import doctorPhoto from '../assets/images/regenerated_image_1787089379420.webp';
 import { 
   Award, 
   CheckCircle2, 
@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 import { DoctorExerciseVideoStudio } from './DoctorExerciseVideoStudio';
 
 interface AboutPageProps {
@@ -40,22 +41,76 @@ export const AboutPage: React.FC<AboutPageProps> = ({
   onOpenAiAssistant,
   onNavigatePage,
 }) => {
+  const doctorSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Physician"],
+        "@id": "https://runtowinphysiotherapy.com/#dr-pawan-gupta",
+        "name": "Dr. Pawan Gupta (PT)",
+        "givenName": "Pawan",
+        "familyName": "Gupta",
+        "honorificPrefix": "Dr.",
+        "honorificSuffix": "PT, B.P.Th, M.P.Th, MIAP",
+        "jobTitle": "Senior Consultant Physiotherapist & Clinical Director",
+        "image": "https://runtowinphysiotherapy.com/dr-pawan-gupta.jpg",
+        "worksFor": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        },
+        "telephone": CLINIC_CONTACT.phone,
+        "email": CLINIC_CONTACT.email,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Sewri",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400015",
+          "addressCountry": "IN"
+        },
+        "medicalSpecialty": [
+          "Physiotherapy",
+          "Orthopedic",
+          "SportsMedicine",
+          "Neurology"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Dr. Pawan Gupta (PT)",
+            "item": "https://runtowinphysiotherapy.com/about"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="About Dr. Pawan Gupta (PT) | Senior Consultant Physiotherapist Mumbai"
         description="Learn about Dr. Pawan Gupta (PT), B.P.Th, M.P.Th (MIAP), Senior Consultant Physiotherapist in Mumbai. 8+ years experience in spine care, sports rehab, and post-op recovery."
-        canonicalUrl="https://runtowinphysiotherapy.com/#about"
+        canonicalUrl="https://runtowinphysiotherapy.com/about"
+        ogImage="https://runtowinphysiotherapy.com/dr-pawan-gupta.jpg"
+        schema={doctorSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">About Dr. Pawan Gupta (PT)</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'About Dr. Pawan Gupta (PT)', current: true },
+        ]}
+      />
 
       {/* Hero / Header Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-16 md:py-24 relative overflow-hidden">
@@ -130,9 +185,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                     {/* Dr. Pawan Gupta Cutout Photo with studio lighting */}
                     <img 
                       src={doctorPhoto} 
-                      alt="Dr. Pawan Gupta (PT)" 
+                      alt="Dr. Pawan Gupta (PT) - Lead Physiotherapist and Clinical Director at Run To Win Mumbai" 
+                      loading="lazy"
+                      decoding="async"
+                      width="80"
+                      height="80"
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-top filter brightness-105"
+                      className="w-full h-full object-cover object-[center_18%] filter brightness-[1.05] contrast-[1.08] hover:scale-105 transition-transform duration-500 rounded-xl"
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-blue-600/80 text-[8px] font-bold text-center text-white py-0.5">
                       LIVE PT

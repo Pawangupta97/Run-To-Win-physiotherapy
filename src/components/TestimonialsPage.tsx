@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { WriteReviewModal } from './WriteReviewModal';
 import { SeoMeta } from './SeoMeta';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface TestimonialsPageProps {
   onBackToHome: () => void;
@@ -59,22 +60,58 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
     return matchesCategory && matchesSearch;
   });
 
+  const testimonialsSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://runtowinphysiotherapy.com/testimonials#webpage",
+        "name": "Patient Reviews & Recovery Stories Mumbai | Dr. Pawan Gupta (PT)",
+        "url": "https://runtowinphysiotherapy.com/testimonials",
+        "description": "Read verified patient recovery stories for Dr. Pawan Gupta (PT). Spine care, knee replacement rehabilitation, and home visits in Mumbai.",
+        "isPartOf": {
+          "@id": "https://runtowinphysiotherapy.com/#website"
+        },
+        "about": {
+          "@id": "https://runtowinphysiotherapy.com/#clinic"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://runtowinphysiotherapy.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Patient Reviews",
+            "item": "https://runtowinphysiotherapy.com/testimonials"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <SeoMeta
         title="Patient Reviews & Recovery Stories Mumbai | Dr. Pawan Gupta (PT)"
-        description="Read 100+ verified patient reviews and before/after recovery metrics for Dr. Pawan Gupta (PT). Spine care, Knee replacement rehab, and Home visits in Mumbai."
-        canonicalUrl="https://runtowinphysiotherapy.com/#testimonials"
+        description="Read verified patient recovery stories for Dr. Pawan Gupta (PT). Spine care, knee replacement rehabilitation, and home visits in Mumbai."
+        canonicalUrl="https://runtowinphysiotherapy.com/testimonials"
+        schema={testimonialsSchema}
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center text-xs text-slate-500">
-          <button onClick={onBackToHome} className="hover:text-blue-600 font-medium">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 mx-2 text-slate-400" />
-          <span className="text-slate-900 font-semibold">Patient Reviews & Case Studies</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        onHomeClick={onBackToHome}
+        items={[
+          { label: 'Patient Reviews & Recovery Stories', current: true },
+        ]}
+      />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-16 md:py-20 relative overflow-hidden">

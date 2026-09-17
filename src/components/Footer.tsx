@@ -1,5 +1,5 @@
 import React from 'react';
-import clinicLogo from '../assets/images/regenerated_image_1787083514422.jpg';
+import clinicLogo from '../assets/images/regenerated_image_1787083514422.webp';
 import { 
   Activity, 
   MapPin, 
@@ -97,15 +97,15 @@ export const Footer: React.FC<FooterProps> = ({
 
       {/* Main Footer Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
           {/* Col 1: Clinic Overview & Hours */}
-          <div className="space-y-4">
+          <div className="space-y-4 lg:col-span-1">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-heading">
-              Clinic & Location
+              Clinic & Headquarters
             </h4>
             <p className="text-slate-400 leading-relaxed">
-              Premier non-surgical orthopedic, spine decompression, sports injury rehabilitation, and dedicated home care physiotherapy across Mumbai.
+              Premier non-surgical orthopedic, spine decompression, sports rehabilitation, and certified doorstep home visit physiotherapy across Mumbai.
             </p>
             <div className="space-y-2 text-slate-300">
               <div className="flex items-start space-x-2">
@@ -123,10 +123,91 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
-          {/* Col 2: Clinical Specializations & Conditions */}
+          {/* Col 2: Core Services (As per IA) */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-heading">
-              Evidence-Based Guides
+              Services
+            </h4>
+            <ul className="space-y-1.5 text-slate-400">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('physiotherapy-mumbai')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Physiotherapy in Mumbai
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('orthopedic-physiotherapy')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Orthopedic Physiotherapy
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('sports-physiotherapy')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Sports Physiotherapy
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('neuro-physiotherapy')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Neuro Physiotherapy
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('home-physiotherapy')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Home Physiotherapy
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('online-physiotherapy')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Online Physiotherapy
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('pain-management')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Pain Management
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('post-surgical-rehab')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Post-Surgical Rehabilitation
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Conditions Treated (As per IA) */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider font-heading">
+              Conditions Treated
             </h4>
             <ul className="space-y-1.5 text-slate-400">
               <li>
@@ -135,7 +216,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectCondition && onSelectCondition('lower-back')}
                   className="hover:text-blue-400 transition text-left"
                 >
-                  • Lower Back Pain & Sciatica
+                  • Back Pain & Sciatica
                 </button>
               </li>
               <li>
@@ -144,7 +225,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectCondition && onSelectCondition('cervical-neck')}
                   className="hover:text-blue-400 transition text-left"
                 >
-                  • Cervical Spondylosis & Tech Neck
+                  • Neck Pain & Spondylosis
                 </button>
               </li>
               <li>
@@ -153,7 +234,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectCondition && onSelectCondition('knee')}
                   className="hover:text-blue-400 transition text-left"
                 >
-                  • Knee Osteoarthritis & TKR
+                  • Knee Pain & Arthritis
                 </button>
               </li>
               <li>
@@ -168,10 +249,10 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('neuro-stroke')}
+                  onClick={() => onSelectCondition && onSelectCondition('sports-injuries')}
                   className="hover:text-blue-400 transition text-left"
                 >
-                  • Stroke & Neuro Rehabilitation
+                  • Sports Injury Rehabilitation
                 </button>
               </li>
               <li>
@@ -180,22 +261,70 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectCondition && onSelectCondition('posture-ergonomics')}
                   className="hover:text-blue-400 transition text-left"
                 >
-                  • Posture & Desk Ergonomics
+                  • Postural & Ergonomic Pain
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigatePage && onNavigatePage('conditions')}
+                  className="text-blue-400 hover:underline transition text-left font-semibold text-[11px] pt-1 block"
+                >
+                  View All 17 Condition Guides →
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Mumbai Home Visit Localities */}
+          {/* Col 4: Rehabilitation Programs & Areas */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-heading">
-              Mumbai Home Care Suburbs
+              Rehabilitation & Areas
             </h4>
-            <p className="text-[11px] text-slate-400">
-              35+ Doorstep Physiotherapy Locations (Click for details):
-            </p>
-            <div className="flex flex-wrap gap-1.5 max-h-56 overflow-y-auto pr-1">
-              {HOME_VISIT_LOCATIONS.map((loc) => (
+            <ul className="space-y-1.5 text-slate-400 mb-4">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('knee-replacement-rehab')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Total Knee Replacement (TKR)
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('hip-replacement-rehab')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Total Hip Replacement (THR)
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('stroke-rehab')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Stroke / Hemiplegia Rehab
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onSelectCondition && onSelectCondition('senior-rehab')}
+                  className="hover:text-blue-400 transition text-left"
+                >
+                  • Senior Citizen Mobility
+                </button>
+              </li>
+            </ul>
+
+            <h5 className="text-[11px] font-bold text-white uppercase tracking-wider font-heading pt-1">
+              Top Mumbai Areas Served
+            </h5>
+            <div className="flex flex-wrap gap-1 max-h-28 overflow-y-auto pr-1">
+              {HOME_VISIT_LOCATIONS.slice(0, 14).map((loc) => (
                 <a
                   key={loc.id}
                   href={getLocationPath(loc.id)}
@@ -206,24 +335,65 @@ export const Footer: React.FC<FooterProps> = ({
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
-                  className="px-2 py-0.5 rounded-md bg-slate-900 hover:bg-blue-900 hover:text-white text-slate-300 text-[10px] border border-slate-800 transition"
-                  title={`Physiotherapist near me in ${loc.name}, Mumbai`}
+                  className="px-1.5 py-0.5 rounded bg-slate-900 hover:bg-blue-900 hover:text-white text-slate-300 text-[10px] border border-slate-800 transition"
+                  title={`Physiotherapy in ${loc.name}, Mumbai`}
                 >
                   {loc.name}
                 </a>
               ))}
             </div>
+            <button
+              onClick={() => onNavigatePage && onNavigatePage('home-visits')}
+              className="text-blue-400 hover:underline transition text-left font-semibold text-[11px] block pt-1"
+            >
+              All 35+ Suburbs Hub →
+            </button>
           </div>
 
-          {/* Col 4: Quick Navigation & Emergency Note */}
+          {/* Col 5: Quick Actions & Trust */}
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-heading">
               Quick Actions
             </h4>
             <div className="space-y-2">
+              <a
+                href="/dr-pawan-gupta/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigatePage) {
+                    onNavigatePage('dr-pawan-gupta');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+                className="w-full py-2 px-3 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-800/50 text-blue-200 font-semibold text-left transition flex items-center justify-between"
+              >
+                <span>Dr. Pawan Gupta (PT)</span>
+                <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded font-bold">Doctor Profile</span>
+              </a>
+              <button
+                onClick={() => onNavigatePage && onNavigatePage('physiotherapy-mumbai')}
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between"
+              >
+                <span>Physiotherapy Mumbai Hub</span>
+                <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded">Hub</span>
+              </button>
+              <button
+                onClick={() => onNavigatePage && onNavigatePage('articles')}
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between"
+              >
+                <span>Clinical Blog & Articles</span>
+                <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded">Guides</span>
+              </button>
+              <button
+                onClick={() => onNavigatePage && onNavigatePage('contact')}
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between"
+              >
+                <span>Contact & Clinic Desk</span>
+                <span className="text-[10px] bg-emerald-900 text-emerald-200 px-1.5 py-0.5 rounded">Sewri</span>
+              </button>
               <button
                 onClick={onOpenAiAssistant}
-                className="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-blue-400 font-semibold text-left transition flex items-center justify-between"
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-blue-400 font-semibold text-left transition flex items-center justify-between"
               >
                 <span>AI Symptom Triage</span>
                 <span className="text-[10px] bg-blue-950/80 border border-blue-800/50 px-2 py-0.5 rounded text-blue-300">Gemini</span>
@@ -236,15 +406,15 @@ export const Footer: React.FC<FooterProps> = ({
               >
                 <span className="flex items-center space-x-1.5">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-slate-200">Google Business Reviews</span>
+                  <span className="text-slate-200">Google Reviews</span>
                 </span>
                 <span className="text-[10px] bg-amber-950/80 border border-amber-800/50 px-2 py-0.5 rounded text-amber-300">4.9 ★</span>
               </a>
             </div>
 
-            <div className="p-3.5 bg-slate-900 rounded-2xl border border-slate-800 text-[11px] text-slate-400">
-              <strong className="text-slate-300 block mb-1">Emergency Disclaimer:</strong>
-              Physiotherapy is not a substitute for emergency medicine. If you experience severe chest pain, sudden paralysis, or traumatic injury, please visit the nearest hospital casualty immediately.
+            <div className="p-3 bg-slate-900 rounded-2xl border border-slate-800 text-[10px] text-slate-400">
+              <strong className="text-slate-300 block mb-0.5">Emergency Disclaimer:</strong>
+              Physiotherapy does not replace acute emergency medicine. For chest pain or sudden paralysis, visit a hospital emergency department immediately.
             </div>
           </div>
 

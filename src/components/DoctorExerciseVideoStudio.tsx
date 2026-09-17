@@ -19,8 +19,19 @@ import {
   Heart
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import doctorPhoto from '../assets/images/regenerated_image_1787089379420.jpg';
+import doctorPhoto from '../assets/images/regenerated_image_1787089379420.webp';
+import orthopedicImg from '../assets/images/regenerated_image_1787088217070.webp';
+import sportsImg from '../assets/images/regenerated_image_1787088221289.webp';
+import postOpImg from '../assets/images/regenerated_image_1787088225175.webp';
+import ergonomicsImg from '../assets/images/regenerated_image_1787088933047.webp';
 import { CLINIC_CONTACT } from '../data/clinicData';
+
+const EXERCISE_DEMO_IMAGES: Record<string, string> = {
+  'spine-decompression': orthopedicImg,
+  'knee-quad-activation': sportsImg,
+  'shoulder-pendulum': postOpImg,
+  'cervical-chin-tucks': ergonomicsImg,
+};
 
 export interface ExerciseVideoLesson {
   id: string;
@@ -263,15 +274,31 @@ export const DoctorExerciseVideoStudio: React.FC<DoctorExerciseVideoStudioProps>
                     repeat: Infinity, 
                     ease: "easeInOut" 
                   }}
-                  className="relative z-10 w-full h-full flex items-center justify-center"
+                  className="relative z-10 w-full h-full flex items-center justify-center p-2 sm:p-4"
                 >
                   <img
-                    src={doctorPhoto}
-                    alt={`Dr. Pawan Gupta demonstrating ${activeLesson.title}`}
+                    src={EXERCISE_DEMO_IMAGES[activeLesson.id] || orthopedicImg}
+                    alt={`Clinical Rehabilitation Protocol: ${activeLesson.title}`}
                     referrerPolicy="no-referrer"
-                    className="h-full w-auto object-contain max-h-[92%] drop-shadow-[0_20px_40px_rgba(59,130,246,0.35)] filter contrast-105 brightness-105"
+                    className="h-full w-full object-cover sm:object-contain rounded-2xl max-h-[94%] drop-shadow-[0_20px_40px_rgba(59,130,246,0.4)] filter contrast-[1.08] brightness-[1.04] saturate-[1.08] transition-all duration-700 border border-blue-500/20"
                   />
                 </motion.div>
+
+                {/* Dr. Pawan Gupta Lead Clinical Supervisor Badge */}
+                <div className="absolute top-4 right-4 z-20 flex items-center space-x-2 px-3 py-1.5 rounded-2xl bg-slate-950/90 backdrop-blur-md border border-blue-500/40 shadow-xl">
+                  <div className="w-8 h-8 rounded-xl overflow-hidden border border-blue-400 shrink-0 bg-slate-900">
+                    <img 
+                      src={doctorPhoto} 
+                      alt="Dr. Pawan Gupta (PT)" 
+                      className="w-full h-full object-cover object-[center_18%]"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="text-left hidden sm:block">
+                    <div className="text-[10px] font-bold text-white leading-tight">Dr. Pawan Gupta (PT)</div>
+                    <div className="text-[9px] text-blue-400 font-medium">Lead Clinical Supervisor</div>
+                  </div>
+                </div>
 
                 {/* Interactive Speech / Audio Guide Bubble Overlay */}
                 <div className="absolute bottom-16 left-4 right-4 sm:left-6 sm:right-6 z-20">
