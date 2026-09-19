@@ -13,10 +13,15 @@ import {
   ChevronRight,
   Send,
   Building,
-  Navigation
+  Navigation,
+  Car,
+  Train,
+  RefreshCw,
+  Globe
 } from 'lucide-react';
 import { SeoMeta } from './SeoMeta';
 import { Breadcrumbs } from './Breadcrumbs';
+import { useClinicProfile } from '../hooks/useClinicProfile';
 
 interface ContactPageProps {
   onBackToHome: () => void;
@@ -24,6 +29,7 @@ interface ContactPageProps {
   onOpenAiAssistant: () => void;
   onNavigatePage?: (page: string) => void;
   onSelectCondition?: (conditionId: string) => void;
+  onOpenGmbSync?: () => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({
@@ -32,7 +38,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   onOpenAiAssistant,
   onNavigatePage,
   onSelectCondition,
+  onOpenGmbSync,
 }) => {
+  const clinicProfile = useClinicProfile();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -143,16 +151,39 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-heading">
                       Sewri Clinic Location
                     </h3>
-                    <p className="text-xs text-slate-500">Run To Win Healthcare Services</p>
+                    <p className="text-xs text-slate-500">{clinicProfile.businessName}</p>
                   </div>
+                </div>
+
+                {/* Google Business Profile Sync Bar */}
+                <div className="bg-blue-50/80 rounded-2xl p-3.5 border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                    <div>
+                      <span className="font-semibold text-slate-900">Google Business Profile:</span>{' '}
+                      <span className="text-slate-600">Synced & Verified on Google Maps</span>
+                    </div>
+                  </div>
+                  {onOpenGmbSync && (
+                    <button
+                      onClick={onOpenGmbSync}
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors shadow-2xs cursor-pointer"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      <span>Sync Map Data</span>
+                    </button>
+                  )}
                 </div>
 
                 <div className="space-y-3 text-xs sm:text-sm text-slate-700">
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-1" />
                     <div>
-                      <strong className="text-slate-900">Address:</strong><br />
-                      Sewri, Mumbai, Maharashtra 400015, India
+                      <strong className="text-slate-900">Exact Clinic Address:</strong><br />
+                      <span className="font-semibold text-slate-800">{clinicProfile.address}</span>
+                      <p className="text-[11px] text-slate-500 mt-1">
+                        Landmark: Near Post Office • Convenient ground floor clinic access
+                      </p>
                     </div>
                   </div>
 
@@ -160,8 +191,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     <Clock className="w-4 h-4 text-blue-600 shrink-0 mt-1" />
                     <div>
                       <strong className="text-slate-900">Clinic Hours:</strong><br />
-                      Monday – Saturday: 8:00 AM – 9:00 PM<br />
-                      Sunday: 9:00 AM – 2:00 PM (Prior Appointment)
+                      {clinicProfile.hours.weekdays}<br />
+                      {clinicProfile.hours.sunday}
                     </div>
                   </div>
 
@@ -169,8 +200,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     <Phone className="w-4 h-4 text-blue-600 shrink-0 mt-1" />
                     <div>
                       <strong className="text-slate-900">Direct Telephone:</strong><br />
-                      <a href={`tel:${CLINIC_CONTACT.phone}`} className="text-blue-600 font-bold hover:underline">
-                        {CLINIC_CONTACT.phoneDisplay}
+                      <a href={`tel:${clinicProfile.phone}`} className="text-blue-600 font-bold hover:underline">
+                        {clinicProfile.phoneDisplay}
                       </a>
                     </div>
                   </div>
@@ -187,25 +218,53 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 </div>
 
                 {/* Embedded Map for Verified Sewri Clinic */}
-                <div className="pt-2">
-                  <div className="rounded-xl overflow-hidden border border-slate-200 shadow-2xs h-56 w-full relative">
+                <div className="pt-2 space-y-3">
+                  <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md h-64 sm:h-72 w-full relative group">
                     <iframe
-                      title="Sewri Clinic Location - Run To Win Healthcare Services Mumbai"
-                      src="https://maps.google.com/maps?q=Sewri,+Mumbai,+Maharashtra+400015&t=&z=14&ie=UTF8&iwloc=&output=embed"
-                      className="w-full h-full border-0"
+                      id="sewri-clinic-map-iframe"
+                      title={`${clinicProfile.businessName} - Map`}
+                      src={clinicProfile.googleMapsEmbedUrl}
+                      className="w-full h-full border-0 filter saturate-[1.05]"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
                     ></iframe>
+                    <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm flex items-center gap-1.5 text-[11px] font-semibold text-slate-800 pointer-events-none">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>10, Manish Investment, Sewri</span>
+                    </div>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-blue-600 shrink-0" />
-                    <span>Verified Physical Practice: Sewri, Mumbai 400015. Easy transit from Dadar, Parel & Wadala.</span>
+
+                  {/* Commute & Travel Times to Clinic */}
+                  <div className="bg-slate-50 rounded-xl p-3 border border-slate-200/80 space-y-2 text-xs">
+                    <div className="flex items-center justify-between text-slate-700 font-semibold text-[11px]">
+                      <span className="flex items-center gap-1">
+                        <Navigation className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Commute to Sewri Clinic</span>
+                      </span>
+                      <span className="text-[10px] text-slate-500 font-mono">{clinicProfile.latitude}° N, {clinicProfile.longitude}° E</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
+                      <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-100 shadow-2xs">
+                        <Car className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                        <span><strong>~8–12 min</strong> from Dadar & Parel</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-100 shadow-2xs">
+                        <Train className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span><strong>4 min walk</strong> from Sewri Station</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                    <span>Exact Pin: {clinicProfile.address}</span>
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-3">
                   <a
-                    href={CLINIC_CONTACT.googleMapsUrl}
+                    href={clinicProfile.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-blue-50 text-blue-700 hover:bg-blue-100 px-5 py-2.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 border border-blue-200"

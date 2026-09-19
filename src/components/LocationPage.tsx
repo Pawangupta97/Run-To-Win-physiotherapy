@@ -127,7 +127,7 @@ export const LocationPage: React.FC<LocationPageProps> = ({
         "paymentAccepted": "Cash, UPI, Google Pay, PhonePe, Net Banking",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Sewri",
+          "streetAddress": "10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri",
           "addressLocality": "Mumbai",
           "addressRegion": "Maharashtra",
           "postalCode": "400015",
@@ -135,8 +135,8 @@ export const LocationPage: React.FC<LocationPageProps> = ({
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": "19.0016",
-          "longitude": "72.8550"
+          "latitude": "18.9966682",
+          "longitude": "72.8505096"
         },
         "areaServed": [
           {

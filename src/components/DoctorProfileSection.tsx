@@ -84,8 +84,10 @@ export const DoctorProfileSection: React.FC<DoctorProfileSectionProps> = ({ onOp
                 <div className="flex items-center space-x-4">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-blue-400/50 shadow-lg shadow-blue-500/25 shrink-0 bg-slate-800">
                     <img 
+                      id="dr-pawan-gupta-home-avatar"
                       src={doctorPhoto} 
-                      alt="Dr. Pawan Gupta (PT) - Consultant Physiotherapist in Mumbai" 
+                      alt="Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai | Consultant Physiotherapist" 
+                      title="Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai"
                       loading="lazy"
                       decoding="async"
                       width="80"

@@ -110,7 +110,17 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-2 text-slate-300">
               <div className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                <span>{CLINIC_CONTACT.address}</span>
+                <div>
+                  <span className="block">{CLINIC_CONTACT.address}</span>
+                  <a
+                    href={CLINIC_CONTACT.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs text-blue-400 hover:text-blue-300 underline mt-1"
+                  >
+                    View on Google Maps →
+                  </a>
+                </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Clock className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
@@ -410,6 +420,16 @@ export const Footer: React.FC<FooterProps> = ({
                 </span>
                 <span className="text-[10px] bg-amber-950/80 border border-amber-800/50 px-2 py-0.5 rounded text-amber-300">4.9 ★</span>
               </a>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('open-gmb-sync'))}
+                className="w-full py-2 px-3 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-800/60 text-blue-200 font-semibold text-left transition flex items-center justify-between cursor-pointer"
+              >
+                <span className="flex items-center space-x-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Google Profile & Map Sync</span>
+                </span>
+                <span className="text-[10px] bg-emerald-950 border border-emerald-800/60 px-2 py-0.5 rounded text-emerald-300 font-bold">Live API</span>
+              </button>
             </div>
 
             <div className="p-3 bg-slate-900 rounded-2xl border border-slate-800 text-[10px] text-slate-400">

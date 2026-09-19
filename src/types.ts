@@ -49,6 +49,10 @@ export interface Testimonial {
   verified: boolean;
   tag: string;
   doctorQuote?: string;
+  source?: 'google_business' | 'clinic_records';
+  reviewerPhotoUrl?: string;
+  reviewDate?: string;
+  reply?: string;
 }
 
 export interface MumbaiArea {

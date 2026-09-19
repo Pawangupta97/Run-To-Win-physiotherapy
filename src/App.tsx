@@ -30,6 +30,7 @@ import { ContactPage } from './components/ContactPage';
 import { DoctorProfilePage } from './components/DoctorProfilePage';
 import { AreasWeServePage } from './components/AreasWeServePage';
 import { NotFoundPage } from './components/NotFoundPage';
+import { GoogleBusinessSyncModal } from './components/GoogleBusinessSyncModal';
 import { HOME_VISIT_LOCATIONS, parseLocationFromUrl, getLocationPath, getLocationHash } from './data/homeVisitLocations';
 import { CONDITION_GUIDES, getRehabGuideById } from './data/conditionGuides';
 import { CLINICAL_ARTICLES } from './data/articlesData';
@@ -62,6 +63,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
+  const [isGmbSyncOpen, setIsGmbSyncOpen] = useState(false);
   const [selectedRegionId, setSelectedRegionId] = useState('lower-back');
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
   const [selectedConditionId, setSelectedConditionId] = useState<string | null>(null);
@@ -74,6 +76,12 @@ export default function App() {
   }>({});
 
   const [aiContext, setAiContext] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const handleOpenSync = () => setIsGmbSyncOpen(true);
+    window.addEventListener('open-gmb-sync', handleOpenSync);
+    return () => window.removeEventListener('open-gmb-sync', handleOpenSync);
+  }, []);
 
   // Sync with URL pathname and hash for all pages and detail routes
   useEffect(() => {
@@ -407,6 +415,7 @@ export default function App() {
         onNavigatePage={handleNavigatePage}
         currentPage={currentPage}
         onGoHome={handleGoHome}
+        onOpenGmbSync={() => setIsGmbSyncOpen(true)}
       />
 
       {/* Main Content: Render dedicated Pages OR Suburb/Condition/Article Detail Pages */}
@@ -597,6 +606,7 @@ export default function App() {
             onOpenAiAssistant={() => handleOpenAiAssistant()}
             onNavigatePage={handleNavigatePage}
             onSelectCondition={handleSelectCondition}
+            onOpenGmbSync={() => setIsGmbSyncOpen(true)}
           />
         ) : currentPage === 'areas-we-serve' ? (
           <AreasWeServePage
@@ -655,6 +665,12 @@ export default function App() {
         onClose={() => setIsAiOpen(false)}
         initialContext={aiContext}
         onOpenBooking={handleOpenBooking}
+      />
+
+      {/* Google Business Profile & Map Sync Modal */}
+      <GoogleBusinessSyncModal
+        isOpen={isGmbSyncOpen}
+        onClose={() => setIsGmbSyncOpen(false)}
       />
     </div>
   );

@@ -197,7 +197,7 @@ export const PhysiotherapyMumbaiPage: React.FC<PhysiotherapyMumbaiPageProps> = (
         "priceRange": "₹₹",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Sewri",
+          "streetAddress": "10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri",
           "addressLocality": "Mumbai",
           "addressRegion": "Maharashtra",
           "postalCode": "400015",
@@ -205,9 +205,10 @@ export const PhysiotherapyMumbaiPage: React.FC<PhysiotherapyMumbaiPageProps> = (
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": "19.0016",
-          "longitude": "72.8550"
+          "latitude": "18.9966682",
+          "longitude": "72.8505096"
         },
+        "hasMap": "https://maps.google.com/?q=18.9966682,72.8505096+(Run+To+Win+Healthcare+Services+Mumbai)",
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
@@ -672,7 +673,12 @@ export const PhysiotherapyMumbaiPage: React.FC<PhysiotherapyMumbaiPageProps> = (
                     <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-slate-900">Verified Clinic Address:</strong>
-                      <p className="text-slate-600">Sewri, Mumbai, Maharashtra 400015, India</p>
+                      <p className="text-slate-800 font-medium">
+                        10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri, Mumbai, Maharashtra 400015
+                      </p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Landmark: Near Post Office • Ground Floor Access for Elderly & Mobility-Impaired Patients
+                      </p>
                     </div>
                   </div>
 
@@ -748,21 +754,21 @@ export const PhysiotherapyMumbaiPage: React.FC<PhysiotherapyMumbaiPageProps> = (
                 <div className="px-4 py-3 bg-white rounded-t-xl border-b border-slate-200 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                    <span className="text-xs font-bold text-slate-800">Sewri Clinic Location (Mumbai 400015)</span>
+                    <span className="text-xs font-bold text-slate-800">10, Manish Investment, Datta Mandir Marg, Sewri</span>
                   </div>
                   <span className="text-[11px] text-slate-500 font-medium">Verified Practice Facility</span>
                 </div>
                 <div className="w-full h-80 rounded-b-xl overflow-hidden relative">
                   <iframe
                     title="Run To Win Healthcare Services Mumbai - Clinic Map"
-                    src="https://maps.google.com/maps?q=Sewri,+Mumbai,+Maharashtra+400015&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                    src={CLINIC_CONTACT.googleMapsEmbedUrl}
                     className="w-full h-full border-0"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
                 </div>
-                <p className="text-[11px] text-slate-500 p-2.5 text-center">
-                  📍 Verified Physical Clinic: Sewri, Mumbai, Maharashtra 400015. Home visit services dispatched from here across Mumbai.
+                <p className="text-[11px] text-slate-600 p-2.5 text-center font-medium">
+                  📍 Verified Physical Clinic: 10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri, Mumbai 400015.
                 </p>
               </div>
             </div>

@@ -14,7 +14,21 @@ export const CLINIC_CONTACT = {
   website: 'https://runtowinphysiotherapy.com/',
   instagram: '@runtowin.in',
   instagramUrl: 'https://instagram.com/runtowin.in',
-  address: 'Sewri, Mumbai, Maharashtra 400015',
+  address: '10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri, Mumbai, Maharashtra 400015',
+  shortAddress: '10, Manish Investment, Datta Mandir Marg, Sewri, Mumbai 400015',
+  streetAddress: '10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office',
+  building: '10, Ground Floor, Manish Investment',
+  road: 'Datta Mandir Marg, Off TJ Road',
+  landmark: 'Near Post Office',
+  locality: 'Sewri',
+  city: 'Mumbai',
+  state: 'Maharashtra',
+  postalCode: '400015',
+  country: 'India',
+  geo: {
+    latitude: 18.9966682,
+    longitude: 72.8505096,
+  },
   clinicHours: {
     weekdays: 'Monday – Saturday: 8:00 AM – 9:00 PM',
     sunday: 'Sunday: 9:00 AM – 2:00 PM (Emergency & Prior Appointments)',
@@ -30,8 +44,10 @@ export const CLINIC_CONTACT = {
   googleReviewsCount: '128+',
   googleBusinessName: 'Run To Win Healthcare Services Mumbai',
   googleBusinessUrl: 'https://www.google.com/search?q=Run+To+Win+Healthcare+Services+Mumbai',
-  googleReviewUrl: 'https://maps.google.com/?q=Run+To+Win+Healthcare+Services+Mumbai',
-  googleMapsUrl: 'https://maps.google.com/?q=Run+To+Win+Healthcare+Services+Mumbai',
+  googleReviewUrl: 'https://maps.google.com/?q=18.9966682,72.8505096',
+  googleMapsUrl: 'https://maps.google.com/?q=18.9966682,72.8505096+(Run+To+Win+Healthcare+Services+Mumbai)',
+  googleMapsDirectionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=18.9966682,72.8505096',
+  googleMapsEmbedUrl: 'https://maps.google.com/maps?q=18.9966682,72.8505096+(Run+To+Win+Healthcare+Services+Mumbai)&t=&z=16&ie=UTF8&iwloc=&output=embed',
 };
 
 export const BODY_REGIONS: BodyRegion[] = [

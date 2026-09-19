@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { LOCATION_GROUPS, HomeVisitLocation } from '../data/homeVisitLocations';
+import { useClinicProfile } from '../hooks/useClinicProfile';
 
 interface NavbarProps {
   onOpenBooking: (prefillService?: string, prefillArea?: string) => void;
@@ -24,6 +25,7 @@ interface NavbarProps {
   onNavigatePage?: (page: string) => void;
   currentPage?: string;
   onGoHome?: () => void;
+  onOpenGmbSync?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
@@ -32,8 +34,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLocation,
   onNavigatePage,
   currentPage = 'home',
-  onGoHome
+  onGoHome,
+  onOpenGmbSync
 }) => {
+  const clinicProfile = useClinicProfile();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
@@ -108,8 +112,21 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="flex items-center space-x-4">
+            {onOpenGmbSync && (
+              <>
+                <button 
+                  onClick={onOpenGmbSync}
+                  className="flex items-center space-x-1.5 text-blue-300 hover:text-white font-medium transition cursor-pointer bg-blue-900/50 hover:bg-blue-800/60 px-2.5 py-1 rounded-full border border-blue-700/50"
+                  title="Google Business Profile & Map Sync"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Google Profile Sync</span>
+                </button>
+                <span className="text-slate-700">|</span>
+              </>
+            )}
             <a 
-              href={`https://wa.me/${CLINIC_CONTACT.whatsappNumber}?text=Hello%20Dr.%20Pawan%20Gupta,%20I%20would%20like%20to%20inquire%20about%20physiotherapy%20consultation.`}
+              href={`https://wa.me/${clinicProfile.whatsappNumber}?text=Hello%20Dr.%20Pawan%20Gupta,%20I%20would%20like%20to%20inquire%20about%20physiotherapy%20consultation.`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-1.5 text-emerald-400 hover:text-emerald-300 font-medium transition"
@@ -119,11 +136,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
             <span className="text-slate-700">|</span>
             <a 
-              href={`tel:${CLINIC_CONTACT.phone}`}
+              href={`tel:${clinicProfile.phone}`}
               className="flex items-center space-x-1 text-white hover:text-blue-300 font-semibold transition"
             >
               <Phone className="w-3.5 h-3.5 text-blue-400" />
-              <span>{CLINIC_CONTACT.phoneDisplay}</span>
+              <span>{clinicProfile.phoneDisplay}</span>
             </a>
           </div>
         </div>
@@ -631,6 +648,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Calendar className="w-4 h-4" />
                 <span>Book In-Clinic or Home Visit</span>
               </button>
+
+              {onOpenGmbSync && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenGmbSync();
+                  }}
+                  className="w-full py-2 px-3 rounded-xl text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center space-x-2 hover:bg-slate-200 transition"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Google Business Profile & Map Sync</span>
+                </button>
+              )}
             </div>
 
             <div className="pt-2 text-center text-xs text-slate-500 flex items-center justify-center space-x-1">

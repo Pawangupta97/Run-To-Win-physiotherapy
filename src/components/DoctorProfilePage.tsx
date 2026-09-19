@@ -62,7 +62,18 @@ export const DoctorProfilePage: React.FC<DoctorProfilePageProps> = ({
         "honorificPrefix": "Dr.",
         "honorificSuffix": "PT, B.P.Th, M.P.Th, MIAP",
         "jobTitle": "Senior Consultant Physiotherapist & Clinical Director",
-        "image": "https://runtowinphysiotherapy.com/images/dr_pawan_gupta.jpg",
+        "image": {
+          "@type": "ImageObject",
+          "@id": "https://runtowinphysiotherapy.com/#dr-pawan-gupta-photo",
+          "name": "Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai",
+          "url": "https://runtowinphysiotherapy.com/images/dr_pawan_gupta.jpg",
+          "contentUrl": "https://runtowinphysiotherapy.com/images/dr_pawan_gupta.jpg",
+          "caption": "Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai | Senior Consultant Physiotherapist & Rehabilitation Specialist",
+          "description": "Professional clinical portrait of Dr. Pawan Gupta (PT), Lead Physiotherapist and Clinical Director at Run To Win Healthcare Services Mumbai.",
+          "width": 400,
+          "height": 500,
+          "representativeOfPage": true
+        },
         "url": "https://runtowinphysiotherapy.com/dr-pawan-gupta",
         "sameAs": [
           "https://instagram.com/runtowin.in",
@@ -115,7 +126,7 @@ export const DoctorProfilePage: React.FC<DoctorProfilePageProps> = ({
         "email": CLINIC_CONTACT.email,
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Sewri",
+          "streetAddress": "10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri",
           "addressLocality": "Mumbai",
           "addressRegion": "Maharashtra",
           "postalCode": "400015",
@@ -266,29 +277,42 @@ export const DoctorProfilePage: React.FC<DoctorProfilePageProps> = ({
             <div className="lg:col-span-5">
               <div className="bg-slate-900/90 rounded-3xl p-6 sm:p-7 border border-slate-800 shadow-2xl backdrop-blur relative overflow-hidden">
                 
-                {/* Authentic Professional Photograph */}
-                <div className="w-full aspect-[4/5] max-h-[380px] rounded-2xl overflow-hidden border-2 border-blue-500/40 shadow-xl relative bg-slate-950 mb-5">
+                {/* Authentic Professional Photograph with Proper SEO */}
+                <figure
+                  itemScope
+                  itemType="https://schema.org/ImageObject"
+                  className="w-full aspect-[4/5] max-h-[460px] rounded-2xl overflow-hidden border-2 border-blue-500/40 shadow-xl relative bg-slate-950 mb-5 group"
+                >
+                  <meta itemProp="name" content="Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai" />
+                  <meta itemProp="caption" content="Dr. Pawan Gupta (PT), Senior Consultant Physiotherapist & Clinical Director at Run To Win Healthcare Services Mumbai" />
+                  <meta itemProp="contentUrl" content="https://runtowinphysiotherapy.com/images/dr_pawan_gupta.jpg" />
+                  <meta itemProp="representativeOfPage" content="true" />
                   <img
+                    id="dr-pawan-gupta-photo"
                     src={doctorPhoto}
-                    alt="Dr. Pawan Gupta (PT) - Senior Consultant Physiotherapist & Clinical Director Mumbai"
+                    alt="Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai | Senior Consultant Physiotherapist & Rehabilitation Specialist"
+                    title="Dr. Pawan Gupta (PT) - Run To Win Healthcare Mumbai"
+                    itemProp="image"
                     loading="eager"
+                    fetchPriority="high"
                     decoding="async"
                     width="400"
                     height="500"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-[center_15%] filter brightness-[1.03] contrast-[1.05]"
+                    className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.04] transition-transform duration-500 group-hover:scale-[1.02]"
                   />
-                  <div className="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur-md rounded-xl p-3 border border-white/10 text-white flex items-center justify-between">
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent pointer-events-none" />
+                  <figcaption className="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur-md rounded-xl p-3 border border-white/10 text-white flex items-center justify-between shadow-lg">
                     <div>
                       <div className="text-xs font-bold font-heading">Dr. Pawan Gupta (PT)</div>
-                      <div className="text-[10px] text-blue-300">Lead Physical Therapist</div>
+                      <div className="text-[10px] text-blue-300 font-medium">Run To Win Healthcare Mumbai</div>
                     </div>
                     <div className="flex items-center space-x-1 text-amber-400 text-xs font-bold">
                       <Star className="w-3.5 h-3.5 fill-amber-400" />
                       <span>4.9 / 5.0</span>
                     </div>
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
 
                 {/* Verified Identity Indicators */}
                 <div className="space-y-2.5 text-xs text-slate-300">
@@ -302,7 +326,7 @@ export const DoctorProfilePage: React.FC<DoctorProfilePageProps> = ({
                   </div>
                   <div className="flex items-center space-x-2">
                     <MapPin className="w-4 h-4 text-blue-400 shrink-0" />
-                    <span>Sewri Clinic & Doorstep Care Across 35+ Suburbs</span>
+                    <span>Sewri Clinic (10, Manish Investment) & Home Visits Across 35+ Suburbs</span>
                   </div>
                 </div>
 
@@ -772,8 +796,18 @@ export const DoctorProfilePage: React.FC<DoctorProfilePageProps> = ({
                 <div className="flex items-start space-x-2.5">
                   <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900 block">Sewri Clinic:</strong>
-                    <span>Sewri, Mumbai, Maharashtra 400015</span>
+                    <strong className="text-slate-900 block">Sewri Clinic Address:</strong>
+                    <span className="text-slate-800 font-medium leading-snug block">
+                      10, Ground Floor, Manish Investment, Datta Mandir Marg, Off TJ Road, Near Post Office, Sewri, Mumbai 400015
+                    </span>
+                    <a
+                      href={CLINIC_CONTACT.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-1 text-blue-600 hover:text-blue-800 font-semibold text-[11px] mt-1"
+                    >
+                      <span>Get Directions on Google Maps →</span>
+                    </a>
                   </div>
                 </div>
 
