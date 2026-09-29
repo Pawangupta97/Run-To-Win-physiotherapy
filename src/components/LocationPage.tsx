@@ -4,6 +4,7 @@ import {
   HOME_VISIT_LOCATIONS, 
   getLocationCanonicalUrl 
 } from '../data/homeVisitLocations';
+import { getLocationPath } from '../lib/routes';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -292,8 +293,8 @@ export const LocationPage: React.FC<LocationPageProps> = ({
             className="!py-0 !px-0 !bg-transparent !border-0 text-xs"
             onHomeClick={onBackToHome}
             items={[
-              { label: 'Areas We Serve', href: '/#areas-we-serve' },
-              { label: location.category, href: '/#areas-we-serve' },
+              { label: 'Areas We Serve', href: '/areas-we-serve' },
+              { label: location.category, href: '/areas-we-serve' },
               { label: location.name, current: true },
             ]}
           />
@@ -758,10 +759,14 @@ export const LocationPage: React.FC<LocationPageProps> = ({
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {siblingLocations.map((sibling) => (
-              <button
+              <a
                 key={sibling.id}
-                onClick={() => onSelectLocation(sibling.id)}
-                className="p-3 rounded-2xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-left transition group space-y-1 shadow-sm"
+                href={getLocationPath(sibling.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectLocation(sibling.id);
+                }}
+                className="p-3 rounded-2xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-left transition group space-y-1 shadow-sm block"
               >
                 <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition flex items-center justify-between">
                   <span>{sibling.name}</span>
@@ -770,7 +775,7 @@ export const LocationPage: React.FC<LocationPageProps> = ({
                 <div className="text-[10px] text-slate-500">
                   {sibling.responseTime}
                 </div>
-              </button>
+              </a>
             ))}
           </div>
         </section>

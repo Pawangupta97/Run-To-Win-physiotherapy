@@ -27,6 +27,7 @@ import { REHABILITATION_AUTHORITY_GUIDES } from '../data/rehabilitationAuthority
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
 import { Breadcrumbs } from './Breadcrumbs';
+import { getPagePath, getConditionPath, getRehabPath } from '../lib/routes';
 
 interface RehabilitationDetailPageProps {
   guide: RehabilitationAuthorityGuide;
@@ -152,7 +153,7 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
             className="!py-0 !px-0 !bg-transparent !border-0 text-xs"
             onHomeClick={onBackToHub}
             items={[
-              { label: 'Rehabilitation Hub', onClick: onBackToHub },
+              { label: 'Rehabilitation Hub', href: '/rehabilitation', onClick: onBackToHub },
               { label: `${guide.pillar} Rehabilitation` },
               { label: guide.name, current: true }
             ]}
@@ -590,10 +591,14 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
                   </h3>
                   <div className="space-y-2">
                     {guide.relatedConditions.map((cond, idx) => (
-                      <button
+                      <a
                         key={idx}
-                        onClick={() => onSelectCondition(cond.conditionId)}
-                        className="w-full text-left p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200/80 transition flex items-center justify-between group"
+                        href={getConditionPath(cond.conditionId)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectCondition(cond.conditionId);
+                        }}
+                        className="w-full text-left p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200/80 transition flex items-center justify-between group block"
                       >
                         <div>
                           <div className="text-xs font-bold text-slate-900 group-hover:text-blue-700">
@@ -604,7 +609,7 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
                           </div>
                         </div>
                         <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 ml-2" />
-                      </button>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -616,10 +621,14 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
                   </h3>
                   <div className="space-y-2">
                     {guide.relatedServices.map((svc, idx) => (
-                      <button
+                      <a
                         key={idx}
-                        onClick={() => onSelectService(svc.pageKey)}
-                        className="w-full text-left p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200/80 transition flex items-center justify-between group"
+                        href={getPagePath(svc.pageKey)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectService(svc.pageKey);
+                        }}
+                        className="w-full text-left p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200/80 transition flex items-center justify-between group block"
                       >
                         <div>
                           <div className="text-xs font-bold text-slate-900 group-hover:text-blue-700">
@@ -630,7 +639,7 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
                           </div>
                         </div>
                         <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0 ml-2" />
-                      </button>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -644,10 +653,14 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {siblingPrograms.map((sib) => (
-                      <button
+                      <a
                         key={sib.id}
-                        onClick={() => onSelectRehabGuide(sib.id)}
-                        className="text-left p-3 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 transition group"
+                        href={getRehabPath(sib.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectRehabGuide(sib.id);
+                        }}
+                        className="text-left p-3 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 transition group block"
                       >
                         <div className="text-xs font-bold text-slate-900 group-hover:text-blue-700 line-clamp-1">
                           {sib.name}
@@ -656,7 +669,7 @@ export const RehabilitationDetailPage: React.FC<RehabilitationDetailPageProps> =
                           <span>View Protocol</span>
                           <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-blue-600" />
                         </div>
-                      </button>
+                      </a>
                     ))}
                   </div>
                 </div>

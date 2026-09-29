@@ -55,14 +55,14 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 </span>
               ) : (
                 <a 
-                  href={item.href || '#'} 
+                  href={(item.href || '/').replace(/^#+/, '').replace(/^\/#+/, '/')} 
                   onClick={(e) => {
                     if (item.onClick) {
                       e.preventDefault();
                       item.onClick();
                     }
                   }}
-                  className="text-slate-400 hover:text-blue-300 transition truncate max-w-[160px] sm:max-w-[240px]"
+                  className="text-slate-400 hover:text-blue-300 transition truncate max-w-[160px] sm:max-w-[240px] cursor-pointer"
                 >
                   {item.label}
                 </a>

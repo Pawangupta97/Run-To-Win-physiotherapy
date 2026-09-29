@@ -80,7 +80,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Postural & Functional Rehabilitation Protocol',
-      url: '/rehabilitation#posture-ergonomics',
+      url: '/rehabilitation/posture-ergonomics',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {
@@ -105,7 +105,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Spinal Decompression & Core Stabilization Protocol',
-      url: '/rehabilitation#spine',
+      url: '/rehabilitation/cervical-neck',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {
@@ -130,7 +130,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Runner’s Knee & Lower Limb Kinetic Chain Protocol',
-      url: '/rehabilitation#runners-knee',
+      url: '/rehabilitation/runners-knee-rehab',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {
@@ -155,7 +155,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Post-Stroke Functional Walking & Transfer Protocol',
-      url: '/rehabilitation#stroke',
+      url: '/rehabilitation/stroke-rehab',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {
@@ -180,7 +180,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Geriatric Fall Prevention & Balance Protocol',
-      url: '/rehabilitation#senior-citizen',
+      url: '/rehabilitation/senior-rehab',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {
@@ -205,7 +205,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Neural Mobilization & Sciatic Decompression Protocol',
-      url: '/rehabilitation#sciatica',
+      url: '/rehabilitation/sciatica',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {
@@ -230,7 +230,7 @@ export const TOPICAL_AUTHORITY_PILLARS: AuthorityPillar[] = [
     },
     rehabilitationPage: {
       title: 'Total Knee Replacement (TKR) Week 1 to 12 Protocol',
-      url: '/rehabilitation#knee-replacement',
+      url: '/rehabilitation/knee-replacement-rehab',
       routeKey: 'rehabilitation',
     },
     primaryCondition: {

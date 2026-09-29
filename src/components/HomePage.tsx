@@ -466,12 +466,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
 
                 <div className="pt-5 mt-4 border-t border-slate-100 flex items-center gap-2">
-                  <button
-                    onClick={() => onNavigatePage('services')}
-                    className="flex-1 py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition text-center"
+                  <a
+                    href="/services"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigatePage('services');
+                    }}
+                    className="flex-1 py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition text-center cursor-pointer block"
                   >
                     View Details
-                  </button>
+                  </a>
                   <button
                     onClick={() => onOpenBooking(service.title)}
                     className="py-2 px-4 rounded-lg text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 transition flex items-center space-x-1 shadow-2xs"
@@ -485,13 +489,17 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="text-center mt-8">
-            <button
-              onClick={() => onNavigatePage('services')}
-              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4"
+            <a
+              href="/services"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigatePage('services');
+              }}
+              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4 cursor-pointer"
             >
               <span>Explore all services, clinical modalities and treatment tariffs</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
         </div>
@@ -552,12 +560,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   Book Orthopedic Consultation
                 </button>
-                <button
-                  onClick={() => onSelectCondition('lower-back')}
-                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm transition"
+                <a
+                  href="/conditions/lower-back"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectCondition('lower-back');
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm transition cursor-pointer inline-block"
                 >
                   Read Spine & Disc Guide
-                </button>
+                </a>
               </div>
             </div>
 
@@ -607,12 +619,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   Schedule Sports Injury Assessment
                 </button>
-                <button
-                  onClick={() => onSelectCondition('acl-rehab')}
-                  className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-semibold text-xs sm:text-sm transition"
+                <a
+                  href="/rehabilitation/acl-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectCondition('acl-rehab');
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-semibold text-xs sm:text-sm transition cursor-pointer inline-block"
                 >
                   View ACL Protocol
-                </button>
+                </a>
               </div>
             </div>
 
@@ -688,12 +704,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   Book Neuro Rehabilitation
                 </button>
-                <button
-                  onClick={() => onSelectCondition('stroke-rehab')}
-                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm transition"
+                <a
+                  href="/rehabilitation/stroke-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectCondition('stroke-rehab');
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm transition cursor-pointer inline-block"
                 >
                   Explore Stroke Recovery Protocol
-                </button>
+                </a>
               </div>
             </div>
 
@@ -740,15 +760,22 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="pt-2">
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Popular Service Locations:</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {['Sewri', 'Dadar', 'Bandra', 'Santacruz', 'Juhu', 'Andheri', 'Worli', 'Lower Parel', 'South Mumbai', 'Powai', 'Thane'].map((suburb) => (
-                    <button
-                      key={suburb}
-                      onClick={() => onNavigatePage('home-visits')}
-                      className="text-xs px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 hover:border-emerald-400 hover:text-emerald-700 transition"
-                    >
-                      {suburb}
-                    </button>
-                  ))}
+                  {['Sewri', 'Dadar', 'Bandra', 'Santacruz', 'Juhu', 'Andheri', 'Worli', 'Lower Parel', 'South Mumbai', 'Powai', 'Thane'].map((suburb) => {
+                    const subId = suburb.toLowerCase().replace(/\s+/g, '-');
+                    return (
+                      <a
+                        key={suburb}
+                        href={`/physiotherapist-near-me-${subId}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectLocation(subId);
+                        }}
+                        className="text-xs px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 hover:border-emerald-400 hover:text-emerald-700 transition cursor-pointer"
+                      >
+                        {suburb}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -759,12 +786,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   Book Doorstep Home Visit
                 </button>
-                <button
-                  onClick={() => onNavigatePage('home-visits')}
-                  className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-semibold text-xs sm:text-sm transition"
+                <a
+                  href="/areas-we-serve"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigatePage('home-visits');
+                  }}
+                  className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-semibold text-xs sm:text-sm transition cursor-pointer inline-block"
                 >
                   View Mumbai Coverage Directory
-                </button>
+                </a>
               </div>
             </div>
 
@@ -892,25 +923,33 @@ export const HomePage: React.FC<HomePageProps> = ({
                     {c.quickSummary}
                   </p>
                 </div>
-                <button
-                  onClick={() => onSelectCondition(c.id)}
-                  className="mt-4 pt-3 border-t border-slate-200 text-xs font-bold text-blue-700 hover:text-blue-800 flex items-center justify-between"
+                <a
+                  href={`/conditions/${c.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectCondition(c.id);
+                  }}
+                  className="mt-4 pt-3 border-t border-slate-200 text-xs font-bold text-blue-700 hover:text-blue-800 flex items-center justify-between cursor-pointer"
                 >
                   <span>Read Full Clinical Protocol</span>
                   <ChevronRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
             ))}
           </div>
 
           <div className="text-center mt-8">
-            <button
-              onClick={() => onNavigatePage('conditions')}
-              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4"
+            <a
+              href="/conditions"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigatePage('conditions');
+              }}
+              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4 cursor-pointer"
             >
               <span>View all condition guides and clinical diagnosis pathways</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
         </div>
@@ -974,13 +1013,17 @@ export const HomePage: React.FC<HomePageProps> = ({
               <p className="text-xs text-slate-600 leading-relaxed">
                 Early CPM passive motion, quadriceps activation, extension lag elimination, and progressive gait training from walker to independent stairs.
               </p>
-              <button
-                onClick={() => onSelectCondition('knee-replacement-rehab')}
-                className="text-xs font-bold text-blue-700 hover:text-blue-800 inline-flex items-center space-x-1 pt-1"
+              <a
+                href="/rehabilitation/knee-replacement-rehab"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectCondition('knee-replacement-rehab');
+                }}
+                className="text-xs font-bold text-blue-700 hover:text-blue-800 inline-flex items-center space-x-1 pt-1 cursor-pointer"
               >
                 <span>View TKR Protocol</span>
                 <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+              </a>
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-3">
@@ -991,13 +1034,17 @@ export const HomePage: React.FC<HomePageProps> = ({
               <p className="text-xs text-slate-600 leading-relaxed">
                 Precise hip precaution management, abductor strengthening, pelvic leveling, and Trendelenburg gait correction for durable joint longevity.
               </p>
-              <button
-                onClick={() => onSelectCondition('hip-replacement-rehab')}
-                className="text-xs font-bold text-blue-700 hover:text-blue-800 inline-flex items-center space-x-1 pt-1"
+              <a
+                href="/rehabilitation/hip-replacement-rehab"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectCondition('hip-replacement-rehab');
+                }}
+                className="text-xs font-bold text-blue-700 hover:text-blue-800 inline-flex items-center space-x-1 pt-1 cursor-pointer"
               >
                 <span>View THR Protocol</span>
                 <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+              </a>
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-3">
@@ -1008,25 +1055,33 @@ export const HomePage: React.FC<HomePageProps> = ({
               <p className="text-xs text-slate-600 leading-relaxed">
                 Vestibular re-weighting, lower-limb stability, safe bathroom and bed transfer training, and gentle multi-joint mobilization for elderly citizens.
               </p>
-              <button
-                onClick={() => onSelectCondition('balance-gait-rehab')}
-                className="text-xs font-bold text-blue-700 hover:text-blue-800 inline-flex items-center space-x-1 pt-1"
+              <a
+                href="/rehabilitation/balance-gait-rehab"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectCondition('balance-gait-rehab');
+                }}
+                className="text-xs font-bold text-blue-700 hover:text-blue-800 inline-flex items-center space-x-1 pt-1 cursor-pointer"
               >
                 <span>View Balance Protocol</span>
                 <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+              </a>
             </div>
 
           </div>
 
           <div className="text-center mt-8">
-            <button
-              onClick={() => onNavigatePage('rehabilitation')}
-              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4"
+            <a
+              href="/rehabilitation"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigatePage('rehabilitation');
+              }}
+              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4 cursor-pointer"
             >
               <span>Explore complete rehabilitation pathways, surgeon protocols & phase guides</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
         </div>
@@ -1103,13 +1158,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   Book Appointment with Dr. Pawan Gupta
                 </button>
-                <button
-                  onClick={() => onNavigatePage('dr-pawan-gupta')}
-                  className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm transition flex items-center space-x-1.5"
+                <a
+                  href="/dr-pawan-gupta"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigatePage('dr-pawan-gupta');
+                  }}
+                  className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm transition flex items-center space-x-1.5 cursor-pointer"
                 >
                   <span>View Dr. Pawan Gupta Profile</span>
                   <ChevronRight className="w-4 h-4 text-slate-500" />
-                </button>
+                </a>
               </div>
 
             </div>
@@ -1362,12 +1421,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
                   <span>Google Maps Directions</span>
                 </a>
-                <button
-                  onClick={() => onNavigatePage('contact')}
-                  className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold text-xs flex items-center justify-center space-x-1 transition text-center"
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigatePage('contact');
+                  }}
+                  className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold text-xs flex items-center justify-center space-x-1 transition text-center cursor-pointer"
                 >
                   <span>View Transit & Landmark Guide</span>
-                </button>
+                </a>
               </div>
 
             </div>
@@ -1417,25 +1480,33 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </p>
                 </div>
 
-                <button
-                  onClick={() => onSelectArticle(article.id)}
-                  className="mt-5 pt-3 border-t border-slate-200 text-xs font-bold text-blue-700 hover:text-blue-800 flex items-center justify-between"
+                <a
+                  href={`/articles/${article.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectArticle(article.id);
+                  }}
+                  className="mt-5 pt-3 border-t border-slate-200 text-xs font-bold text-blue-700 hover:text-blue-800 flex items-center justify-between cursor-pointer"
                 >
                   <span>Read Clinical Guide</span>
                   <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                </a>
               </article>
             ))}
           </div>
 
           <div className="text-center mt-8">
-            <button
-              onClick={() => onNavigatePage('articles')}
-              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4"
+            <a
+              href="/articles"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigatePage('articles');
+              }}
+              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4 cursor-pointer"
             >
               <span>Explore all articles and patient recovery guides</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
         </div>
@@ -1489,13 +1560,17 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="text-center mt-8">
-            <button
-              onClick={() => onNavigatePage('faq')}
-              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4"
+            <a
+              href="/faq"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigatePage('faq');
+              }}
+              className="inline-flex items-center space-x-2 text-sm font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4 cursor-pointer"
             >
               <span>View full FAQ library including home visit equipment & insurance claim guides</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
         </div>
@@ -1551,13 +1626,17 @@ export const HomePage: React.FC<HomePageProps> = ({
             </a>
 
             {/* In-Clinic / Contact Page */}
-            <button
-              onClick={() => onNavigatePage('contact')}
-              className="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600 text-slate-200 font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition"
+            <a
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigatePage('contact');
+              }}
+              className="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600 text-slate-200 font-bold text-sm sm:text-base flex items-center justify-center space-x-2 transition cursor-pointer"
             >
               <MapPin className="w-4 h-4 text-blue-400" />
               <span>Sewri Clinic Directions</span>
-            </button>
+            </a>
 
           </div>
 

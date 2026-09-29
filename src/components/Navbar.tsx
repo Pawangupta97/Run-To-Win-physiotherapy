@@ -158,7 +158,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           
           {/* Logo & Brand Identity */}
           <a 
-            href="#" 
+            href="/" 
             onClick={handleLogoClick}
             className="flex items-center space-x-3 group cursor-pointer"
           >
@@ -190,59 +190,84 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-4 xl:space-x-5 text-sm font-medium text-slate-600">
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('home') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold ${
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('home');
+                else if (onGoHome) onGoHome();
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold cursor-pointer ${
                 currentPage === 'home' ? 'text-blue-600 border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Home
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('physiotherapy-mumbai') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold ${
+            <a
+              href="/physiotherapy-mumbai"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('physiotherapy-mumbai');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group font-semibold cursor-pointer ${
                 currentPage === 'physiotherapy-mumbai' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Mumbai Care
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('services') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/services"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('services');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'services' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Services
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('conditions') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/conditions"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('conditions');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'conditions' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Conditions
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('rehabilitation') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/rehabilitation"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('rehabilitation');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'rehabilitation' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Rehabilitation
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('dr-pawan-gupta') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/dr-pawan-gupta"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('dr-pawan-gupta');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'dr-pawan-gupta' || currentPage === 'about' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Dr. Pawan
-            </button>
+            </a>
 
             {/* Mumbai Home Visit Dropdown Link with Mega Menu */}
             <div 
@@ -251,18 +276,22 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <button
-                type="button"
-                onClick={() => onNavigatePage ? onNavigatePage('home-visits') : setIsLocationsOpen(!isLocationsOpen)}
-                className={`flex items-center space-x-1 py-1 transition-colors font-semibold ${
-                  currentPage === 'home-visits' || isLocationsOpen ? 'text-blue-600' : 'text-blue-900 hover:text-blue-600'
+              <a
+                href="/areas-we-serve"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigatePage) onNavigatePage('areas-we-serve');
+                  else setIsLocationsOpen(!isLocationsOpen);
+                }}
+                className={`flex items-center space-x-1 py-1 transition-colors font-semibold cursor-pointer ${
+                  currentPage === 'home-visits' || currentPage === 'areas-we-serve' || isLocationsOpen ? 'text-blue-600' : 'text-blue-900 hover:text-blue-600'
                 }`}
               >
                 <span>Areas We Serve</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isLocationsOpen ? 'rotate-180 text-blue-600' : 'text-slate-400'}`} />
-              </button>
+              </a>
 
-              {/* Mega-Menu Dropdown Panel (Styled identically to user image reference) */}
+              {/* Mega-Menu Dropdown Panel */}
               {isLocationsOpen && (
                 <div 
                   className="absolute -left-64 sm:-left-48 lg:-left-32 top-full mt-2 w-[920px] max-w-[95vw] bg-white rounded-2xl shadow-2xl border border-slate-200/90 p-6 z-50 animate-in fade-in zoom-in-98 duration-150"
@@ -282,13 +311,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <ul className="space-y-1.5 text-xs max-h-[360px] overflow-y-auto pr-1">
                           {group.locations.map((loc) => (
                             <li key={loc.id}>
-                              <button
-                                type="button"
-                                onClick={() => handleLocationClick(loc)}
-                                className="text-slate-600 hover:text-blue-600 hover:translate-x-0.5 transition-all text-left block w-full py-0.5 font-medium hover:font-semibold"
+                              <a
+                                href={`/physiotherapist-near-me-${loc.id}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleLocationClick(loc);
+                                }}
+                                className="text-slate-600 hover:text-blue-600 hover:translate-x-0.5 transition-all text-left block w-full py-0.5 font-medium hover:font-semibold cursor-pointer"
                               >
                                 {loc.name}
-                              </button>
+                              </a>
                             </li>
                           ))}
                         </ul>
@@ -302,64 +334,86 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <MapPin className="w-3.5 h-3.5 text-blue-600" />
                       <span><strong>35+ Suburbs Covered:</strong> 7:00 AM – 8:30 PM Doorstep Sessions Across Mumbai & Thane</span>
                     </div>
-                    <button
-                      onClick={() => {
+                    <a
+                      href="/areas-we-serve"
+                      onClick={(e) => {
+                        e.preventDefault();
                         setIsLocationsOpen(false);
-                        if (onNavigatePage) onNavigatePage('home-visits');
+                        if (onNavigatePage) onNavigatePage('areas-we-serve');
                       }}
-                      className="text-blue-600 hover:text-blue-700 font-bold hover:underline"
+                      className="text-blue-600 hover:text-blue-700 font-bold hover:underline cursor-pointer"
                     >
                       View All 35+ Suburbs Hub →
-                    </button>
+                    </a>
                   </div>
                 </div>
               )}
             </div>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('body-map') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/body-map"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('body-map');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'body-map' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Body Map
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('testimonials') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/testimonials"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('testimonials');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'testimonials' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Testimonials
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('articles') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/articles"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('articles');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'articles' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Patient Education
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('faq') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/faq"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('faq');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'faq' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               FAQ
-            </button>
+            </a>
 
-            <button
-              onClick={() => onNavigatePage ? onNavigatePage('contact') : onGoHome && onGoHome()}
-              className={`hover:text-blue-600 transition-colors py-1 relative group ${
+            <a
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('contact');
+              }}
+              className={`hover:text-blue-600 transition-colors py-1 relative group cursor-pointer ${
                 currentPage === 'contact' ? 'text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5' : 'text-slate-700'
               }`}
             >
               Contact
-            </button>
+            </a>
           </nav>
 
           {/* Action CTAs */}
@@ -435,12 +489,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <div className="space-y-1">
               <a
-                href="#"
+                href="/"
                 onClick={(e) => {
+                  e.preventDefault();
                   handleLogoClick(e);
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition cursor-pointer"
               >
                 <span>Home</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -469,14 +524,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                         </div>
                         <div className="grid grid-cols-2 gap-1.5 text-xs">
                           {group.locations.map((loc) => (
-                            <button
+                            <a
                               key={loc.id}
-                              type="button"
-                              onClick={() => handleLocationClick(loc)}
-                              className="text-left py-1 px-2 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium transition text-[11px]"
+                              href={`/physiotherapist-near-me-${loc.id}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleLocationClick(loc);
+                              }}
+                              className="text-left py-1 px-2 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium transition text-[11px] block cursor-pointer"
                             >
                               • {loc.name}
-                            </button>
+                            </a>
                           ))}
                         </div>
                       </div>
@@ -485,145 +543,165 @@ export const Navbar: React.FC<NavbarProps> = ({
                 )}
               </div>
 
-              <button
-                onClick={() => {
+              <a
+                href="/physiotherapy-mumbai"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('physiotherapy-mumbai');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'physiotherapy-mumbai' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Physiotherapy in Mumbai</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/services"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('services');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'services' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Services</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/conditions"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('conditions');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'conditions' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Conditions Treated</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/rehabilitation"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('rehabilitation');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'rehabilitation' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Rehabilitation Programs</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/dr-pawan-gupta"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('dr-pawan-gupta');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'dr-pawan-gupta' || currentPage === 'about' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Dr. Pawan Gupta (PT) — Profile</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/articles"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('articles');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'articles' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Patient Education & Articles</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/body-map"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('body-map');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'body-map' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Interactive Body Symptom Map</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/testimonials"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('testimonials');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'testimonials' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Patient Reviews</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/faq"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('faq');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'faq' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Frequently Asked Questions</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
 
-              <button
-                onClick={() => {
+              <a
+                href="/contact"
+                onClick={(e) => {
+                  e.preventDefault();
                   setMobileMenuOpen(false);
                   if (onNavigatePage) onNavigatePage('contact');
                   else if (onGoHome) onGoHome();
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer ${
                   currentPage === 'contact' ? 'bg-blue-50 text-blue-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 <span>Contact & Sewri Clinic</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
+              </a>
             </div>
 
             <div className="pt-2 space-y-2">

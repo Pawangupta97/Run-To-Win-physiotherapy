@@ -31,9 +31,16 @@ import { DoctorProfilePage } from './components/DoctorProfilePage';
 import { AreasWeServePage } from './components/AreasWeServePage';
 import { NotFoundPage } from './components/NotFoundPage';
 import { GoogleBusinessSyncModal } from './components/GoogleBusinessSyncModal';
-import { HOME_VISIT_LOCATIONS, parseLocationFromUrl, getLocationPath, getLocationHash } from './data/homeVisitLocations';
+import { HOME_VISIT_LOCATIONS, parseLocationFromUrl } from './data/homeVisitLocations';
 import { CONDITION_GUIDES, getRehabGuideById } from './data/conditionGuides';
 import { CLINICAL_ARTICLES } from './data/articlesData';
+import { 
+  getPagePath, 
+  getLocationPath, 
+  getConditionPath, 
+  getRehabPath, 
+  getArticlePath 
+} from './lib/routes';
 
 type PageType = 
   | 'home' 
@@ -83,11 +90,12 @@ export default function App() {
     return () => window.removeEventListener('open-gmb-sync', handleOpenSync);
   }, []);
 
-  // Sync with URL pathname and hash for all pages and detail routes
+  // Sync with URL pathname and clean any hash for all pages and detail routes
   useEffect(() => {
     const handleUrlRouting = () => {
       const pathname = window.location.pathname.replace(/\/$/, '') || '/';
       const hash = window.location.hash.toLowerCase();
+      let resolvedCleanPath = pathname;
 
       // 1. Check for location routing (/physiotherapist-near-me-[loc] or #physiotherapist-near-me-[loc] or #location/[loc])
       const locId = parseLocationFromUrl(pathname, hash);
@@ -95,6 +103,12 @@ export default function App() {
         setSelectedLocationId(locId);
         setSelectedConditionId(null);
         setSelectedArticleId(null);
+        resolvedCleanPath = getLocationPath(locId);
+        if (hash) {
+          try {
+            window.history.replaceState({ locationId: locId }, '', resolvedCleanPath);
+          } catch {}
+        }
         return;
       }
 
@@ -143,6 +157,12 @@ export default function App() {
           setSelectedConditionId(foundRehab.id);
           setSelectedLocationId(null);
           setSelectedArticleId(null);
+          resolvedCleanPath = getRehabPath(foundRehab.id);
+          if (hash) {
+            try {
+              window.history.replaceState(null, '', resolvedCleanPath);
+            } catch {}
+          }
           return;
         }
 
@@ -153,6 +173,12 @@ export default function App() {
           setSelectedConditionId(found.id);
           setSelectedLocationId(null);
           setSelectedArticleId(null);
+          resolvedCleanPath = getConditionPath(found.id);
+          if (hash) {
+            try {
+              window.history.replaceState(null, '', resolvedCleanPath);
+            } catch {}
+          }
           return;
         }
       }
@@ -179,6 +205,12 @@ export default function App() {
           setSelectedArticleId(found.id);
           setSelectedLocationId(null);
           setSelectedConditionId(null);
+          resolvedCleanPath = getArticlePath(found.id);
+          if (hash) {
+            try {
+              window.history.replaceState(null, '', resolvedCleanPath);
+            } catch {}
+          }
           return;
         }
       }
@@ -186,49 +218,31 @@ export default function App() {
       // 4. Check for topical pillar pages & standalone routes
       if (hash === '#physiotherapy-mumbai' || hash === '#mumbai' || pathname === '/physiotherapy-mumbai') {
         setCurrentPage('physiotherapy-mumbai');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/physiotherapy-mumbai';
       } else if (hash === '#orthopedic-physiotherapy' || hash === '#orthopedic' || pathname === '/orthopedic-physiotherapy') {
         setCurrentPage('orthopedic-physiotherapy');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/orthopedic-physiotherapy';
       } else if (hash === '#sports-physiotherapy' || hash === '#sports' || pathname === '/sports-physiotherapy') {
         setCurrentPage('sports-physiotherapy');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/sports-physiotherapy';
       } else if (hash === '#neuro-physiotherapy' || hash === '#neuro' || pathname === '/neuro-physiotherapy') {
         setCurrentPage('neuro-physiotherapy');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/neuro-physiotherapy';
       } else if (hash === '#home-physiotherapy' || pathname === '/home-physiotherapy') {
         setCurrentPage('home-physiotherapy');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/home-physiotherapy';
       } else if (hash === '#online-physiotherapy' || hash === '#tele-physio' || pathname === '/online-physiotherapy') {
         setCurrentPage('online-physiotherapy');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/online-physiotherapy';
       } else if (hash === '#pain-management' || pathname === '/pain-management') {
         setCurrentPage('pain-management');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/pain-management';
       } else if (hash === '#post-surgical-rehab' || hash === '#post-surgical-rehabilitation' || hash === '#post-op' || pathname === '/post-surgical-rehab' || pathname === '/post-surgical-rehabilitation') {
         setCurrentPage('post-surgical-rehab');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/post-surgical-rehab';
       } else if (hash === '#rehabilitation' || pathname === '/rehabilitation') {
         setCurrentPage('rehabilitation');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/rehabilitation';
       } else if (
         hash === '#dr-pawan-gupta' ||
         hash === '#dr-pawan' ||
@@ -236,70 +250,55 @@ export default function App() {
         pathname === '/dr-pawan-gupta'
       ) {
         setCurrentPage('dr-pawan-gupta');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/dr-pawan-gupta';
       } else if (hash === '#about' || pathname === '/about') {
         setCurrentPage('about');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/dr-pawan-gupta';
       } else if (hash === '#services' || pathname === '/services') {
         setCurrentPage('services');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/services';
       } else if (hash === '#conditions' || pathname === '/conditions') {
         setCurrentPage('conditions');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/conditions';
       } else if (hash === '#articles' || hash === '#patient-education' || pathname === '/articles' || pathname === '/patient-education') {
         setCurrentPage('articles');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/articles';
       } else if (hash === '#home-visits' || hash === '#home-visit' || pathname === '/home-visits') {
         setCurrentPage('home-visits');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/home-visits';
       } else if (hash === '#areas-we-serve' || hash === '#locations' || pathname === '/areas-we-serve' || pathname === '/locations') {
         setCurrentPage('areas-we-serve');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/areas-we-serve';
       } else if (hash === '#body-map' || hash === '#symptoms' || pathname === '/body-map') {
         setCurrentPage('body-map');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/body-map';
       } else if (hash === '#testimonials' || hash === '#reviews' || pathname === '/testimonials') {
         setCurrentPage('testimonials');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/testimonials';
       } else if (hash === '#faq' || pathname === '/faq') {
         setCurrentPage('faq');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/faq';
       } else if (hash === '#contact' || pathname === '/contact') {
         setCurrentPage('contact');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/contact';
       } else if (pathname === '/' && (hash === '' || hash === '#' || hash === '#home')) {
         setCurrentPage('home');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = '/';
       } else {
         // Unknown URL -> 404
         setCurrentPage('404');
-        setSelectedLocationId(null);
-        setSelectedConditionId(null);
-        setSelectedArticleId(null);
+        resolvedCleanPath = pathname;
+      }
+
+      setSelectedLocationId(null);
+      setSelectedConditionId(null);
+      setSelectedArticleId(null);
+
+      // Strip legacy hash fragment from address bar if present
+      if (hash) {
+        try {
+          window.history.replaceState(null, '', resolvedCleanPath);
+        } catch {}
       }
     };
 
@@ -317,11 +316,10 @@ export default function App() {
     setSelectedConditionId(null);
     setSelectedArticleId(null);
     setCurrentPage(page as PageType);
+    const cleanPath = getPagePath(page);
     try {
-      const cleanPath = page === 'home' ? '/' : `/${page}`;
       window.history.pushState(null, '', cleanPath);
     } catch {}
-    window.location.hash = page === 'home' ? '' : `#${page}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -329,15 +327,11 @@ export default function App() {
     setSelectedLocationId(locationId);
     setSelectedConditionId(null);
     setSelectedArticleId(null);
-    const newPath = getLocationPath(locationId);
-    const newHash = getLocationHash(locationId);
+    const cleanPath = getLocationPath(locationId);
 
-    // Update browser URL seamlessly for direct links and local SEO bookmarks
     try {
-      window.history.pushState({ locationId }, '', newPath);
-    } catch {
-      window.location.hash = newHash;
-    }
+      window.history.pushState({ locationId }, '', cleanPath);
+    } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -345,10 +339,11 @@ export default function App() {
     setSelectedConditionId(conditionId);
     setSelectedLocationId(null);
     setSelectedArticleId(null);
+    const isRehab = getRehabGuideById(conditionId);
+    const cleanPath = isRehab ? getRehabPath(conditionId) : getConditionPath(conditionId);
     try {
-      window.history.pushState(null, '', `/conditions/${conditionId}`);
+      window.history.pushState(null, '', cleanPath);
     } catch {}
-    window.location.hash = `#condition/${conditionId}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -356,10 +351,10 @@ export default function App() {
     setSelectedArticleId(articleId);
     setSelectedLocationId(null);
     setSelectedConditionId(null);
+    const cleanPath = getArticlePath(articleId);
     try {
-      window.history.pushState(null, '', `/articles/${articleId}`);
+      window.history.pushState(null, '', cleanPath);
     } catch {}
-    window.location.hash = `#article/${articleId}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -371,7 +366,6 @@ export default function App() {
     try {
       window.history.pushState(null, '', '/');
     } catch {}
-    window.location.hash = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -434,7 +428,9 @@ export default function App() {
             onBackToHub={() => {
               setSelectedConditionId(null);
               setCurrentPage('rehabilitation');
-              window.location.hash = '#rehabilitation';
+              try {
+                window.history.pushState(null, '', '/rehabilitation');
+              } catch {}
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onSelectRehabGuide={(id) => handleSelectCondition(id)}

@@ -220,6 +220,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   </div>
                   <a
                     href="#exercise-studio"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById('exercise-studio')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="text-[11px] font-bold text-blue-400 hover:text-blue-300 underline"
                   >
                     View Studio ↓

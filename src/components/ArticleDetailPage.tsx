@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import doctorPhoto from '../assets/images/dr_pawan_gupta.webp';
 import { ClinicalArticle, CLINICAL_ARTICLES } from '../data/articlesData';
+import { getArticlePath, getConditionPath } from '../lib/routes';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -56,24 +57,31 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     if (onNavigatePage) {
       onNavigatePage('dr-pawan-gupta');
     } else {
-      window.location.hash = '#dr-pawan-gupta';
+      try {
+        window.history.pushState(null, '', '/dr-pawan-gupta');
+      } catch {}
     }
   };
 
   const handleServiceClick = (url: string) => {
-    const route = url.replace('/', '').replace('#', '');
+    const route = url.replace(/^\/+/, '').replace(/^#+/, '');
     if (onNavigatePage) {
       onNavigatePage(route);
     } else {
-      window.location.hash = `#${route}`;
+      try {
+        window.history.pushState(null, '', `/${route}`);
+      } catch {}
     }
   };
 
   const handleRehabClick = (url: string) => {
+    const cleanPath = url.startsWith('/') ? url : `/${url.replace(/^#+/, '')}`;
     if (onNavigatePage) {
       onNavigatePage('rehabilitation');
     } else {
-      window.location.hash = url.startsWith('/') ? `#${url.slice(1)}` : url;
+      try {
+        window.history.pushState(null, '', cleanPath);
+      } catch {}
     }
   };
 
@@ -83,7 +91,9 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     } else if (onNavigatePage) {
       onNavigatePage('conditions');
     } else {
-      window.location.hash = `#condition/${condId}`;
+      try {
+        window.history.pushState(null, '', `/conditions/${condId}`);
+      } catch {}
     }
   };
 
@@ -169,8 +179,8 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
             className="!py-0 !px-0 !bg-transparent !border-0 text-xs"
             onHomeClick={onBackToHome}
             items={[
-              { label: 'Patient Education', href: '/#articles' },
-              { label: article.pillarName, href: `/#${article.pillarId}` },
+              { label: 'Patient Education', href: '/articles' },
+              { label: article.pillarName, href: `/${article.pillarId}` },
               { label: article.title, current: true },
             ]}
           />
@@ -207,19 +217,27 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
                 Patient Guide (This Article)
               </span>
               <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <button
-                onClick={() => handleConditionClick(article.clusterNavigation.relatedConditionId)}
+              <a
+                href={getConditionPath(article.clusterNavigation.relatedConditionId)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleConditionClick(article.clusterNavigation.relatedConditionId);
+                }}
                 className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200 transition"
               >
                 {article.clusterNavigation.relatedConditionLabel} →
-              </button>
+              </a>
               <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <button
-                onClick={() => handleServiceClick(article.clusterNavigation.servicePageUrl)}
+              <a
+                href={article.clusterNavigation.servicePageUrl}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleServiceClick(article.clusterNavigation.servicePageUrl);
+                }}
                 className="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-200 transition"
               >
                 {article.clusterNavigation.servicePageLabel} →
-              </button>
+              </a>
             </div>
           </div>
         )}
@@ -793,10 +811,14 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {relatedArticles.slice(0, 4).map((rel) => (
-              <button
+              <a
                 key={rel.id}
-                onClick={() => onSelectArticle(rel.id)}
-                className="p-5 rounded-2xl bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 text-left transition space-y-2 group shadow-sm"
+                href={getArticlePath(rel.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectArticle(rel.id);
+                }}
+                className="p-5 rounded-2xl bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 text-left transition space-y-2 group shadow-sm block"
               >
                 <div className="flex items-center justify-between text-[11px] text-blue-600 font-bold uppercase">
                   <span>{rel.pillarName}</span>
@@ -808,7 +830,7 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
                 <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
                   {rel.keyTakeaway}
                 </p>
-              </button>
+              </a>
             ))}
           </div>
         </div>

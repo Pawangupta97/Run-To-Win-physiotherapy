@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { ConditionGuide, CONDITION_GUIDES } from '../data/conditionGuides';
+import { getConditionPath } from '../lib/routes';
 import { CLINIC_CONTACT } from '../data/clinicData';
 import { SeoMeta } from './SeoMeta';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -58,7 +59,9 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
     } else if (onNavigatePage) {
       onNavigatePage(target);
     } else {
-      window.location.hash = `#${target}`;
+      try {
+        window.history.pushState(null, '', `/${target.replace(/^#+/, '')}`);
+      } catch {}
     }
   };
 
@@ -146,7 +149,7 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
             className="!py-0 !px-0 !bg-transparent !border-0 text-xs"
             onHomeClick={onBackToHome}
             items={[
-              { label: 'Conditions Treated in Mumbai', href: '/#conditions' },
+              { label: 'Conditions Treated in Mumbai', href: '/conditions' },
               { label: condition.name, current: true },
             ]}
           />
@@ -641,17 +644,21 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
               </h3>
               <div className="space-y-3">
                 {condition.relatedConditions.map((rc, idx) => (
-                  <div
+                  <a
                     key={idx}
-                    onClick={() => onSelectCondition(rc.conditionId)}
-                    className="p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-50/80 border border-slate-200/80 hover:border-blue-300 cursor-pointer transition flex items-center justify-between group"
+                    href={getConditionPath(rc.conditionId)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onSelectCondition(rc.conditionId);
+                    }}
+                    className="p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-50/80 border border-slate-200/80 hover:border-blue-300 cursor-pointer transition flex items-center justify-between group block"
                   >
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-700">{rc.name}</h4>
                       <p className="text-[11px] text-slate-500 mt-0.5">{rc.reason}</p>
                     </div>
                     <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0" />
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -675,11 +682,16 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
             </div>
 
             <a
-              href="/dr-pawan-gupta/"
+              href="/dr-pawan-gupta"
               onClick={(e) => {
                 e.preventDefault();
-                if (onNavigatePage) onNavigatePage('dr-pawan-gupta');
-                else window.location.hash = '#dr-pawan-gupta';
+                if (onNavigatePage) {
+                  onNavigatePage('dr-pawan-gupta');
+                } else {
+                  try {
+                    window.history.pushState(null, '', '/dr-pawan-gupta');
+                  } catch {}
+                }
               }}
               className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center space-x-1.5 shrink-0"
             >
@@ -723,17 +735,21 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {siblingConditions.map((sib) => (
-              <button
+              <a
                 key={sib.id}
-                onClick={() => onSelectCondition(sib.id)}
-                className="p-4 rounded-2xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-left transition flex items-center justify-between group shadow-sm"
+                href={getConditionPath(sib.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectCondition(sib.id);
+                }}
+                className="p-4 rounded-2xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-left transition flex items-center justify-between group shadow-sm block"
               >
                 <div>
                   <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">{sib.category}</span>
                   <span className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-blue-700">{sib.name}</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition" />
-              </button>
+              </a>
             ))}
           </div>
         </div>

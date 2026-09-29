@@ -140,76 +140,100 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-1.5 text-slate-400">
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('physiotherapy-mumbai')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/physiotherapy-mumbai"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('physiotherapy-mumbai');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Physiotherapy in Mumbai
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('orthopedic-physiotherapy')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/orthopedic-physiotherapy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('orthopedic-physiotherapy');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Orthopedic Physiotherapy
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('sports-physiotherapy')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/sports-physiotherapy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('sports-physiotherapy');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Sports Physiotherapy
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('neuro-physiotherapy')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/neuro-physiotherapy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('neuro-physiotherapy');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Neuro Physiotherapy
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('home-physiotherapy')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/home-physiotherapy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('home-physiotherapy');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Home Physiotherapy
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('online-physiotherapy')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/online-physiotherapy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('online-physiotherapy');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Online Physiotherapy
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('pain-management')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/pain-management"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('pain-management');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Pain Management
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('post-surgical-rehab')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/post-surgical-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('post-surgical-rehab');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Post-Surgical Rehabilitation
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -221,67 +245,88 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-1.5 text-slate-400">
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('lower-back')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/conditions/lower-back"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('lower-back');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Back Pain & Sciatica
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('cervical-neck')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/conditions/cervical-neck"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('cervical-neck');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Neck Pain & Spondylosis
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('knee')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/conditions/knee"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('knee');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Knee Pain & Arthritis
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('shoulder')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/conditions/shoulder"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('shoulder');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Frozen Shoulder & Rotator Cuff
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('sports-injuries')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/conditions/sports-injuries"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('sports-injuries');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Sports Injury Rehabilitation
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('posture-ergonomics')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/conditions/posture-ergonomics"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('posture-ergonomics');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Postural & Ergonomic Pain
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigatePage && onNavigatePage('conditions')}
-                  className="text-blue-400 hover:underline transition text-left font-semibold text-[11px] pt-1 block"
+                <a
+                  href="/conditions"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigatePage) onNavigatePage('conditions');
+                  }}
+                  className="text-blue-400 hover:underline transition text-left font-semibold text-[11px] pt-1 block cursor-pointer"
                 >
                   View All 17 Condition Guides →
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -293,40 +338,52 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-1.5 text-slate-400 mb-4">
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('knee-replacement-rehab')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/rehabilitation/knee-replacement-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('knee-replacement-rehab');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Total Knee Replacement (TKR)
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('hip-replacement-rehab')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/rehabilitation/hip-replacement-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('hip-replacement-rehab');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Total Hip Replacement (THR)
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('stroke-rehab')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/rehabilitation/stroke-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('stroke-rehab');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Stroke / Hemiplegia Rehab
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onSelectCondition && onSelectCondition('senior-rehab')}
-                  className="hover:text-blue-400 transition text-left"
+                <a
+                  href="/rehabilitation/senior-rehab"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelectCondition) onSelectCondition('senior-rehab');
+                  }}
+                  className="hover:text-blue-400 transition text-left block cursor-pointer"
                 >
                   • Senior Citizen Mobility
-                </button>
+                </a>
               </li>
             </ul>
 
@@ -345,19 +402,23 @@ export const Footer: React.FC<FooterProps> = ({
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
-                  className="px-1.5 py-0.5 rounded bg-slate-900 hover:bg-blue-900 hover:text-white text-slate-300 text-[10px] border border-slate-800 transition"
+                  className="px-1.5 py-0.5 rounded bg-slate-900 hover:bg-blue-900 hover:text-white text-slate-300 text-[10px] border border-slate-800 transition cursor-pointer"
                   title={`Physiotherapy in ${loc.name}, Mumbai`}
                 >
                   {loc.name}
                 </a>
               ))}
             </div>
-            <button
-              onClick={() => onNavigatePage && onNavigatePage('home-visits')}
-              className="text-blue-400 hover:underline transition text-left font-semibold text-[11px] block pt-1"
+            <a
+              href="/areas-we-serve"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigatePage) onNavigatePage('home-visits');
+              }}
+              className="text-blue-400 hover:underline transition text-left font-semibold text-[11px] block pt-1 cursor-pointer"
             >
               All 35+ Suburbs Hub →
-            </button>
+            </a>
           </div>
 
           {/* Col 5: Quick Actions & Trust */}
@@ -367,7 +428,7 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <div className="space-y-2">
               <a
-                href="/dr-pawan-gupta/"
+                href="/dr-pawan-gupta"
                 onClick={(e) => {
                   e.preventDefault();
                   if (onNavigatePage) {
@@ -375,32 +436,44 @@ export const Footer: React.FC<FooterProps> = ({
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }
                 }}
-                className="w-full py-2 px-3 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-800/50 text-blue-200 font-semibold text-left transition flex items-center justify-between"
+                className="w-full py-2 px-3 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-800/50 text-blue-200 font-semibold text-left transition flex items-center justify-between cursor-pointer"
               >
                 <span>Dr. Pawan Gupta (PT)</span>
                 <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded font-bold">Doctor Profile</span>
               </a>
-              <button
-                onClick={() => onNavigatePage && onNavigatePage('physiotherapy-mumbai')}
-                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between"
+              <a
+                href="/physiotherapy-mumbai"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigatePage) onNavigatePage('physiotherapy-mumbai');
+                }}
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between cursor-pointer"
               >
                 <span>Physiotherapy Mumbai Hub</span>
                 <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded">Hub</span>
-              </button>
-              <button
-                onClick={() => onNavigatePage && onNavigatePage('articles')}
-                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between"
+              </a>
+              <a
+                href="/articles"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigatePage) onNavigatePage('articles');
+                }}
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between cursor-pointer"
               >
                 <span>Clinical Blog & Articles</span>
                 <span className="text-[10px] bg-blue-900 text-blue-200 px-1.5 py-0.5 rounded">Guides</span>
-              </button>
-              <button
-                onClick={() => onNavigatePage && onNavigatePage('contact')}
-                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between"
+              </a>
+              <a
+                href="/contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigatePage) onNavigatePage('contact');
+                }}
+                className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold text-left transition flex items-center justify-between cursor-pointer"
               >
                 <span>Contact & Clinic Desk</span>
                 <span className="text-[10px] bg-emerald-900 text-emerald-200 px-1.5 py-0.5 rounded">Sewri</span>
-              </button>
+              </a>
               <button
                 onClick={onOpenAiAssistant}
                 className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-blue-400 font-semibold text-left transition flex items-center justify-between"

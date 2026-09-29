@@ -42,8 +42,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'physiotherapy-mumbai': {
     id: 'physiotherapy-mumbai',
     name: 'Physiotherapy in Mumbai',
-    url: 'https://runtowinphysiotherapy.com/#physiotherapy-mumbai',
-    path: '/#physiotherapy-mumbai',
+    url: 'https://runtowinphysiotherapy.com/physiotherapy-mumbai',
+    path: '/physiotherapy-mumbai',
     purpose: 'Comprehensive regional landing page highlighting clinic-based and doorstep physiotherapy capabilities across all Mumbai zones.',
     primaryKeyword: 'Physiotherapy treatment in Mumbai',
     secondaryKeywords: ['Physiotherapy center Mumbai', 'Leading physiotherapy clinic Mumbai', 'Dr Pawan Gupta PT Mumbai'],
@@ -54,7 +54,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'core',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Physiotherapy in Mumbai', href: '/#physiotherapy-mumbai' }
+      { label: 'Physiotherapy in Mumbai', href: '/physiotherapy-mumbai' }
     ]
   },
 
@@ -62,8 +62,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'services': {
     id: 'services',
     name: 'Physiotherapy Services',
-    url: 'https://runtowinphysiotherapy.com/#services',
-    path: '/#services',
+    url: 'https://runtowinphysiotherapy.com/services',
+    path: '/services',
     purpose: 'Clinical treatment modalities and specialized physiotherapy branches directory.',
     primaryKeyword: 'Physiotherapy services Mumbai',
     secondaryKeywords: ['Physiotherapy treatments Mumbai', 'Specialized physiotherapy modalities', 'Physical therapy clinic Mumbai'],
@@ -82,7 +82,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' }
+      { label: 'Services', href: '/services' }
     ]
   },
 
@@ -90,8 +90,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'orthopedic-physiotherapy': {
     id: 'orthopedic-physiotherapy',
     name: 'Orthopedic Physiotherapy',
-    url: 'https://runtowinphysiotherapy.com/#service/orthopedic-physiotherapy',
-    path: '/#service/orthopedic-physiotherapy',
+    url: 'https://runtowinphysiotherapy.com/orthopedic-physiotherapy',
+    path: '/orthopedic-physiotherapy',
     purpose: 'Specialized diagnosis and rehabilitation for spine, joint, bone, and tendon disorders.',
     primaryKeyword: 'Orthopedic physiotherapy Mumbai',
     secondaryKeywords: ['Musculoskeletal physiotherapist Mumbai', 'Spine and joint physiotherapy', 'Bone and joint rehabilitation'],
@@ -101,16 +101,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Orthopedic Physiotherapy', href: '/#service/orthopedic-physiotherapy' }
+      { label: 'Services', href: '/services' },
+      { label: 'Orthopedic Physiotherapy', href: '/orthopedic-physiotherapy' }
     ]
   },
 
   'sports-physiotherapy': {
     id: 'sports-physiotherapy',
     name: 'Sports Physiotherapy',
-    url: 'https://runtowinphysiotherapy.com/#service/sports-physiotherapy',
-    path: '/#service/sports-physiotherapy',
+    url: 'https://runtowinphysiotherapy.com/sports-physiotherapy',
+    path: '/sports-physiotherapy',
     purpose: 'Performance optimization, acute athletic injury triage, biomechanical video gait analysis, and return-to-play clearance.',
     primaryKeyword: 'Sports physiotherapist in Mumbai',
     secondaryKeywords: ['Sports injury clinic Mumbai', 'Athletic rehabilitation Mumbai', 'Running injury physiotherapy'],
@@ -120,16 +120,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Sports Physiotherapy', href: '/#service/sports-physiotherapy' }
+      { label: 'Services', href: '/services' },
+      { label: 'Sports Physiotherapy', href: '/sports-physiotherapy' }
     ]
   },
 
   'neuro-physiotherapy': {
     id: 'neuro-physiotherapy',
     name: 'Neurological Physiotherapy',
-    url: 'https://runtowinphysiotherapy.com/#service/neuro-physiotherapy',
-    path: '/#service/neuro-physiotherapy',
+    url: 'https://runtowinphysiotherapy.com/neuro-physiotherapy',
+    path: '/neuro-physiotherapy',
     purpose: 'Neuroplasticity motor retraining for stroke, Parkinson’s, Bell’s Palsy, neuropathy, and spinal cord conditions.',
     primaryKeyword: 'Neuro physiotherapy in Mumbai',
     secondaryKeywords: ['Neurological physical therapy Mumbai', 'Paralysis rehabilitation Mumbai', 'Neuro physiotherapist near me'],
@@ -139,16 +139,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Neuro Physiotherapy', href: '/#service/neuro-physiotherapy' }
+      { label: 'Services', href: '/services' },
+      { label: 'Neuro Physiotherapy', href: '/neuro-physiotherapy' }
     ]
   },
 
   'home-physiotherapy': {
     id: 'home-physiotherapy',
     name: 'Home Physiotherapy',
-    url: 'https://runtowinphysiotherapy.com/#home-visits',
-    path: '/#home-visits',
+    url: 'https://runtowinphysiotherapy.com/home-visits',
+    path: '/home-visits',
     purpose: 'Doorstep home visit physiotherapy across South, Central, Western, Eastern Mumbai, and Thane for bedridden, post-op, or elderly patients.',
     primaryKeyword: 'Home visit physiotherapy in Mumbai',
     secondaryKeywords: ['Physiotherapist home visit near me', 'Physiotherapy at home Mumbai', 'Doorstep physical therapy Mumbai'],
@@ -159,16 +159,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Home Physiotherapy', href: '/#home-visits' }
+      { label: 'Services', href: '/services' },
+      { label: 'Home Physiotherapy', href: '/home-visits' }
     ]
   },
 
   'online-physiotherapy': {
     id: 'online-physiotherapy',
     name: 'Online Physiotherapy Consultation',
-    url: 'https://runtowinphysiotherapy.com/#service/online-physiotherapy',
-    path: '/#service/online-physiotherapy',
+    url: 'https://runtowinphysiotherapy.com/online-physiotherapy',
+    path: '/online-physiotherapy',
     purpose: 'Virtual video ergonomic assessments, post-discharge review, and guided home exercise prescription.',
     primaryKeyword: 'Online physiotherapy consultation India',
     secondaryKeywords: ['Tele-physiotherapy consultation', 'Virtual physical therapy Mumbai', 'Ergonomic online consult'],
@@ -178,16 +178,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Online Physiotherapy', href: '/#service/online-physiotherapy' }
+      { label: 'Services', href: '/services' },
+      { label: 'Online Physiotherapy', href: '/online-physiotherapy' }
     ]
   },
 
   'pain-management': {
     id: 'pain-management',
     name: 'Pain Management & Modalities',
-    url: 'https://runtowinphysiotherapy.com/#service/pain-management',
-    path: '/#service/pain-management',
+    url: 'https://runtowinphysiotherapy.com/pain-management',
+    path: '/pain-management',
     purpose: 'Non-pharmacological pain relief utilizing Dry Needling, Myofascial Cupping, IASTM, and Electrotherapy.',
     primaryKeyword: 'Physiotherapy pain management Mumbai',
     secondaryKeywords: ['Dry needling clinic Mumbai', 'Myofascial cupping therapy Mumbai', 'Non-surgical pain relief'],
@@ -197,16 +197,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Pain Management', href: '/#service/pain-management' }
+      { label: 'Services', href: '/services' },
+      { label: 'Pain Management', href: '/pain-management' }
     ]
   },
 
   'post-surgical-rehab': {
     id: 'post-surgical-rehab',
     name: 'Post-Surgical Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#service/post-surgical-rehab',
-    path: '/#service/post-surgical-rehab',
+    url: 'https://runtowinphysiotherapy.com/post-surgical-rehab',
+    path: '/post-surgical-rehab',
     purpose: 'Protocol-driven phased recovery following orthopedic surgery in coordination with Mumbai surgeons.',
     primaryKeyword: 'Post-surgical physiotherapy Mumbai',
     secondaryKeywords: ['Post-operative rehabilitation Mumbai', 'Surgery recovery physiotherapy', 'Orthopedic surgeon rehab protocols'],
@@ -216,8 +216,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'service',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
-      { label: 'Post-Surgical Rehabilitation', href: '/#service/post-surgical-rehab' }
+      { label: 'Services', href: '/services' },
+      { label: 'Post-Surgical Rehabilitation', href: '/post-surgical-rehab' }
     ]
   },
 
@@ -225,8 +225,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'conditions': {
     id: 'conditions',
     name: 'Conditions Treated',
-    url: 'https://runtowinphysiotherapy.com/#conditions',
-    path: '/#conditions',
+    url: 'https://runtowinphysiotherapy.com/conditions',
+    path: '/conditions',
     purpose: 'Directory of musculoskeletal, neurological, and sports conditions treated at Run To Win.',
     primaryKeyword: 'Conditions treated by physiotherapist',
     secondaryKeywords: ['Physiotherapy for pain Mumbai', 'Musculoskeletal disorders list', 'Common physical therapy conditions'],
@@ -240,7 +240,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' }
+      { label: 'Conditions', href: '/conditions' }
     ]
   },
 
@@ -248,8 +248,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'back-pain': {
     id: 'back-pain',
     name: 'Lower Back Pain',
-    url: 'https://runtowinphysiotherapy.com/#condition/lower-back',
-    path: '/#condition/lower-back',
+    url: 'https://runtowinphysiotherapy.com/conditions/lower-back',
+    path: '/conditions/lower-back',
     purpose: 'Patient guide on lumbar disc herniation, facet arthropathy, core muscle reconditioning, and spinal decompression.',
     primaryKeyword: 'Back pain physiotherapy Mumbai',
     secondaryKeywords: ['Lower back pain specialist Mumbai', 'Slip disc physiotherapy Mumbai', 'Lumbar spondylosis rehab'],
@@ -259,16 +259,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Lower Back Pain', href: '/#condition/lower-back' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Lower Back Pain', href: '/conditions/lower-back' }
     ]
   },
 
   'neck-pain': {
     id: 'neck-pain',
     name: 'Neck Pain & Cervical Spondylosis',
-    url: 'https://runtowinphysiotherapy.com/#condition/cervical-neck',
-    path: '/#condition/cervical-neck',
+    url: 'https://runtowinphysiotherapy.com/conditions/cervical-neck',
+    path: '/conditions/cervical-neck',
     purpose: 'Evidence-based recovery for tech neck, cervical spondylosis, nerve pinching, and desk posture strain.',
     primaryKeyword: 'Neck pain physiotherapy Mumbai',
     secondaryKeywords: ['Cervical spondylosis physiotherapy Mumbai', 'Tech neck treatment Mumbai', 'Cervical radiculopathy rehab'],
@@ -278,16 +278,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Neck Pain', href: '/#condition/cervical-neck' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Neck Pain', href: '/conditions/cervical-neck' }
     ]
   },
 
   'sciatica': {
     id: 'sciatica',
     name: 'Sciatica & Nerve Compression',
-    url: 'https://runtowinphysiotherapy.com/#condition/sciatica',
-    path: '/#condition/sciatica',
+    url: 'https://runtowinphysiotherapy.com/conditions/sciatica',
+    path: '/conditions/sciatica',
     purpose: 'Specific guide for shooting leg pain, piriformis syndrome, and L4-S1 nerve root irritation.',
     primaryKeyword: 'Sciatica physiotherapy Mumbai',
     secondaryKeywords: ['Sciatic nerve pain treatment Mumbai', 'Piriformis syndrome rehab', 'Pinched nerve leg pain physiotherapy'],
@@ -297,16 +297,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Sciatica', href: '/#condition/sciatica' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Sciatica', href: '/conditions/sciatica' }
     ]
   },
 
   'knee-pain': {
     id: 'knee-pain',
     name: 'Knee Pain & Meniscus Disorders',
-    url: 'https://runtowinphysiotherapy.com/#condition/knee',
-    path: '/#condition/knee',
+    url: 'https://runtowinphysiotherapy.com/conditions/knee',
+    path: '/conditions/knee',
     purpose: 'Clinical protocols for patellofemoral tracking, runner’s knee, meniscus strains, and stair pain.',
     primaryKeyword: 'Knee pain physiotherapy Mumbai',
     secondaryKeywords: ['Knee joint treatment Mumbai', 'Patellofemoral pain rehab', 'Meniscus tear physical therapy'],
@@ -316,16 +316,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Knee Pain', href: '/#condition/knee' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Knee Pain', href: '/conditions/knee' }
     ]
   },
 
   'arthritis': {
     id: 'arthritis',
     name: 'Arthritis & Joint Degeneration',
-    url: 'https://runtowinphysiotherapy.com/#condition/arthritis',
-    path: '/#condition/arthritis',
+    url: 'https://runtowinphysiotherapy.com/conditions/arthritis',
+    path: '/conditions/arthritis',
     purpose: 'Non-surgical joint preservation, cartilage offloading exercises, and synovial lubrication therapy.',
     primaryKeyword: 'Arthritis physiotherapy Mumbai',
     secondaryKeywords: ['Knee osteoarthritis physiotherapy Mumbai', 'Joint stiffness physical therapy', 'Degenerative joint disease rehab'],
@@ -335,16 +335,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Arthritis', href: '/#condition/arthritis' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Arthritis', href: '/conditions/arthritis' }
     ]
   },
 
   'frozen-shoulder': {
     id: 'frozen-shoulder',
     name: 'Frozen Shoulder (Adhesive Capsulitis)',
-    url: 'https://runtowinphysiotherapy.com/#condition/shoulder',
-    path: '/#condition/shoulder',
+    url: 'https://runtowinphysiotherapy.com/conditions/shoulder',
+    path: '/conditions/shoulder',
     purpose: 'Capsular mobilization (Maitland), night pain management, and stage-wise recovery protocols.',
     primaryKeyword: 'Frozen shoulder physiotherapy Mumbai',
     secondaryKeywords: ['Adhesive capsulitis treatment Mumbai', 'Shoulder stiffness physical therapy', 'Frozen shoulder doctor Mumbai'],
@@ -354,16 +354,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Frozen Shoulder', href: '/#condition/shoulder' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Frozen Shoulder', href: '/conditions/shoulder' }
     ]
   },
 
   'shoulder-pain': {
     id: 'shoulder-pain',
     name: 'Shoulder Pain & Rotator Cuff Impingement',
-    url: 'https://runtowinphysiotherapy.com/#condition/shoulder-pain',
-    path: '/#condition/shoulder-pain',
+    url: 'https://runtowinphysiotherapy.com/conditions/shoulder-pain',
+    path: '/conditions/shoulder-pain',
     purpose: 'Supraspinatus tendinitis, subacromial bursitis, and scapular dyskinesis rehabilitation.',
     primaryKeyword: 'Shoulder pain physiotherapy Mumbai',
     secondaryKeywords: ['Rotator cuff tendinitis treatment Mumbai', 'Shoulder impingement rehab', 'Shoulder specialist physiotherapy'],
@@ -373,16 +373,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Shoulder Pain', href: '/#condition/shoulder-pain' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Shoulder Pain', href: '/conditions/shoulder-pain' }
     ]
   },
 
   'tennis-elbow': {
     id: 'tennis-elbow',
     name: 'Tennis Elbow (Lateral Epicondylalgia)',
-    url: 'https://runtowinphysiotherapy.com/#condition/tennis-elbow',
-    path: '/#condition/tennis-elbow',
+    url: 'https://runtowinphysiotherapy.com/conditions/tennis-elbow',
+    path: '/conditions/tennis-elbow',
     purpose: 'Extensor tendon loading, Tyler twist eccentric exercises, dry needling, and grip ergonomic modifications.',
     primaryKeyword: 'Tennis elbow physiotherapy Mumbai',
     secondaryKeywords: ['Lateral epicondylitis treatment Mumbai', 'Elbow tendon pain physiotherapy', 'Repetitive strain elbow therapy'],
@@ -392,16 +392,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Tennis Elbow', href: '/#condition/tennis-elbow' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Tennis Elbow', href: '/conditions/tennis-elbow' }
     ]
   },
 
   'plantar-fasciitis': {
     id: 'plantar-fasciitis',
     name: 'Plantar Fasciitis & Heel Pain',
-    url: 'https://runtowinphysiotherapy.com/#condition/plantar-fasciitis',
-    path: '/#condition/plantar-fasciitis',
+    url: 'https://runtowinphysiotherapy.com/conditions/plantar-fasciitis',
+    path: '/conditions/plantar-fasciitis',
     purpose: 'First-step morning heel pain protocols, calf-fascia stretching, arch biomechanics, and shock absorption.',
     primaryKeyword: 'Plantar fasciitis physiotherapy Mumbai',
     secondaryKeywords: ['Heel pain treatment Mumbai', 'Calcaneal spur physiotherapy', 'Foot arch pain physical therapy'],
@@ -411,16 +411,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Plantar Fasciitis', href: '/#condition/plantar-fasciitis' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Plantar Fasciitis', href: '/conditions/plantar-fasciitis' }
     ]
   },
 
   'sports-injuries': {
     id: 'sports-injuries',
     name: 'Sports Injuries & Athletic Overuse',
-    url: 'https://runtowinphysiotherapy.com/#condition/sports-injuries',
-    path: '/#condition/sports-injuries',
+    url: 'https://runtowinphysiotherapy.com/conditions/sports-injuries',
+    path: '/conditions/sports-injuries',
     purpose: 'Acute sprains, hamstring strains, shin splints, and biomechanical return-to-sport testing.',
     primaryKeyword: 'Sports injury treatment Mumbai',
     secondaryKeywords: ['Athletic injury physiotherapy Mumbai', 'Hamstring strain recovery', 'Ankle sprain physical therapy'],
@@ -430,8 +430,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'condition',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Conditions', href: '/#conditions' },
-      { label: 'Sports Injuries', href: '/#condition/sports-injuries' }
+      { label: 'Conditions', href: '/conditions' },
+      { label: 'Sports Injuries', href: '/conditions/sports-injuries' }
     ]
   },
 
@@ -439,8 +439,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'rehabilitation': {
     id: 'rehabilitation',
     name: 'Rehabilitation Programs',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation',
-    path: '/#rehabilitation',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation',
+    path: '/rehabilitation',
     purpose: 'Structured, multi-week recovery frameworks for major orthopedic surgeries, neurological events, and seniors.',
     primaryKeyword: 'Rehabilitation programs Mumbai',
     secondaryKeywords: ['Physical therapy rehabilitation Mumbai', 'Rehabilitation center Mumbai', 'Surgeon approved rehab programs'],
@@ -455,7 +455,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' }
+      { label: 'Rehabilitation', href: '/rehabilitation' }
     ]
   },
 
@@ -463,8 +463,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'acl-rehab': {
     id: 'acl-rehab',
     name: 'ACL Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation/acl',
-    path: '/#rehabilitation/acl',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation/acl',
+    path: '/rehabilitation/acl',
     purpose: 'Phase-wise post-ACL reconstruction graft protection, neuromuscular re-education, and return-to-sport testing.',
     primaryKeyword: 'ACL reconstruction physiotherapy Mumbai',
     secondaryKeywords: ['ACL rehab protocol Mumbai', 'Post-surgery ACL physical therapy', 'ACL tear return to sports test'],
@@ -474,16 +474,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'ACL Rehabilitation', href: '/#rehabilitation/acl' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'ACL Rehabilitation', href: '/rehabilitation/acl' }
     ]
   },
 
   'stroke-rehab': {
     id: 'stroke-rehab',
     name: 'Stroke Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#condition/neuro-stroke',
-    path: '/#condition/neuro-stroke',
+    url: 'https://runtowinphysiotherapy.com/conditions/neuro-stroke',
+    path: '/conditions/neuro-stroke',
     purpose: 'Intensive neuroplastic recovery, bedside mobilization, anti-spasticity positioning, and gait re-education.',
     primaryKeyword: 'Stroke rehabilitation in Mumbai',
     secondaryKeywords: ['Stroke paralysis physiotherapy Mumbai', 'Hemiplegia physical therapy', 'Post-stroke recovery at home'],
@@ -493,16 +493,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'Stroke Rehabilitation', href: '/#condition/neuro-stroke' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'Stroke Rehabilitation', href: '/conditions/neuro-stroke' }
     ]
   },
 
   'parkinsons-rehab': {
     id: 'parkinsons-rehab',
     name: 'Parkinson\'s Disease Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation/parkinsons',
-    path: '/#rehabilitation/parkinsons',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation/parkinsons',
+    path: '/rehabilitation/parkinsons',
     purpose: 'Amplitude-based movement retraining (LSVT BIG concepts), rigidity management, and freeze-of-gait cues.',
     primaryKeyword: 'Parkinsons physiotherapy in Mumbai',
     secondaryKeywords: ['Parkinsons disease exercise therapy Mumbai', 'Movement disorder physical therapy', 'Parkinsons home physiotherapy'],
@@ -512,16 +512,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'Parkinson\'s Rehabilitation', href: '/#rehabilitation/parkinsons' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'Parkinson\'s Rehabilitation', href: '/rehabilitation/parkinsons' }
     ]
   },
 
   'knee-replacement-rehab': {
     id: 'knee-replacement-rehab',
     name: 'Total Knee Replacement (TKR) Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation/knee-replacement',
-    path: '/#rehabilitation/knee-replacement',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation/knee-replacement',
+    path: '/rehabilitation/knee-replacement',
     purpose: 'Immediate post-discharge protocol: preventing flexion contracture, achieving 0-120° ROM, and independent stair climbing.',
     primaryKeyword: 'Total knee replacement physiotherapy Mumbai',
     secondaryKeywords: ['TKR rehabilitation Mumbai', 'Post knee surgery physiotherapy at home', 'Knee replacement exercises protocol'],
@@ -531,16 +531,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'Knee Replacement Rehabilitation', href: '/#rehabilitation/knee-replacement' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'Knee Replacement Rehabilitation', href: '/rehabilitation/knee-replacement' }
     ]
   },
 
   'hip-replacement-rehab': {
     id: 'hip-replacement-rehab',
     name: 'Total Hip Replacement (THR) Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation/hip-replacement',
-    path: '/#rehabilitation/hip-replacement',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation/hip-replacement',
+    path: '/rehabilitation/hip-replacement',
     purpose: 'Hip dislocation precautions, gluteal activation, weight-bearing gait symmetry, and independent sit-to-stand recovery.',
     primaryKeyword: 'Total hip replacement physiotherapy Mumbai',
     secondaryKeywords: ['THR rehabilitation Mumbai', 'Post hip surgery physical therapy', 'Hip arthroplasty rehab protocol'],
@@ -550,16 +550,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'Hip Replacement Rehabilitation', href: '/#rehabilitation/hip-replacement' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'Hip Replacement Rehabilitation', href: '/rehabilitation/hip-replacement' }
     ]
   },
 
   'balance-gait-rehab': {
     id: 'balance-gait-rehab',
     name: 'Balance & Gait Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation/balance-gait',
-    path: '/#rehabilitation/balance-gait',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation/balance-gait',
+    path: '/rehabilitation/balance-gait',
     purpose: 'Fall risk reduction, vestibular proprioception retraining, and assistive device progression (walker to cane to unassisted).',
     primaryKeyword: 'Balance and gait training physiotherapy Mumbai',
     secondaryKeywords: ['Fall prevention physiotherapy Mumbai', 'Gait re-education therapy', 'Vestibular balance rehab'],
@@ -569,16 +569,16 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'Balance & Gait Rehabilitation', href: '/#rehabilitation/balance-gait' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'Balance & Gait Rehabilitation', href: '/rehabilitation/balance-gait' }
     ]
   },
 
   'senior-rehab': {
     id: 'senior-rehab',
     name: 'Senior Citizen & Geriatric Rehabilitation',
-    url: 'https://runtowinphysiotherapy.com/#rehabilitation/senior-citizen',
-    path: '/#rehabilitation/senior-citizen',
+    url: 'https://runtowinphysiotherapy.com/rehabilitation/senior-citizen',
+    path: '/rehabilitation/senior-citizen',
     purpose: 'Safe in-home physical therapy designed specifically for elderly adults to maintain mobility, relieve arthritis, and prevent falls.',
     primaryKeyword: 'Geriatric physiotherapy in Mumbai',
     secondaryKeywords: ['Elderly physical therapy Mumbai', 'Senior citizen home physiotherapy Mumbai', 'Old age mobility therapy'],
@@ -588,8 +588,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'rehabilitation',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Rehabilitation', href: '/#rehabilitation' },
-      { label: 'Senior Citizen Rehabilitation', href: '/#rehabilitation/senior-citizen' }
+      { label: 'Rehabilitation', href: '/rehabilitation' },
+      { label: 'Senior Citizen Rehabilitation', href: '/rehabilitation/senior-citizen' }
     ]
   },
 
@@ -597,8 +597,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'about': {
     id: 'about',
     name: 'Dr. Pawan Gupta (PT)',
-    url: 'https://runtowinphysiotherapy.com/#about',
-    path: '/#about',
+    url: 'https://runtowinphysiotherapy.com/dr-pawan-gupta',
+    path: '/dr-pawan-gupta',
     purpose: 'Doctor credentials, clinical qualifications (B.P.Th, M.P.Th, MIAP), 8+ years experience, and hospital background.',
     primaryKeyword: 'Dr Pawan Gupta PT Mumbai',
     secondaryKeywords: ['Best physiotherapist Mumbai', 'Senior consultant physiotherapist Sewri', 'Musculoskeletal specialist Dr Pawan Gupta'],
@@ -608,7 +608,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'trust',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Dr. Pawan Gupta (PT)', href: '/#about' }
+      { label: 'Dr. Pawan Gupta (PT)', href: '/dr-pawan-gupta' }
     ]
   },
 
@@ -616,8 +616,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'areas-we-serve': {
     id: 'areas-we-serve',
     name: 'Areas We Serve in Mumbai',
-    url: 'https://runtowinphysiotherapy.com/#home-visits',
-    path: '/#home-visits',
+    url: 'https://runtowinphysiotherapy.com/home-visits',
+    path: '/home-visits',
     purpose: 'Complete coverage map and directory of 35+ Mumbai localities for clinic and home visit physiotherapy.',
     primaryKeyword: 'Physiotherapist near me Mumbai',
     secondaryKeywords: ['Home visit physiotherapy Mumbai locations', 'Physiotherapy clinic Sewri South Mumbai', 'Doorstep physiotherapy Mumbai suburbs'],
@@ -633,7 +633,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'location',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Areas We Serve', href: '/#home-visits' }
+      { label: 'Areas We Serve', href: '/home-visits' }
     ]
   },
 
@@ -641,8 +641,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'articles': {
     id: 'articles',
     name: 'Patient Education & Clinical Articles',
-    url: 'https://runtowinphysiotherapy.com/#articles',
-    path: '/#articles',
+    url: 'https://runtowinphysiotherapy.com/articles',
+    path: '/articles',
     purpose: 'Evidence-based articles answering patient questions, post-operative protocols, and preventative spine/joint health.',
     primaryKeyword: 'Physiotherapy articles and guides Mumbai',
     secondaryKeywords: ['Physical therapy advice Dr Pawan Gupta', 'Spine and knee exercises guide', 'Patient education physiotherapy'],
@@ -652,7 +652,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'core',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Patient Education', href: '/#articles' }
+      { label: 'Patient Education', href: '/articles' }
     ]
   },
 
@@ -660,8 +660,8 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
   'contact': {
     id: 'contact',
     name: 'Contact & Book Assessment',
-    url: 'https://runtowinphysiotherapy.com/#contact',
-    path: '/#contact',
+    url: 'https://runtowinphysiotherapy.com/contact',
+    path: '/contact',
     purpose: 'Direct booking conversion page with clinic phone, WhatsApp direct channel, Sewri clinic address, hours, and interactive triage.',
     primaryKeyword: 'Book physiotherapy appointment Mumbai',
     secondaryKeywords: ['Contact Dr Pawan Gupta PT', 'Physiotherapy appointment Sewri', 'Book home visit physiotherapist Mumbai'],
@@ -671,7 +671,7 @@ export const ARCHITECTURE_MAP: Record<string, ArchitectureNode> = {
     category: 'conversion',
     breadcrumbs: [
       { label: 'Home', href: '/' },
-      { label: 'Contact & Book Assessment', href: '/#contact' }
+      { label: 'Contact & Book Assessment', href: '/contact' }
     ]
   }
 };
